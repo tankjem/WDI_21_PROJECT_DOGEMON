@@ -1,10 +1,7 @@
 # WDI_21_PROJECT_DOGEMON
 Group Project - project 3
 
-
+Jeremy Smith
+Shu is the best
 BEX
-
-you lose the game lol :D
-
-
-I lost
+Ed loses the game lol :D
