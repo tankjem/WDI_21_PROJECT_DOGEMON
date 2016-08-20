@@ -43,7 +43,24 @@ Item.create([{
   image_attack: 0,
   image_defense: 10,
   item_heal: 0
+}]);
+
+Event.create([{
+  name: "Zombie Attack",
+  description: "You are attacked by a zombie",
+  image_url: "https://cdn0.iconfinder.com/data/icons/black-religious-icons/256/Zombie.png",
+  event_type: "red_zone_encounter",
+  choices: ["attack", "flee"]
 }, {
-  
-}
-])
+  name: "Yoga-Rosie",
+  description:"A bizarre sight unravels before you. A girl is doing yoga on top of a van which is surrounded by zombies. She seems perfectly at ease.",
+  image_url: "https://cdn0.iconfinder.com/data/icons/sport-and-fitness/500/Fitness_meditation_sport_yoga_Eexercise_exercises_fitness_gym_health-512.png",
+  event_type: "random_encounter",
+  choices: ["Curious you jump on the van next to her and join in", "Watch", "Run away"]
+}, {
+  name: "Resource Found",
+  description: "You found a resource",
+  image_url: "https://s3.amazonaws.com/kinlane-productions/api-evangelist/services/api-management.png",
+  event_type: "resource_encounter",
+  choices: ["collect", "leave"]
+}]);
