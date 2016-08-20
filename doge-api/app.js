@@ -14,7 +14,9 @@ var databaseUri = require('./config/db')(environment);
 
 mongoose.connect(databaseUri);
 
-app.use(require('morgan')('dev'));
+if('test' !== app.get('env')) {
+  app.use(require('morgan')('dev'));
+}
 
 app.use(cors());
 
