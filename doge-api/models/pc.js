@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Item = require('./item');
 
 var pcSchema = new mongoose.Schema({
   image_url: String,

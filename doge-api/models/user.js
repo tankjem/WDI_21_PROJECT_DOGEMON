@@ -1,5 +1,7 @@
 var mongoose = require("mongoose");
 var bcrypt = require("bcrypt");
+
+var Pc = require("./pc")
 // var beautifulUnique = require("mongoose-beautiful-unique-validation");
 
 var userSchema = new mongoose.Schema({
@@ -8,7 +10,7 @@ var userSchema = new mongoose.Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   passwordHash: { type: String, required: true },
-  created_pc: [Pc.Schema]
+  created_pc: [{type: mongoose.Schema.ObjectId, ref: 'Pc'}]
 });
 
 userSchema.virtual("password")
