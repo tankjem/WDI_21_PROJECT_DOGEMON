@@ -5,7 +5,7 @@
     "Jeremy Smith <jmsmith57@hotmail.com>"
   ],
   "description": "",
-  "main": "",
+  "main": "app.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
