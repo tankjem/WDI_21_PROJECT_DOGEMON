@@ -8,8 +8,6 @@ var itemSchema = new mongoose.Schema({
   item_attack: Number,
   item_defense: Number,
   item_heal: Number
-}, {
-  timestamps: true
 });
 
 // export the model
