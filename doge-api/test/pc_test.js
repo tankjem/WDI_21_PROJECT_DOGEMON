@@ -16,43 +16,6 @@ describe("Pc tests", function() {
     done();
   });
 
-  describe("GET /api/pcs", function() {
-
-    beforeEach(function(done) {
-      api.post('/api/pcs')
-        .set('Accept', 'application/json')
-        .send({
-          image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
-          health: 100,
-          inventory: []
-        }).end(done);
-    });
-
-    it("should return a 200 response", function(done) {
-      api.get('/api/pcs')
-        .set('Accept', 'application/json')
-        .expect(200, done);
-    });
-
-    it("should return an array", function(done) {
-      api.get('/api/pcs')
-        .set('Accept', 'application/json')
-        .end(function(err, res) {
-          expect(res.body).to.be.an('array');
-          done();
-        });
-    });
-
-    it("should return an array of objects that contain a 'brand' property", function(done) {
-      api.get('/api/pcs')
-        .set('Accept', 'application/json')
-        .end(function(err, res) {
-          expect(res.body[0]).to.have.property('brand');
-          done();
-        });
-    });
-  });
-
   describe("POST /api/pcs", function() {
     it("should return a 201 response", function(done) {
       api.post('/api/pcs')
@@ -70,11 +33,9 @@ describe("Pc tests", function() {
   describe("GET /api/pcs/:id", function() {
     it("should return a 200 response", function(done) {
       var pc = new Pc({
-        brand: "Nike",
-        color: "Black",
-        laced: true,
-        material: "leather",
-        price: 49.99
+        image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
+        health: 100,
+        inventory: []
       });
 
       pc.save(function(err, pc) {
@@ -88,11 +49,9 @@ describe("Pc tests", function() {
   describe("DELETE /api/pcs/:id", function() {
     it("should return a 204 response", function(done) {
       var pc = new Pc({
-        brand: "Nike",
-        color: "Black",
-        laced: true,
-        material: "leather",
-        price: 49.99
+        image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
+        health: 100,
+        inventory: []
       });
 
       pc.save(function(err, pc) {
@@ -102,5 +61,4 @@ describe("Pc tests", function() {
       });
     });
   });
-
 });

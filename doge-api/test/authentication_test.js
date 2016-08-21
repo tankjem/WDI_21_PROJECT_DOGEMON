@@ -27,7 +27,9 @@ describe("Auth tests", function() {
           username: "test",
           email: "test@test.com",
           password: "password",
-          passwordConfirmation: "password"
+          passwordConfirmation: "password",
+          first_name: "Test",
+          last_name: "Test"
         }).end(function(err, res) {
           expect(res.body.token).to.be.a('string');
           done();
