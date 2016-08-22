@@ -1,4 +1,3 @@
-
 var DogeApp = DogeApp || {};
 
 DogeApp.API_URL = "http://localhost:3000/api";
@@ -95,6 +94,17 @@ DogeApp.logout = function(){
 
 
 
+
+
+var ready = $(function() {
+  $(".menu").hide();
+  $(".hamburger").click(function() {
+    $(".menu").slideToggle("slow", function() {
+    });
+  });
+});
+
+ready;
 
 
 var map = new google.maps.Map(document.getElementById('map'), 

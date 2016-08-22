@@ -7,3 +7,181 @@ html, body {
 #map {
   height: 100%;
 }
+
+/* Menu CSS */
+
+header {
+    width:100%; 
+    background: rgba(255,255,255,0.5);
+    height:50px; 
+    line-height:50px;
+    text-align: center;
+    color: #000;
+  }
+
+header span {
+  color: red;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.hamburger{
+  background:none;
+  position:absolute;
+  top:0;
+  right:0;
+  line-height:45px;
+  padding:0px 15px 0px 15px;
+  color:#000;
+  border:0;
+  font-size:1.4em;
+  font-weight:bold;
+  cursor:pointer;
+  outline:none;
+  z-index:10000000000000;
+}
+
+.menu {
+  z-index:1000000; 
+  font-weight:bold; 
+  font-size:0.8em; 
+  width:100%; 
+  background: rgba(255,255,255,0.5);
+  position:absolute; 
+  text-align:center;
+}
+
+.menu ul {
+  margin: 0; 
+  padding: 0; 
+  list-style-type: none; 
+  list-style-image: none;
+}
+
+.menu li {
+  display: block;   
+  padding: 15px 0 15px 0; 
+  border-bottom: transparent 1px solid;
+}
+
+.menu li:hover {
+  display: block;    
+  background: rgba(255,255,255,0.8);
+  padding: 15px 0 15px 0; 
+}
+
+.menu ul li a { 
+  text-decoration:none; 
+  font-size: 2em; 
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0px; 
+  color: #fff;
+}
+
+.menu ul li span {
+  text-transform: uppercase;
+  color: #FFF;
+  font-size: 2em;
+  vertical-align: 50%;
+}
+
+.menu ul li a:hover {  
+  color: red;
+  text-decoration: none;
+}
+
+.menu a {
+  text-decoration: none; 
+  color: white;
+}
+
+.menu a:hover {
+  text-decoration: none; 
+  color: white;
+}
+
+/* Responsive menu CSS */
+
+@media only screen and (max-width: 960px) {
+
+  header {
+    width:100%; 
+    background: rgba(0,0,0,0.4);
+    height:50px; 
+    line-height:50px;
+  }
+
+  .hamburger{
+    background:none;
+    position:absolute;
+    top:0;
+    right:0;
+    line-height:45px;
+    padding:0px 15px 0px 15px;
+    color:#fff;
+    border:0;
+    font-size:1.4em;
+    font-weight:bold;
+    cursor:pointer;
+    outline:none;
+    z-index:10000000000000;
+  }
+
+  .menu {
+    z-index:1000000; 
+    font-weight:bold; 
+    font-size:0.8em; 
+    width:100%; 
+    background: rgba(0,0,0,0.4);
+    position:absolute; 
+    text-align:center;
+  }
+
+  .menu ul {
+    margin: 0; 
+    padding: 0; 
+    list-style-type: none; 
+    list-style-image: none;
+  }
+
+  .menu li {
+    display: block;   
+    padding: 15px 0 15px 0; 
+    border-bottom: transparent 1px solid;
+  }
+
+  .menu li:hover {
+    display: block;    
+    background-color: none;
+    padding: 15px 0 15px 0; 
+  }
+
+  .menu ul li a { 
+    text-decoration:none; 
+    font-size: 2em; 
+    margin: 0px; 
+    color: #fff;
+  }
+
+  .menu ul li span {
+    text-transform: uppercase;
+    color: #FFF;
+    font-size: 2em;
+  }
+
+  .menu ul li a:hover {  
+    color: #FF9900;
+    text-decoration: none;
+  }
+
+  .menu a {
+    text-decoration: none; 
+    color: white;
+  }
+
+  .menu a:hover {
+    text-decoration: none; 
+    color: white;
+  }
