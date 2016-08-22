@@ -15,20 +15,31 @@ DogeApp.getTemplate = function(template, data) {
   });
 }
 
-// users???
+// user show
 
 DogeApp.getUser = function() {
   event.preventDefault();
 
-  var id = $(this).data('id');
-
   return $.ajax({
     method: "GET",
-    url: DogeApp.API_URL + "/users/" + id
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    DogeApp.getTemplate("show", { user: data });
+    DogeApp.getTemplate("/user/show", { user: data });
   });
 }
+
+DogeApp.deleteUser = function() {
+  event.preventDefault();
+
+  return $.ajax({
+    method: "DELETE",
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(DogeApp.getShoes);
+}
+
+
 
 DogeApp.handleForm = function() {
   event.preventDefault();
@@ -49,6 +60,8 @@ DogeApp.handleForm = function() {
     if(!!data.token) {
       window.localStorage.setItem("token", data.token);
     }
+
+    DogeApp.getUser();
   })
   .fail(DogeApp.handleFormErrors);
 }
@@ -64,10 +77,12 @@ DogeApp.handleFormErrors = function(jqXHR) {
 DogeApp.getEditForm = function() {
   event.preventDefault();
 
-  var id = $(this).data('id');
-
-  return $.get(DogeApp.API_URL + "/users/" + id).done(function(data) {
-    DogeApp.getTemplate("edit", { user: data });
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data) {
+    DogeApp.getTemplate("/user/edit", { user: data });
   });
 }
 
@@ -96,10 +111,11 @@ DogeApp.updateUI = function() {
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$main.on("submit", "form", this.handleForm);
-  $(".menu a").not(".logout").not(".user-profile").on('click', this.loadPage);
-  $(".menu a").on('click', '.user-profile', this.getUser);
+  $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
+  $(".menu a.profile").on('click', this.getUser);
+  $(".delete-user").on('click', this.deleteUser);
   $(".menu a.logout").on('click', this.logout);
-  this.$main.on("click", "a.edit-user", this.getEditForm);
+  $(".edit-user").on("click", this.getEditForm);
   this.$main.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
