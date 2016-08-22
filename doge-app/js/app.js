@@ -1,3 +1,13 @@
+var ready = $(function() {
+  $(".menu").hide();
+  $(".hamburger").click(function() {
+    $(".menu").slideToggle("slow", function() {
+    });
+  });
+});
+
+ready;
+
 var map = new google.maps.Map(document.getElementById('map'), 
 {
   center: { lat: 51.5080072, lng: -0.1019284 },
