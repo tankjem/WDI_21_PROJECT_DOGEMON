@@ -11,7 +11,7 @@ DogeApp.getTemplate = function(template, data) {
   return $.get('/templates/' + template + '.html').done(function(templateHtml) {
     var html = _.template(templateHtml)(data);
     DogeApp.$main.html(html);
-    DogeApp.updateUI();
+    // DogeApp.updateUI();
   });
 }
 DogeApp.getUser = function() {
@@ -89,10 +89,28 @@ DogeApp.loadPage = function() {
 DogeApp.logout = function(){
   event.preventDefault();
   window.localStorage.clear();
-  DogeApp.updateUI();
+  // DogeApp.updateUI();
 }
 
+DogeApp.initEventHandlers = function() {
+  this.$main = $("main");
+  this.$main.on('click', '.menu a', this.getTemplate);
+  this.$main.on("submit", "form", this.handleForm);
+  // $(".navbar-nav a").not(".logout").on('click', this.loadPage);
+  // $(".navbar-nav a.logout").on('click', this.logout);
+  // this.$main.on("click", "a.edit-shoe", this.getEditForm);
+  // this.$main.on("click", "a.delete-shoe", this.deleteShoe);
+  // this.$main.on("focus", "form input", function() {
+  //   $(this).parents('.form-group').removeClass('has-error');
+  // });
+}
+DogeApp.init = function() {
+  this.initEventHandlers();
+  // this.getShoes();
+  // this.updateUI();
+}.bind(DogeApp);
 
+$(DogeApp.init);
 
 
 
