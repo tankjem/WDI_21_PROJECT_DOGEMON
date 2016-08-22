@@ -7,7 +7,7 @@ var secret = require("../config/tokens").secret;
 
 // require our controller(s)
 var authController = require('../controllers/authentications');
-var usersController = require('../controllers/users');
+var userController = require('../controllers/user');
 var itemsController = require('../controllers/items');
 var eventsController = require('../controllers/events');
 var pcsController = require('../controllers/pcs');
@@ -29,20 +29,23 @@ function secureRoute(req, res, next) {
 
 // Users - restful routes apart from index, create and delete
 
-router.route('/users/:id')
-  .get(secureRoute, usersController.show)
-  .put(secureRoute, usersController.update)
-  .patch(secureRoute, usersController.update)
+router.route('/user')
+  .all(secureRoute)
+  .get(userController.show)
+  .put(userController.update)
+  .patch(userController.update)
 // PC  - restful routes apart from index
 router.route('/pcs')
   .post(secureRoute, pcsController.create);
 
 router.route('/pcs/:id')
-  .get(secureRoute, pcsController.show)
-  .put(secureRoute, pcsController.update)
-  .patch(secureRoute, pcsController.update)
-  .delete(secureRoute, pcsController.delete);
+  .all(secureRoute)
+  .get(pcsController.show)
+  .put(pcsController.update)
+  .patch(pcsController.update)
+  .delete(pcsController.delete);
 // items - only show
+
 router.route('/items/:id')
   .get(secureRoute, itemsController.show)
 // event - only show
