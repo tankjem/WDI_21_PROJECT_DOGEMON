@@ -15,6 +15,21 @@ DogeApp.getTemplate = function(template, data) {
   });
 }
 
+// users???
+
+DogeApp.getUser = function() {
+  event.preventDefault();
+
+  var id = $(this).data('id');
+
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/users/" + id
+  }).done(function(data) {
+    DogeApp.getTemplate("show", { user: data });
+  });
+}
+
 DogeApp.handleForm = function() {
   event.preventDefault();
 
@@ -56,22 +71,6 @@ DogeApp.getEditForm = function() {
   });
 }
 
-// users
-
-DogeApp.getUser = function() {
-  event.preventDefault();
-
-  var id = $(this).data('id');
-
-  return $.ajax({
-    method: "GET",
-    url: DogeApp.API_URL + "/users/" + id
-  }).done(function(data) {
-    DogeApp.getTemplate("show", { user: data });
-  });
-}
-
-
 DogeApp.loadPage = function() {
   event.preventDefault();
   DogeApp.getTemplate($(this).data("template"));
@@ -96,9 +95,9 @@ DogeApp.updateUI = function() {
 
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
-  this.$main.on('click', '.menu a.user-profile', this.getUser);
   this.$main.on("submit", "form", this.handleForm);
   $(".menu a").not(".logout").not(".user-profile").on('click', this.loadPage);
+  $(".menu a").on('click', '.user-profile', this.getUser);
   $(".menu a.logout").on('click', this.logout);
   this.$main.on("click", "a.edit-user", this.getEditForm);
   this.$main.on("focus", "form input", function() {
@@ -193,7 +192,7 @@ var rectangle = new google.maps.Rectangle({
       west: -0.084863
     }
   });
-=======
+
 // added inventory for loop
 
 // DogeApp.inventoryCreation = function(){
