@@ -177,7 +177,6 @@ var map = new google.maps.Map(document.getElementById('map'), {
     lng: -0.1019284
   },
   zoom: 14,
-<<<<<<< HEAD
   styles: [{
     "featureType": "landscape",
     "stylers": [{
