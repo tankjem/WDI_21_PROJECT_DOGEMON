@@ -8,7 +8,6 @@ var app = require('../app');
 var api = supertest(app);
 
 var User = require('../models/user');
-var Pc = require('../models/Pc');
 
 describe("User tests", function() {
 
@@ -19,18 +18,11 @@ describe("User tests", function() {
 
   describe("GET /api/users/:id", function() {
     it("should return a 200 response", function(done) {
-      
-      var pc1 = new Pc ({
-        name: "New TESTES",
-      });
-
       var user = new User({
         username: "TEST",
         email: "TEST",
         first_name: "TEST",
-        last_name: "Test",
-        _id: "stringystring",
-        created_pc: [pc1]
+        last_name: "Test"
       });
 
       user.save(function(err, user) {

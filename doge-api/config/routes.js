@@ -30,27 +30,31 @@ function secureRoute(req, res, next) {
 // Users - restful routes apart from index, create and delete
 
 router.route('/users/:id')
-  .get(usersController.show)
-  .put(usersController.update)
-  .patch(usersController.update)
+  .get(secureRoute, usersController.show)
+  .put(secureRoute, usersController.update)
+  .patch(secureRoute, usersController.update)
 // PC  - restful routes apart from index
 router.route('/pcs')
-  .post(pcsController.create);
+  .post(secureRoute, pcsController.create);
 
 router.route('/pcs/:id')
-  .get(pcsController.show)
-  .put(pcsController.update)
-  .patch(pcsController.update)
-  .delete(pcsController.delete);
+  .get(secureRoute, pcsController.show)
+  .put(secureRoute, pcsController.update)
+  .patch(secureRoute, pcsController.update)
+  .delete(secureRoute, pcsController.delete);
 // items - only show
 router.route('/items/:id')
-  .get(itemsController.show)
+  .get(secureRoute, itemsController.show)
 // event - only show
 router.route('/events/:id')
-  .get(eventsController.show)
+  .get(secureRoute, eventsController.show)
 // hook up our controller methods to urls/paths
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 // export the router
+
+// code to secure routes - |secureRoute, |
+
+
 module.exports = router;
