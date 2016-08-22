@@ -97,21 +97,18 @@ DogeApp.handleFormErrors = function(jqXHR) {
 DogeApp.getEditForm = function() {
   event.preventDefault();
 
-<<<<<<< HEAD
   var id = $(this).data('id');
 
   return $.get(DogeApp.API_URL + "/users/" + id).done(function(data) {
     DogeApp.getTemplate("edit", {
       user: data
     });
-=======
   return $.ajax({
     method: "GET",
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     DogeApp.getTemplate("/user/edit", { user: data });
->>>>>>> development
   });
 }
 
