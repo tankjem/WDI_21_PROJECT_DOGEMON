@@ -157,3 +157,38 @@ navigator.geolocation.getCurrentPosition(function(position) {
  map.setZoom(17);
 });
 
+// Bounds Rectangle
+
+var bounds = new google.maps.LatLngBounds(
+  new google.maps.LatLng(51.511883, -0.084863),
+  new google.maps.LatLng(51.518263, -0.061775) 
+);
+
+var lastValidCenter = map.getCenter();
+
+google.maps.event.addListener(map, 'center_changed', function() {
+    if (bounds.contains(map.getCenter())) {
+        // still within valid bounds, so save the last valid position
+        lastValidCenter = map.getCenter();
+        return; 
+    }
+
+    // not valid anymore => return to last valid position
+    map.panTo(lastValidCenter);
+});
+
+var rectangle = new google.maps.Rectangle({
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 4,
+    // fillColor: '#FF0000',
+    // fillOpacity: 0.35,
+    map: map,
+    bounds: {
+      north: 51.518263,
+      south: 51.511883,
+      east: -0.061775,
+      west: -0.084863
+    }
+  });
+=======
