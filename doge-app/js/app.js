@@ -113,8 +113,6 @@ DogeApp.init = function() {
 
 $(DogeApp.init);
 
-// burger for menu
-
 // Drop down menu
 
 var ready = $(function() {
@@ -127,8 +125,6 @@ var ready = $(function() {
 
 ready;
 
-// map
-
 // The map
 
 
@@ -140,34 +136,37 @@ var map = new google.maps.Map(document.getElementById('map'),
 
 });
 
-map.addListener('click', function(e) {
+map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
+map.setZoom(18);
 
-  var marker = new google.maps.Marker({
-    position: e.latLng,
-    map: map, 
-    animation: google.maps.Animation.BOUNCE,
-    icon: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
-  });
+// map.addListener('click', function(e) {
 
-    marker.addListener('click', function() {
-      this.setAnimation(null);
-    });
-  });
+//   var marker = new google.maps.Marker({
+//     position: e.latLng,
+//     map: map, 
+//     animation: google.maps.Animation.BOUNCE,
+//     icon: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+//   });
 
-navigator.geolocation.getCurrentPosition(function(position) {
- var marker = new google.maps.Marker({
-    position: { lat: position.coords.latitude, lng: position.coords.longitude },
-  map: map,
-  animation: google.maps.Animation.DROP,
-      url: "./images/safe-icon.png", // url
-      scaledSize: new google.maps.Size(30, 30), // scaled size
-      origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(0, 0) // anchor
-  });
+//     marker.addListener('click', function() {
+//       this.setAnimation(null);
+//     });
+//   });
 
- map.panTo(marker.getPosition());
- map.setZoom(17);
-});
+// navigator.geolocation.getCurrentPosition(function(position) {
+//  var marker = new google.maps.Marker({
+//     position: { lat: position.coords.latitude, lng: position.coords.longitude },
+//   map: map,
+//   animation: google.maps.Animation.DROP,
+//       url: "./images/safe-icon.png", // url
+//       scaledSize: new google.maps.Size(30, 30), // scaled size
+//       origin: new google.maps.Point(0,0), // origin
+//       anchor: new google.maps.Point(0, 0) // anchor
+//   });
+
+//  map.panTo(marker.getPosition());
+//  map.setZoom(16);
+// });
 
 // Bounds Rectangle
 
@@ -179,30 +178,30 @@ var bounds = new google.maps.LatLngBounds(
 var lastValidCenter = map.getCenter();
 
 google.maps.event.addListener(map, 'center_changed', function() {
-    if (bounds.contains(map.getCenter())) {
-        // still within valid bounds, so save the last valid position
-        lastValidCenter = map.getCenter();
-        return; 
-    }
+  if (bounds.contains(map.getCenter())) {
+    // still within valid bounds, so save the last valid position
+    lastValidCenter = map.getCenter();
+    return; 
+  }
 
-    // not valid anymore => return to last valid position
-    map.panTo(lastValidCenter);
+  // not valid anymore => return to last valid position
+  map.panTo(lastValidCenter);
 });
 
 var rectangle = new google.maps.Rectangle({
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 4,
-    // fillColor: '#FF0000',
-    // fillOpacity: 0.35,
-    map: map,
-    bounds: {
-      north: 51.518263,
-      south: 51.511883,
-      east: -0.061775,
-      west: -0.084863
-    }
-  });
+  strokeColor: '#FF0000',
+  strokeOpacity: 0.8,
+  strokeWeight: 40,
+  fillColor: '#FF0000',
+  fillOpacity: 0,
+  map: map,
+  bounds: {
+    north: 51.518263,
+    south: 51.511883,
+    east: -0.061775,
+    west: -0.084863
+  }
+});
 
 // Resource Drops
 
@@ -216,22 +215,45 @@ function getRandom_marker(bounds) {
                                 lng_min + (Math.random() * lng_range));
 }
 
-google.maps.event.addListener(map, 'tilesloaded', function () {
+function setRandMarkers() {
 
- for (var i = 0; i < 20; i++) {
+ for (var i = 0; i < 100; i++) {
   var icon = {
       url: "./images/safe-icon.png", // url
       scaledSize: new google.maps.Size(30, 30), // scaled size
       origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(0, 0) // anchor
+      anchor: new google.maps.Point(0,0) // anchor
   };
    var randMarker = new google.maps.Marker({
      position: getRandom_marker(bounds), 
      map: map,
      icon: icon
    });
+
+   // Resource radius
+   var resourceCircle = new google.maps.Circle({
+     map: map,
+     radius: 25,
+     strokeColor: '#ffff4d', 
+     strokeOpacity: 0.5,   
+     fillColor: '#ffff4d',
+     fillOpacity: 0.2,
+   });
+
+   resourceCircle.bindTo('center', randMarker, 'position');
   };
-})
+};
+
+setRandMarkers();
+
+google.maps.event.addListener(map, 'zoom_changed', function() {
+  if (map.getZoom() < 18) map.setZoom(18);
+});
+
+
+
+
+
 
 // added inventory for loop
 
