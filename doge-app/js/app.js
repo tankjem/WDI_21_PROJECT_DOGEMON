@@ -192,3 +192,12 @@ var rectangle = new google.maps.Rectangle({
     }
   });
 =======
+// added inventory for loop
+
+// DogeApp.inventoryCreation = function(){
+//   for (var i = 0; i < 30; i++) {
+    
+//     var inventory = document.createElement('div');
+//     inventory.setAttribute("class","items");
+//   }
+// }
