@@ -131,7 +131,7 @@ var map = new google.maps.Map(document.getElementById('map'),
 {
   center: { lat: 51.5080072, lng: -0.1019284 },
   zoom: 14,
-  styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}]
+  styles: [{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"simplified"},{"color":"#e94f3f"}]},{"featureType":"landscape","elementType":"all","stylers":[{"visibility":"on"},{"gamma":"0.50"},{"hue":"#ff4a00"},{"lightness":"-79"},{"saturation":"-86"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"hue":"#ff1700"}]},{"featureType":"landscape.natural.landcover","elementType":"all","stylers":[{"visibility":"on"},{"hue":"#ff0000"}]},{"featureType":"poi","elementType":"all","stylers":[{"color":"#e74231"},{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"color":"#4d6447"},{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"color":"#f0ce41"},{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"color":"#363f42"}]},{"featureType":"road","elementType":"all","stylers":[{"color":"#231f20"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#6c5e53"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#313639"},{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.text","stylers":[{"hue":"#ff0000"}]},{"featureType":"transit","elementType":"labels.text.fill","stylers":[{"visibility":"simplified"},{"hue":"#ff0000"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#0e171d"}]}]
 
 });
 
@@ -170,8 +170,8 @@ map.setZoom(18);
 // Bounds Rectangle
 
 var bounds = new google.maps.LatLngBounds(
-  new google.maps.LatLng(51.511883, -0.084863),
-  new google.maps.LatLng(51.518263, -0.061775) 
+  new google.maps.LatLng(51.514462, -0.075382),
+  new google.maps.LatLng(51.516465, -0.069771) 
 );
 
 var lastValidCenter = map.getCenter();
@@ -195,10 +195,10 @@ var rectangle = new google.maps.Rectangle({
   fillOpacity: 0,
   map: map,
   bounds: {
-    north: 51.518263,
-    south: 51.511883,
-    east: -0.061775,
-    west: -0.084863
+    north: 51.516465,
+    south: 51.514462,
+    east: -0.069771,
+    west: -0.075382
   }
 });
 
@@ -216,7 +216,7 @@ function getRandom_marker(bounds) {
 
 function setRandMarkers() {
 
- for (var i = 0; i < 100; i++) {
+ for (var i = 0; i < 80; i++) {
   var icon = {
       url: "./images/safe-icon.png", // url
       scaledSize: new google.maps.Size(30, 30), // scaled size
@@ -232,7 +232,7 @@ function setRandMarkers() {
    // Resource radius
    var resourceCircle = new google.maps.Circle({
      map: map,
-     radius: 25,
+     radius: 10,
      strokeColor: '#ffff4d', 
      strokeOpacity: 0.5,   
      fillColor: '#ffff4d',
@@ -246,12 +246,43 @@ function setRandMarkers() {
 setRandMarkers();
 
 google.maps.event.addListener(map, 'zoom_changed', function() {
-  if (map.getZoom() < 18) map.setZoom(18);
+  if (map.getZoom() < 19) map.setZoom(19);
 });
 
 
+// Red Zones
 
+function setRandRedZones() {
 
+ for (var i = 0; i < 5; i++) {
+  var skullIcon = {
+      url: "./images/skull.png", // url
+      scaledSize: new google.maps.Size(30, 30), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0,0) // anchor
+  };
+   var randRedMarker = new google.maps.Marker({
+     position: getRandom_marker(bounds),
+     map: map,
+     icon: skullIcon
+   });
+
+   // Resource radius
+   var redCircle = new google.maps.Circle({
+     map: map,
+     radius: 40,
+     strokeColor: '#ff0000', 
+     strokeOpacity: 0.2,   
+     fillColor: '#ff0000',
+     fillOpacity: 0.2,
+   });
+
+   redCircle.bindTo('center', randRedMarker, 'position');
+
+  };
+};
+
+setRandRedZones();
 
 
 // added inventory for loop
