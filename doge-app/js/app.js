@@ -15,22 +15,37 @@ DogeApp.getTemplate = function(template, data) {
   });
 }
 
-// users???
+// user show
 
 DogeApp.getUser = function() {
   event.preventDefault();
 
-  var id = $(this).data('id');
-
   return $.ajax({
     method: "GET",
-    url: DogeApp.API_URL + "/users/" + id
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
+<<<<<<< HEAD
     DogeApp.getTemplate("show", {
       user: data
     });
+=======
+    DogeApp.getTemplate("/user/show", { user: data });
+>>>>>>> development
   });
 }
+
+DogeApp.deleteUser = function() {
+  event.preventDefault();
+
+  return $.ajax({
+    method: "DELETE",
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(DogeApp.getShoes);
+}
+
+
 
 DogeApp.handleForm = function() {
   event.preventDefault();
@@ -42,6 +57,7 @@ DogeApp.handleForm = function() {
   var url = DogeApp.API_URL + $(this).attr("action");
 
   return $.ajax({
+<<<<<<< HEAD
       url: url,
       method: method,
       data: data,
@@ -53,6 +69,21 @@ DogeApp.handleForm = function() {
       }
     })
     .fail(DogeApp.handleFormErrors);
+=======
+    url: url,
+    method: method,
+    data: data,
+    beforeSend: DogeApp.setRequestHeader
+  })
+  .done(function(data) {
+    if(!!data.token) {
+      window.localStorage.setItem("token", data.token);
+    }
+
+    DogeApp.getUser();
+  })
+  .fail(DogeApp.handleFormErrors);
+>>>>>>> development
 }
 
 DogeApp.handleFormErrors = function(jqXHR) {
@@ -66,12 +97,21 @@ DogeApp.handleFormErrors = function(jqXHR) {
 DogeApp.getEditForm = function() {
   event.preventDefault();
 
+<<<<<<< HEAD
   var id = $(this).data('id');
 
   return $.get(DogeApp.API_URL + "/users/" + id).done(function(data) {
     DogeApp.getTemplate("edit", {
       user: data
     });
+=======
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data) {
+    DogeApp.getTemplate("/user/edit", { user: data });
+>>>>>>> development
   });
 }
 
@@ -100,10 +140,11 @@ DogeApp.updateUI = function() {
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$main.on("submit", "form", this.handleForm);
-  $(".menu a").not(".logout").not(".user-profile").on('click', this.loadPage);
-  $(".menu a").on('click', '.user-profile', this.getUser);
+  $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
+  $(".menu a.profile").on('click', this.getUser);
+  $(".delete-user").on('click', this.deleteUser);
   $(".menu a.logout").on('click', this.logout);
-  this.$main.on("click", "a.edit-user", this.getEditForm);
+  $(".edit-user").on("click", this.getEditForm);
   this.$main.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
@@ -136,6 +177,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
     lng: -0.1019284
   },
   zoom: 14,
+<<<<<<< HEAD
   styles: [{
     "featureType": "landscape",
     "stylers": [{
@@ -254,8 +296,13 @@ map.setZoom(18);
 // Bounds Rectangle
 
 var bounds = new google.maps.LatLngBounds(
+<<<<<<< HEAD
   new google.maps.LatLng(51.511883, -0.084863),
   new google.maps.LatLng(51.518263, -0.061775)
+=======
+  new google.maps.LatLng(51.514462, -0.075382),
+  new google.maps.LatLng(51.516465, -0.069771)
+>>>>>>> development
 );
 
 var lastValidCenter = map.getCenter();
@@ -279,10 +326,10 @@ var rectangle = new google.maps.Rectangle({
   fillOpacity: 0,
   map: map,
   bounds: {
-    north: 51.518263,
-    south: 51.511883,
-    east: -0.061775,
-    west: -0.084863
+    north: 51.516465,
+    south: 51.514462,
+    east: -0.069771,
+    west: -0.075382
   }
 });
 
@@ -300,6 +347,7 @@ function getRandom_marker(bounds) {
 
 function setRandMarkers() {
 
+<<<<<<< HEAD
   for (var i = 0; i < 100; i++) {
     var icon = {
       url: "./images/safe-icon.png", // url
@@ -324,13 +372,39 @@ function setRandMarkers() {
     });
 
     resourceCircle.bindTo('center', randMarker, 'position');
+=======
+ for (var i = 0; i < 80; i++) {
+  var icon = {
+      url: "./images/safe-icon.png", // url
+      scaledSize: new google.maps.Size(30, 30), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0,0) // anchor
+  };
+   var randMarker = new google.maps.Marker({
+     position: getRandom_marker(bounds),
+     map: map,
+     icon: icon
+   });
+
+   // Resource radius
+   var resourceCircle = new google.maps.Circle({
+     map: map,
+     radius: 10,
+     strokeColor: '#ffff4d',
+     strokeOpacity: 0.5,
+     fillColor: '#ffff4d',
+     fillOpacity: 0.2,
+   });
+
+   resourceCircle.bindTo('center', randMarker, 'position');
+>>>>>>> development
   };
 };
 
 setRandMarkers();
 
 google.maps.event.addListener(map, 'zoom_changed', function() {
-  if (map.getZoom() < 18) map.setZoom(18);
+  if (map.getZoom() < 19) map.setZoom(19);
 });
 
 function initMap() {
@@ -338,6 +412,7 @@ function initMap() {
     map: map
   });
 
+<<<<<<< HEAD
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -366,6 +441,41 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 initMap();
+=======
+// Red Zones
+
+function setRandRedZones() {
+
+ for (var i = 0; i < 5; i++) {
+  var skullIcon = {
+      url: "./images/skull.png", // url
+      scaledSize: new google.maps.Size(30, 30), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0,0) // anchor
+  };
+   var randRedMarker = new google.maps.Marker({
+     position: getRandom_marker(bounds),
+     map: map,
+     icon: skullIcon
+   });
+
+   // Resource radius
+   var redCircle = new google.maps.Circle({
+     map: map,
+     radius: 40,
+     strokeColor: '#ff0000',
+     strokeOpacity: 0.2,
+     fillColor: '#ff0000',
+     fillOpacity: 0.2,
+   });
+
+   redCircle.bindTo('center', randRedMarker, 'position');
+
+  };
+};
+
+setRandRedZones();
+>>>>>>> development
 
 
 // added inventory for loop
