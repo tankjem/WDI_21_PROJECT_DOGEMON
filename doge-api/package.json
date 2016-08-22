@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "cors": "^2.7.1",
     "express": "^4.14.0",
@@ -23,8 +24,5 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "supertest": "^2.0.0"
-  },
-  "directories": {
-    "test": "test"
   }
 }
