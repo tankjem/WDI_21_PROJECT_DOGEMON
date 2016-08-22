@@ -21,11 +21,9 @@ describe("Pc tests", function() {
       api.post('/api/pcs')
         .set('Accept', 'application/json')
         .send({
-          brand: "Nike",
-          color: "Black",
-          laced: true,
-          material: "leather",
-          price: 49.99
+          image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
+          health: 100,
+          inventory: []
         }).expect(201, done);
     });
   });
@@ -40,6 +38,38 @@ describe("Pc tests", function() {
 
       pc.save(function(err, pc) {
         api.get('/api/pcs/' + pc.id)
+          .set('Accept', 'application/json')
+          .expect(200, done);
+      });
+    });
+  });
+
+  describe("PUT /api/pcs/:id", function() {
+    it("should return a 200 response", function(done) {
+      var pc = new Pc({
+        image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
+        health: 100,
+        inventory: []
+      });
+
+      pc.save(function(err, pc) {
+        api.put('/api/pcs/' + pc.id)
+          .set('Accept', 'application/json')
+          .expect(200, done);
+      });
+    });
+  });
+
+  describe("PATCH /api/pcs/:id", function() {
+    it("should return a 200 response", function(done) {
+      var pc = new Pc({
+        image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
+        health: 100,
+        inventory: []
+      });
+
+      pc.save(function(err, pc) {
+        api.patch('/api/pcs/' + pc.id)
           .set('Accept', 'application/json')
           .expect(200, done);
       });
