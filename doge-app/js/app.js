@@ -179,6 +179,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
     lng: -0.1019284
   },
   zoom: 14,
+  maxZoom: 18,
   styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative.country","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"hue":"#76ff00"}]},{"featureType":"administrative.locality","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#7e2727"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#a5a0a0"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.fill","stylers":[{"color":"#915b5b"},{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"saturation":"-19"},{"color":"#c53d3d"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#994e4e"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#a85d5d"}]},{"featureType":"poi.attraction","elementType":"geometry.stroke","stylers":[{"color":"#e10909"}]},{"featureType":"poi.place_of_worship","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#6e2e2e"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#c42222"},{"lightness":29},{"weight":0.2},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#4f5049"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#5a5353"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#aa967c"},{"lightness":17}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#486d7a"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#af9393"}]}],
   disableDefaultUI: true
 });
@@ -271,55 +272,73 @@ function getRandom_marker(bounds) {
     lng_min + (Math.random() * lng_range));
 }
 
-navigator.geolocation.getCurrentPosition(function(position) {
-  var pos = {
-    lat: position.coords.latitude,
-    lng: position.coords.longitude
-  };
+function setPlayerMarker(pos) {
+  console.log("location found", pos);
   var playerIcon = {
-    url: "./images/pcmarker.png", // url
+    url: "/images/pcmarker.png", // url
     scaledSize: new google.maps.Size(60, 60), // scaled size
     origin: new google.maps.Point(0,0), // origin
     anchor: new google.maps.Point(25,25) // anchor
   }
   var playerMarker = new google.maps.Marker({
-    position: {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    },
+    position: pos,
     map: map,
     icon: playerIcon
-  })
-});
+  });
+};
 
 
 
-function setRandMarkers() {
+function setRandMarkers(pos) {
 
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var pos = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
+  var icon = {
+    url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(15,15) // anchor
+  };
+
+  // 
+  var testMarker = new google.maps.Marker({
+    position: {lat: pos.lat - 0.0005, lng: pos.lng + 0.0005 },
+    map: map,
+    icon: icon,
+    animation: google.maps.Animation.BOUNCE
+  });
+
+  var resourceCircleTest = new google.maps.Circle({
+    map: map,
+    radius: 20,
+    strokeColor: '#ffffff',
+    strokeOpacity: 0.2,
+    fillColor: '#ffffff',
+    fillOpacity: 0.3,
+  });
+
+  resourceCircleTest.bindTo('center', testMarker, 'position');
+  var resourceCircleBoundsTest = resourceCircleTest.getBounds();
+
+  testMarker.addListener("click", function() {
+   console.log(pos);
+   if (resourceCircleBoundsTest.contains(pos)) {
+     console.log("A resource is close by.");
+   
+     var div = document.createElement('div');
+       div.style.backgroundColor = "white";
+       div.style.position = "absolute";
+       div.style.left = "10%";
+       div.style.top = "10%";
+       div.style.height = "80%";
+       div.style.width = "80%";
+
+     document.getElementsByTagName('body')[0].appendChild(div);
+   }
+  });
 
   for (var i = 0; i < 150; i++) {
-    var icon = {
-      url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
-      scaledSize: new google.maps.Size(30, 30), // scaled size
-      origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(15,15) // anchor
-    };
 
     var randMarker = new google.maps.Marker({
       position: getRandom_marker(bounds),
-      map: map,
-      icon: icon
-    });
-    var testMarker = new google.maps.Marker({
-      position: {
-        lat:51.5152595,
-        lng:-0.0721346
-      },
       map: map,
       icon: icon
     });
@@ -333,66 +352,29 @@ function setRandMarkers() {
      fillColor: '#ffffff',
      fillOpacity: 0.3,
    });
-   var resourceCircleTest = new google.maps.Circle({
-     map: map,
-     radius: 20,
-     strokeColor: '#ffffff',
-     strokeOpacity: 0.2,
-     fillColor: '#ffffff',
-     fillOpacity: 0.3,
-   });
-
 
     resourceCircle.bindTo('center', randMarker, 'position');
-    resourceCircleTest.bindTo('center', testMarker, 'position');
 
    var resourceCircleBounds = resourceCircle.getBounds();
-   var resourceCircleBoundsTest = resourceCircleTest.getBounds();
 
    // if (resourceCircleBoundsTest.contains(pos)) {
    //   console.log("A resource is close by.");
      
    // }
-  
-   testMarker.addListener("click", function() {
-    console.log(pos);
-    // if (resourceCircleBoundsTest.contains(pos)) {
-    //   console.log("A resource is close by.");
-    
-      var div = document.createElement('div');
-        div.style.backgroundColor = "white";
-        div.style.position = "absolute";
-        div.style.left = "10%";
-        div.style.top = "10%";
-        div.style.height = "80%";
-        div.style.width = "80%";
-
-      document.getElementsByTagName('body')[0].appendChild(div);
-    // }
-   });
 
   }
-});
 }
 
-setRandMarkers();
 
-google.maps.event.addListener(map, 'zoom_changed', function() {
-  if (map.getZoom() < 18) map.setZoom(18);
-});
+
+// google.maps.event.addListener(map, 'zoom_changed', function() {
+//   if (map.getZoom() < 18) map.setZoom(18);
+// });
 
 
 // Red Zones
 
-function setRandRedZones() {
-
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var pos = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude,
-    }
-
-    console.log(pos);
+function setRandRedZones(pos) {
 
 
   for (var i = 0; i < 8; i++) {
@@ -428,10 +410,18 @@ function setRandRedZones() {
   }
   
 }
-});
 };
 
-setRandRedZones();
+navigator.geolocation.getCurrentPosition(function(position) {
+  var pos = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude,
+  }
+
+  setRandRedZones(pos);
+  setRandMarkers(pos);
+  setPlayerMarker(pos);
+});
 
 
   // Try HTML5 geolocation. << Ed's code
