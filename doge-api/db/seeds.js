@@ -330,7 +330,7 @@ Item.create([{
     description: "You are attacked by a zombie",
     image_url: "https://cdn0.iconfinder.com/data/icons/black-religious-icons/256/Zombie.png",
     event_type: "red_zone_encounter",
-    choices: ["attack", "flee"]
+    choices: ["attack", "flee"],
     }, {
     name: "Yoga-Rosie",
     description:"A bizarre sight unravels before you. A girl is doing yoga on top of a van which is surrounded by zombies. She seems perfectly at ease.",

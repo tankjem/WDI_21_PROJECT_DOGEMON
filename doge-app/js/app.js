@@ -271,13 +271,27 @@ function getRandom_marker(bounds) {
     lng_min + (Math.random() * lng_range));
 }
 
+navigator.geolocation.getCurrentPosition(function(position) {
+  var pos = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude
+  };
+  var playerMarker = new google.maps.Marker({
+    postition: pos,
+    map: map,
+    icon: icon
+  })
+});
+
+
+
 function setRandMarkers() {
 
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var pos = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
+  // navigator.geolocation.getCurrentPosition(function(position) {
+  //   var pos = {
+  //     lat: position.coords.latitude,
+  //     lng: position.coords.longitude
+  //   };
 
   for (var i = 0; i < 150; i++) {
     var icon = {
@@ -292,7 +306,14 @@ function setRandMarkers() {
       map: map,
       icon: icon
     });
-
+    var testMarker = new google.maps.Marker({
+      position: {
+        lat:51.5152595,
+        lng:-0.0721346
+      },
+      map: map,
+      icon: icon
+    });
 
    // Resource radius
    var resourceCircle = new google.maps.Circle({
@@ -303,18 +324,45 @@ function setRandMarkers() {
      fillColor: '#ffffff',
      fillOpacity: 0.3,
    });
+   var resourceCircleTest = new google.maps.Circle({
+     map: map,
+     radius: 20,
+     strokeColor: '#ffffff',
+     strokeOpacity: 0.2,
+     fillColor: '#ffffff',
+     fillOpacity: 0.3,
+   });
 
 
     resourceCircle.bindTo('center', randMarker, 'position');
+    resourceCircleTest.bindTo('center', testMarker, 'position');
 
    var resourceCircleBounds = resourceCircle.getBounds();
+   var resourceCircleBoundsTest = resourceCircleTest.getBounds();
 
-   if (resourceCircleBounds.contains(pos)) {
+   if (resourceCircleBoundsTest.contains(pos)) {
      console.log("A resource is close by.");
+     
    }
+  
+   testMarker.addListener("click", function() {
+    if (resourceCircleBoundsTest.contains(pos)) {
+      console.log("A resource is close by.");
+    
+      var div = document.createElement('div');
+        div.style.backgroundColor = "white";
+        div.style.position = "absolute";
+        div.style.left = "10%";
+        div.style.top = "10%";
+        div.style.height = "80%";
+        div.style.width = "80%";
+
+      document.getElementsByTagName('body')[0].appendChild(div);
+    }
+   });
 
   }
-});
+// });
 }
 
 setRandMarkers();
@@ -335,39 +383,39 @@ function setRandRedZones() {
     }
 
 
- for (var i = 0; i < 8; i++) {
-  var skullIcon = {
+  for (var i = 0; i < 8; i++) {
+    var skullIcon = {
       url: "./images/skull.png", // url
       scaledSize: new google.maps.Size(60, 60), // scaled size
       origin: new google.maps.Point(0,0), // origin
       anchor: new google.maps.Point(25,25) // anchor
   };
 
-   var randRedMarker = new google.maps.Marker({
-     position: getRandom_marker(bounds),
-     map: map,
-     icon: skullIcon
-   });
+  var randRedMarker = new google.maps.Marker({
+    position: getRandom_marker(bounds),
+    map: map,
+    icon: skullIcon
+  });
 
-   // Resource radius
-   var redCircle = new google.maps.Circle({
-     map: map,
-     radius: 100,
-     strokeColor: '#ff0000',
-     strokeOpacity: 1,
-     fillColor: '#ff0000',
-     fillOpacity: 0.5
-   });
+  // Resource radius
+  var redCircle = new google.maps.Circle({
+    map: map,
+    radius: 100,
+    strokeColor: '#ff0000',
+    strokeOpacity: 1,
+    fillColor: '#ff0000',
+    fillOpacity: 0.5
+  });
 
-   redCircle.bindTo('center', randRedMarker, 'position');
+  redCircle.bindTo('center', randRedMarker, 'position');
 
-   var redCircleBounds = redCircle.getBounds();
+  var redCircleBounds = redCircle.getBounds();
 
-   if (redCircleBounds.contains(pos)) {
-     console.log("You're in the red zone!");
-   }
-
+  if (redCircleBounds.contains(pos)) {
+   console.log("You're in the red zone!");
   }
+  
+}
 });
 };
 
