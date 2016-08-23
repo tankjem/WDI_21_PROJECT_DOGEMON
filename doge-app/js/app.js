@@ -7,10 +7,17 @@ DogeApp.setRequestHeader = function(jqXHR) {
   if(!!token) return jqXHR.setRequestHeader("Authorization", "Bearer " + token);
 }
 
-DogeApp.getTemplate = function(template, data) {
+DogeApp.getTemplate = function(template, data, $element) {
+
   return $.get('/templates/' + template + '.html').done(function(templateHtml) {
     var html = _.template(templateHtml)(data);
-    DogeApp.$main.html(html);
+
+    if(!$element) {
+      DogeApp.$main.html(html);
+    } else {
+      $element.html(html);
+    }
+
     DogeApp.updateUI();
   });
 }
@@ -67,6 +74,22 @@ DogeApp.deletePc = function() {
   }).done(DogeApp.getUser);
 }
 
+// events
+
+DogeApp.getEvent = function() {
+  event.preventDefault();
+
+  var id = $(this).data('id');
+
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/pcs/" + id,
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data) {
+    DogeApp.getTemplate("/pc/show", { pc: data });
+  });
+}
+
 // forms (edit/new)
 
 DogeApp.handleForm = function() {
@@ -111,6 +134,22 @@ DogeApp.getEditForm = function() {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     DogeApp.getTemplate("/user/edit", { user: data });
+  });
+}
+
+DogeApp.getEvent = function() {
+  event.preventDefault();
+
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/event",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data){
+    var $content = $('#content');
+    DogeApp.getTemplate("events/show", { event: data }, $content);
+    $content.removeClass('hidden');
+
+    console.log(data);
   });
 }
 
@@ -272,29 +311,42 @@ function getRandom_marker(bounds) {
     lng_min + (Math.random() * lng_range));
 }
 
-function setPlayerMarker(pos) {
 
-  this.pos = pos;
+// auto-updating player marker
 
-  var playerIcon = {
-    url: "/images/pcmarker.png", // url
-    scaledSize: new google.maps.Size(60, 60), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(25,25) // anchor
-  }
-  var playerMarker = new google.maps.Marker({
-    position: pos,
-    map: map,
-    icon: playerIcon
-  });
-  console.log("Running the thing." + pos);
+var playerMarker = null;
+
+function autoUpdate() {
+  navigator.geolocation.getCurrentPosition(function(position) {  
+    var newPoint = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    var playerIcon = {
+      url: "/images/pcmarker.png", // url
+      scaledSize: new google.maps.Size(60, 60), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(25,25) // anchor
+    }
+
+    if (playerMarker) {
+      playerMarker.setPosition(newPoint);
+    }
+    else {
+      playerMarker = new google.maps.Marker({
+        position: newPoint,
+        map: map,
+        icon: playerIcon
+      });
+    }
+
+    map.setCenter(newPoint);
+  }); 
+
+  setTimeout(autoUpdate, 500);
 }
 
-window.setInterval(function(){
-  setPlayerMarker(this.pos);
-}.bind(this), 5000);
+autoUpdate();
 
-
+// rand marker
 
 function setRandMarkers(pos) {
 
@@ -308,7 +360,7 @@ function setRandMarkers(pos) {
 
   // 
   var testMarker = new google.maps.Marker({
-    position: {lat: pos.lat - 0.0001, lng: pos.lng + 0.0001 },
+    position: { lat: pos.lat - 0.0001, lng: pos.lng + 0.0001 },
     map: map,
     icon: icon,
     animation: google.maps.Animation.BOUNCE
@@ -333,7 +385,7 @@ function setRandMarkers(pos) {
    if (resourceCircleBoundsTest.contains(pos)) {
      console.log("A resource is close by.");
 
-     $('#content').removeClass('hidden');
+     DogeApp.getEvent();
    } 
   });
 
@@ -420,7 +472,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
   setRandRedZones(pos);
   setRandMarkers(pos);
-  setPlayerMarker(pos);
+  // setPlayerMarker(pos);
 });
 
 
@@ -471,6 +523,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 //   }
 // }
 
+
 var marker = null;
 
 function autoUpdate() {
@@ -494,3 +547,4 @@ function autoUpdate() {
 }
 
 autoUpdate();
+
