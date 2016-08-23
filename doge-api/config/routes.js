@@ -41,8 +41,6 @@ router.route('/pcs')
 router.route('/pcs/:id')
   .all(secureRoute)
   .get(pcsController.show)
-  .put(pcsController.update)
-  .patch(pcsController.update)
   .delete(pcsController.delete);
 // items - only show
 
@@ -56,8 +54,5 @@ router.route('/events/:id')
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 // export the router
-
-// code to secure routes - |secureRoute, |
-
 
 module.exports = router;
