@@ -36,10 +36,38 @@ DogeApp.deleteUser = function() {
     method: "DELETE",
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
-  }).done(DogeApp.getShoes);
+  }).done(DogeApp.getUser);// should be landing page instead of getUser, but it isn't done yet.
 }
 
+// pcs
 
+DogeApp.getPc = function() {
+  event.preventDefault();
+
+  var id = $(this).data('id');
+
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/pcs/" + id,
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data) {
+    DogeApp.getTemplate("/pc/show", { pc: data });
+  });
+}
+
+DogeApp.deletePc = function() {
+  event.preventDefault();
+
+  var id = $(this).data('id');
+
+  return $.ajax({
+    method: "DELETE",
+    url: DogeApp.API_URL + "/pcs/" + id,
+    beforeSend: DogeApp.setRequestHeader
+  }).done(DogeApp.getUser);
+}
+
+// forms (edit/new)
 
 DogeApp.handleForm = function() {
   event.preventDefault();
@@ -111,7 +139,9 @@ DogeApp.updateUI = function() {
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$main.on("submit", "form", this.handleForm);
-  $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
+  this.$main.on('click', 'h4 a.pc-show', this.getPc);
+  this.$main.on('click', 'h4 a.delete-pc', this.deletePc);
+  $(".menu a").not(".logout, .profile, .edit-user, .pc-show").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
   $(".menu a.logout").on('click', this.logout);

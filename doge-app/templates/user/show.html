@@ -1,7 +1,5 @@
 <h2><%= user.username %></h2>
 <h3><%= user.email %></h3>
+<h4><a href="#" data-id="<%= user.created_pc %>" class="pc-show">Your PC</a></h4>
 
-<h4><%= user.created_pc %></h4>
-
-<a href="#" data-id="<%= user._id%>" class="edit-user btn btn-primary logged-in">Edit</a>
 <a href="#" data-id="<%= user._id%>" class="delete-user btn btn-danger logged-in">Delete</a>
