@@ -298,6 +298,7 @@ window.setInterval(function(){
 
 function setRandMarkers(pos) {
 
+
   var icon = {
     url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
     scaledSize: new google.maps.Size(30, 30), // scaled size
@@ -335,6 +336,7 @@ function setRandMarkers(pos) {
   });
 
   $('button').on('click', hideContent);
+
 
   function hideContent() {
     $('#content').addClass('hidden');
