@@ -287,11 +287,12 @@ function setRandMarkers() {
       anchor: new google.maps.Point(15,15) // anchor
     };
 
-   var randMarker = new google.maps.Marker({
-     position: getRandom_marker(bounds),
-     map: map,
-     icon: icon
-   });
+    var randMarker = new google.maps.Marker({
+      position: getRandom_marker(bounds),
+      map: map,
+      icon: icon
+    });
+
 
    // Resource radius
    var resourceCircle = new google.maps.Circle({
@@ -303,7 +304,8 @@ function setRandMarkers() {
      fillOpacity: 0.3,
    });
 
-   resourceCircle.bindTo('center', randMarker, 'position');
+
+    resourceCircle.bindTo('center', randMarker, 'position');
 
    var resourceCircleBounds = resourceCircle.getBounds();
 
@@ -373,10 +375,6 @@ function setRandRedZones() {
 
 setRandRedZones();
 
-
-
-
-// =====================A===Divider=====================================================
 
   // Try HTML5 geolocation. << Ed's code
 
