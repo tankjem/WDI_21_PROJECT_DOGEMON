@@ -163,14 +163,14 @@ $(DogeApp.init);
 
 // Drop down menu
 
-var ready = $(function() {
-  $(".menu").hide();
-  $(".hamburger").click(function() {
-    $(".menu").slideToggle("slow", function() {});
-  });
-});
+// var ready = $(function() {
+//   $(".menu").hide();
+//   $(".hamburger").click(function() {
+//     $(".menu").slideToggle("slow", function() {});
+//   });
+// });
 
-ready;
+// ready;
 
 // The map
 
@@ -181,7 +181,8 @@ var map = new google.maps.Map(document.getElementById('map'), {
     lng: -0.1019284
   },
   zoom: 14,
-  styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]
+  styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}],
+  disableDefaultUI: true
 });
 
 // Try HTML5 geolocation.
@@ -258,6 +259,10 @@ var rectangle = new google.maps.Rectangle({
 
 // Resource Drops
 
+google.maps.Circle.prototype.contains = function(latLng) {
+  return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
+}
+
 function getRandom_marker(bounds) {
   var lat_min = bounds.getSouthWest().lat(),
     lat_range = bounds.getNorthEast().lat() - lat_min,
@@ -270,7 +275,13 @@ function getRandom_marker(bounds) {
 
 function setRandMarkers() {
 
-  for (var i = 0; i < 100; i++) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+
+  for (var i = 0; i < 150; i++) {
     var icon = {
       url: "./images/safe-icon.png", // url
       scaledSize: new google.maps.Size(30, 30), // scaled size
@@ -287,7 +298,7 @@ function setRandMarkers() {
    // Resource radius
    var resourceCircle = new google.maps.Circle({
      map: map,
-     radius: 15,
+     radius: 20,
      strokeColor: '#ffffff',
      strokeOpacity: 0.2,
      fillColor: '#ffffff',
@@ -296,7 +307,14 @@ function setRandMarkers() {
 
    resourceCircle.bindTo('center', randMarker, 'position');
 
+   var resourceCircleBounds = resourceCircle.getBounds();
+
+   if (resourceCircleBounds.contains(pos)) {
+     console.log("A resource is close by.");
+   }
+
   }
+});
 }
 
 setRandMarkers();
@@ -310,7 +328,14 @@ google.maps.event.addListener(map, 'zoom_changed', function() {
 
 function setRandRedZones() {
 
- for (var i = 0; i < 5; i++) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    }
+
+
+ for (var i = 0; i < 8; i++) {
   var skullIcon = {
       url: "./images/skull.png", // url
       scaledSize: new google.maps.Size(60, 60), // scaled size
@@ -327,7 +352,7 @@ function setRandRedZones() {
    // Resource radius
    var redCircle = new google.maps.Circle({
      map: map,
-     radius: 80,
+     radius: 100,
      strokeColor: '#ff0000',
      strokeOpacity: 1,
      fillColor: '#ff0000',
@@ -336,46 +361,58 @@ function setRandRedZones() {
 
    redCircle.bindTo('center', randRedMarker, 'position');
 
+   var redCircleBounds = redCircle.getBounds();
+
+   if (redCircleBounds.contains(pos)) {
+     console.log("You're in the red zone!");
+   }
+
   }
-}
+});
+};
 
 setRandRedZones();
 
+
+
+
+// =====================A===Divider=====================================================
+
   // Try HTML5 geolocation. << Ed's code
 
-  function initMap() {
-    var infoWindow = new google.maps.InfoWindow({
-      map: map
-    });
+//   function currentPosition() {
+//     var infoWindow = new google.maps.InfoWindow({
+//       map: map
+//     });
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var pos = {
+//         lat: position.coords.latitude,
+//         lng: position.coords.longitude
+//       };
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-  }
-}
+//       infoWindow.setPosition(pos);
+//       infoWindow.setContent('Location found.');
+//       map.setCenter(pos);
+//     }, function() {
+//       handleLocationError(true, infoWindow, map.getCenter());
+//     });
+//   } else {
+//     // Browser doesn't support Geolocation
+//     handleLocationError(false, infoWindow, map.getCenter());
+//   }
+// }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
-    'Error: Your browser doesn\'t support geolocation.');
-};
+// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//   infoWindow.setPosition(pos);
+//   infoWindow.setContent(browserHasGeolocation ?
+//     'Error: The Geolocation service failed.' :
+//     'Error: Your browser doesn\'t support geolocation.');
+// };
 
 
-initMap();
+// currentPosition();
 
 
 // added inventory for loop
