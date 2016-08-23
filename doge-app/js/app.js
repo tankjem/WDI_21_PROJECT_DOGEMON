@@ -4,7 +4,7 @@ DogeApp.API_URL = "http://localhost:3000/api";
 
 DogeApp.setRequestHeader = function(jqXHR) {
   var token = window.localStorage.getItem("token");
-  if (!!token) return jqXHR.setRequestHeader("Authorization", "Bearer " + token);
+  if(!!token) return jqXHR.setRequestHeader("Authorization", "Bearer " + token);
 }
 
 DogeApp.getTemplate = function(template, data) {
@@ -15,24 +15,20 @@ DogeApp.getTemplate = function(template, data) {
   });
 }
 
-// users???
+// user show
 
 DogeApp.getUser = function() {
   event.preventDefault();
 
-  var id = $(this).data('id');
-
   return $.ajax({
     method: "GET",
-    url: DogeApp.API_URL + "/users/" + id
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    DogeApp.getTemplate("show", {
-      user: data
-    });
+    DogeApp.getTemplate("/user/show", { user: data });
   });
 }
 
-<<<<<<< HEAD
 DogeApp.deleteUser = function() {
   event.preventDefault();
 
@@ -89,16 +85,18 @@ DogeApp.handleForm = function() {
       beforeSend: DogeApp.setRequestHeader
     })
     .done(function(data) {
-      if (!!data.token) {
+      if(!!data.token) {
         window.localStorage.setItem("token", data.token);
       }
+
+      DogeApp.getUser();
     })
     .fail(DogeApp.handleFormErrors);
 }
 
 DogeApp.handleFormErrors = function(jqXHR) {
   var $form = $("form");
-  for (field in jqXHR.responseJSON.errors) {
+  for(field in jqXHR.responseJSON.errors) {
     $form.find("input[name=" + field + "]").parent(".form-group").addClass("has-error");
   }
   $form.find("button").removeAttr("disabled");
@@ -107,12 +105,12 @@ DogeApp.handleFormErrors = function(jqXHR) {
 DogeApp.getEditForm = function() {
   event.preventDefault();
 
-  var id = $(this).data('id');
-
-  return $.get(DogeApp.API_URL + "/users/" + id).done(function(data) {
-    DogeApp.getTemplate("edit", {
-      user: data
-    });
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data) {
+    DogeApp.getTemplate("/user/edit", { user: data });
   });
 }
 
@@ -129,7 +127,7 @@ DogeApp.logout = function() {
 
 DogeApp.updateUI = function() {
   var loggedIn = !!window.localStorage.getItem("token");
-  if (loggedIn) {
+  if(loggedIn) {
     $(".logged-in").removeClass("hidden");
     $(".logged-out").addClass("hidden");
   } else {
@@ -146,10 +144,9 @@ DogeApp.initEventHandlers = function() {
   $(".menu a").not(".logout, .profile, .edit-user, .pc-show").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
-  $(".menu a").not(".logout").not(".user-profile").on('click', this.loadPage);
   $(".menu a").on('click', '.user-profile', this.getUser);
   $(".menu a.logout").on('click', this.logout);
-  this.$main.on("click", "a.edit-user", this.getEditForm);
+  $(".edit-user").on("click", this.getEditForm);
   this.$main.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
