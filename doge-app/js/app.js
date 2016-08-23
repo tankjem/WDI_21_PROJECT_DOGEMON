@@ -74,6 +74,22 @@ DogeApp.deletePc = function() {
   }).done(DogeApp.getUser);
 }
 
+// events
+
+DogeApp.getEvent = function() {
+  event.preventDefault();
+
+  var id = $(this).data('id');
+
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/pcs/" + id,
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data) {
+    DogeApp.getTemplate("/pc/show", { pc: data });
+  });
+}
+
 // forms (edit/new)
 
 DogeApp.handleForm = function() {
@@ -295,31 +311,45 @@ function getRandom_marker(bounds) {
     lng_min + (Math.random() * lng_range));
 }
 
-function setPlayerMarker(pos) {
 
-  this.pos = pos;
+// auto-updating player marker
 
-  var playerIcon = {
-    url: "/images/pcmarker.png", // url
-    scaledSize: new google.maps.Size(60, 60), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(25,25) // anchor
-  }
-  var playerMarker = new google.maps.Marker({
-    position: pos,
-    map: map,
-    icon: playerIcon
-  });
-  console.log("Running the thing." + pos);
+var playerMarker = null;
+
+function autoUpdate() {
+  navigator.geolocation.getCurrentPosition(function(position) {  
+    var newPoint = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    var playerIcon = {
+      url: "/images/pcmarker.png", // url
+      scaledSize: new google.maps.Size(60, 60), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(25,25) // anchor
+    }
+
+    if (playerMarker) {
+      playerMarker.setPosition(newPoint);
+    }
+    else {
+      playerMarker = new google.maps.Marker({
+        position: newPoint,
+        map: map,
+        icon: playerIcon
+      });
+    }
+
+    map.setCenter(newPoint);
+  }); 
+
+  setTimeout(autoUpdate, 500);
 }
 
-window.setInterval(function(){
-  setPlayerMarker(this.pos);
-}.bind(this), 5000);
+autoUpdate();
 
-
+// rand marker
 
 function setRandMarkers(pos) {
+
 
   var icon = {
     url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
@@ -358,6 +388,7 @@ function setRandMarkers(pos) {
   });
 
   $('button').on('click', hideContent);
+
 
   function hideContent() {
     $('#content').addClass('hidden');
@@ -448,7 +479,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
   setRandRedZones(pos);
   setRandMarkers(pos);
-  setPlayerMarker(pos);
+  // setPlayerMarker(pos);
 });
 
 
