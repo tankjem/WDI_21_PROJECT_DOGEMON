@@ -276,10 +276,19 @@ navigator.geolocation.getCurrentPosition(function(position) {
     lat: position.coords.latitude,
     lng: position.coords.longitude
   };
+  var playerIcon = {
+    url: "./images/pcmarker.png", // url
+    scaledSize: new google.maps.Size(60, 60), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(25,25) // anchor
+  }
   var playerMarker = new google.maps.Marker({
-    postition: pos,
+    position: {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    },
     map: map,
-    icon: icon
+    icon: playerIcon
   })
 });
 
@@ -287,11 +296,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 function setRandMarkers() {
 
-  // navigator.geolocation.getCurrentPosition(function(position) {
-  //   var pos = {
-  //     lat: position.coords.latitude,
-  //     lng: position.coords.longitude
-  //   };
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
 
   for (var i = 0; i < 150; i++) {
     var icon = {
@@ -340,14 +349,15 @@ function setRandMarkers() {
    var resourceCircleBounds = resourceCircle.getBounds();
    var resourceCircleBoundsTest = resourceCircleTest.getBounds();
 
-   if (resourceCircleBoundsTest.contains(pos)) {
-     console.log("A resource is close by.");
+   // if (resourceCircleBoundsTest.contains(pos)) {
+   //   console.log("A resource is close by.");
      
-   }
+   // }
   
    testMarker.addListener("click", function() {
-    if (resourceCircleBoundsTest.contains(pos)) {
-      console.log("A resource is close by.");
+    console.log(pos);
+    // if (resourceCircleBoundsTest.contains(pos)) {
+    //   console.log("A resource is close by.");
     
       var div = document.createElement('div');
         div.style.backgroundColor = "white";
@@ -358,11 +368,11 @@ function setRandMarkers() {
         div.style.width = "80%";
 
       document.getElementsByTagName('body')[0].appendChild(div);
-    }
+    // }
    });
 
   }
-// });
+});
 }
 
 setRandMarkers();
