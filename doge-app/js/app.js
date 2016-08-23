@@ -298,6 +298,7 @@ window.setInterval(function(){
 
 function setRandMarkers(pos) {
 
+
   var icon = {
     url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
     scaledSize: new google.maps.Size(30, 30), // scaled size
@@ -325,6 +326,8 @@ function setRandMarkers(pos) {
   resourceCircleTest.bindTo('center', testMarker, 'position');
   var resourceCircleBoundsTest = resourceCircleTest.getBounds();
 
+// ============== The content div, showing events
+
   testMarker.addListener("click", function() {
    console.log(pos);
    if (resourceCircleBoundsTest.contains(pos)) {
@@ -336,9 +339,13 @@ function setRandMarkers(pos) {
 
   $('button').on('click', hideContent);
 
+
   function hideContent() {
     $('#content').addClass('hidden');
   };
+
+
+// =========== Random resource markers
 
   for (var i = 0; i < 150; i++) {
 
@@ -362,22 +369,10 @@ function setRandMarkers(pos) {
 
    var resourceCircleBounds = resourceCircle.getBounds();
 
-   // if (resourceCircleBoundsTest.contains(pos)) {
-   //   console.log("A resource is close by.");
-     
-   // }
-
   }
 }
 
-
-
-// google.maps.event.addListener(map, 'zoom_changed', function() {
-//   if (map.getZoom() < 18) map.setZoom(18);
-// });
-
-
-// Red Zones
+//  ============= Red Zones
 
 function setRandRedZones(pos) {
 
@@ -479,28 +474,23 @@ navigator.geolocation.getCurrentPosition(function(position) {
 var marker = null;
 
 function autoUpdate() {
-  navigator.geolocation.getCurrentPosition(function(position) {  
-    var newPoint = new google.maps.LatLng(position.coords.latitude, 
-                                          position.coords.longitude);
+  navigator.geolocation.getCurrentPosition(function(position) {  
+    var newPoint = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-    if (marker) {
-      // Marker already created - Move it
-      marker.setPosition(newPoint);
-    }
-    else {
-      // Marker does not exist - Create it
-      marker = new google.maps.Marker({
-        position: newPoint,
-        map: map
-      });
-    }
+    if (marker) {
+      marker.setPosition(newPoint);
+    }
+    else {
+      marker = new google.maps.Marker({
+        position: newPoint,
+        map: map
+      });
+    }
 
-    // Center the map on the new position
-    map.setCenter(newPoint);
-  }); 
+    map.setCenter(newPoint);
+  }); 
 
-  // Call the autoUpdate() function every 5 seconds
-  setTimeout(autoUpdate, 5000);
+  setTimeout(autoUpdate, 500);
 }
 
 autoUpdate();

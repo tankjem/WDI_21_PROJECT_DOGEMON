@@ -38,6 +38,7 @@ footer {
 footer .menu span {
   float: left;
   font-family: 'Creepster', cursive;
+  color: red;
   font-size: 55px;
   margin: 0 15px;
   letter-spacing: 15px;
