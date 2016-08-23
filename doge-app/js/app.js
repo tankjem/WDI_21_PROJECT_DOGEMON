@@ -234,7 +234,7 @@ function setRandMarkers() {
     };
 
    var randMarker = new google.maps.Marker({
-     position: getRandom_marker(bounds), 
+     position: getRandom_marker(bounds),
      map: map,
      icon: icon
    });
@@ -243,8 +243,8 @@ function setRandMarkers() {
    var resourceCircle = new google.maps.Circle({
      map: map,
      radius: 15,
-     strokeColor: '#ffffff', 
-     strokeOpacity: 0.2,   
+     strokeColor: '#ffffff',
+     strokeOpacity: 0.2,
      fillColor: '#ffffff',
      fillOpacity: 0.3,
    });
@@ -283,8 +283,8 @@ function setRandRedZones() {
    var redCircle = new google.maps.Circle({
      map: map,
      radius: 80,
-     strokeColor: '#ff0000', 
-     strokeOpacity: 1,   
+     strokeColor: '#ff0000',
+     strokeOpacity: 1,
      fillColor: '#ff0000',
      fillOpacity: 0.5
    });
@@ -298,43 +298,39 @@ setRandRedZones();
 
   // Try HTML5 geolocation. << Ed's code
 
-//   function initMap() {
-//     var infoWindow = new google.maps.InfoWindow({
-//       map: map
-//     });
+  function initMap() {
+    var infoWindow = new google.maps.InfoWindow({
+      map: map
+    });
 
-//   }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
 
-// function geoLocator() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       var pos = {
-//         lat: position.coords.latitude,
-//         lng: position.coords.longitude
-//       };
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
 
-//       infoWindow.setPosition(pos);
-//       infoWindow.setContent('Location found.');
-//       map.setCenter(pos);
-//     }, function() {
-//       handleLocationError(true, infoWindow, map.getCenter());
-//     });
-//   } else {
-//     // Browser doesn't support Geolocation
-//     handleLocationError(false, infoWindow, map.getCenter());
-//   }
-// }
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
+};
 
-// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-//   infoWindow.setPosition(pos);
-//   infoWindow.setContent(browserHasGeolocation ?
-//     'Error: The Geolocation service failed.' :
-//     'Error: Your browser doesn\'t support geolocation.');
-// };
 
-// geoLocator();
-
-// initMap();
+initMap();
 
 
 // added inventory for loop
