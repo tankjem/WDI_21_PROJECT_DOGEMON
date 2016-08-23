@@ -59,7 +59,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Light Tunic",
     description: "A lovely tunic",
-    image_url: "/assets/items/A_Clothing01.png",
+    image_url: "./assets/items/A_Clothing01.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 10,
@@ -69,7 +69,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Medium Tunic",
     description: "Tunics are in this year...",
-    image_url: "/assets/items/A_Clothing02.png",
+    image_url: "./assets/items/A_Clothing02.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 20,
@@ -79,7 +79,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Leather Armour",
     description: "A lovely tunic",
-    image_url: "/assets/items/A_Armour01.png",
+    image_url: "./assets/items/A_Armour01.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 25,
@@ -89,7 +89,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Iron Armour",
     description: "A lovely tunic",
-    image_url: "/assets/items/A_Armour04.png",
+    image_url: "./assets/items/A_Armour04.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 50,
@@ -99,7 +99,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Gold Armour",
     description: "Yes its a terrible idea but somehow its better than expected",
-    image_url: "/assets/items/A_Armour03.png",
+    image_url: "./assets/items/A_Armour03.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 65,
