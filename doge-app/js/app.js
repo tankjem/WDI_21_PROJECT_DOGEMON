@@ -32,7 +32,6 @@ DogeApp.getUser = function() {
   });
 }
 
-<<<<<<< HEAD
 DogeApp.deleteUser = function() {
   event.preventDefault();
 
