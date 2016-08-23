@@ -249,9 +249,9 @@ function setRandMarkers() {
    var resourceCircle = new google.maps.Circle({
      map: map,
      radius: 10,
-     strokeColor: '#ffff4d', 
-     strokeOpacity: 0.5,   
-     fillColor: '#ffff4d',
+     strokeColor: '#ffffff', 
+     strokeOpacity: 0.2,   
+     fillColor: '#ffffff',
      fillOpacity: 0.2,
    });
 
@@ -273,9 +273,9 @@ function setRandRedZones() {
  for (var i = 0; i < 5; i++) {
   var skullIcon = {
       url: "./images/skull.png", // url
-      scaledSize: new google.maps.Size(30, 30), // scaled size
+      scaledSize: new google.maps.Size(60, 60), // scaled size
       origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(0,0) // anchor
+      anchor: new google.maps.Point(50,25) // anchor
   };
    var randRedMarker = new google.maps.Marker({
      position: getRandom_marker(bounds),
