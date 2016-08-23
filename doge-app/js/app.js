@@ -179,7 +179,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
     lng: -0.1019284
   },
   zoom: 14,
-  maxZoom: 18,
+  minZoom: 18,
   styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative.country","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"hue":"#76ff00"}]},{"featureType":"administrative.locality","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#7e2727"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#a5a0a0"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.fill","stylers":[{"color":"#915b5b"},{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"saturation":"-19"},{"color":"#c53d3d"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#994e4e"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#a85d5d"}]},{"featureType":"poi.attraction","elementType":"geometry.stroke","stylers":[{"color":"#e10909"}]},{"featureType":"poi.place_of_worship","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#6e2e2e"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#c42222"},{"lightness":29},{"weight":0.2},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#4f5049"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#5a5353"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#aa967c"},{"lightness":17}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#486d7a"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#af9393"}]}],
   disableDefaultUI: true
 });
@@ -273,7 +273,9 @@ function getRandom_marker(bounds) {
 }
 
 function setPlayerMarker(pos) {
-  console.log("location found", pos);
+
+  this.pos = pos;
+
   var playerIcon = {
     url: "/images/pcmarker.png", // url
     scaledSize: new google.maps.Size(60, 60), // scaled size
@@ -285,7 +287,12 @@ function setPlayerMarker(pos) {
     map: map,
     icon: playerIcon
   });
-};
+  console.log("Running the thing." + pos);
+}
+
+window.setInterval(function(){
+  setPlayerMarker(this.pos);
+}.bind(this), 5000);
 
 
 
@@ -300,7 +307,7 @@ function setRandMarkers(pos) {
 
   // 
   var testMarker = new google.maps.Marker({
-    position: {lat: pos.lat - 0.0005, lng: pos.lng + 0.0005 },
+    position: {lat: pos.lat - 0.0001, lng: pos.lng + 0.0001 },
     map: map,
     icon: icon,
     animation: google.maps.Animation.BOUNCE
@@ -322,18 +329,16 @@ function setRandMarkers(pos) {
    console.log(pos);
    if (resourceCircleBoundsTest.contains(pos)) {
      console.log("A resource is close by.");
-   
-     var div = document.createElement('div');
-       div.style.backgroundColor = "white";
-       div.style.position = "absolute";
-       div.style.left = "10%";
-       div.style.top = "10%";
-       div.style.height = "80%";
-       div.style.width = "80%";
 
-     document.getElementsByTagName('body')[0].appendChild(div);
-   }
+     $('#content').removeClass('hidden');
+   } 
   });
+
+  $('button').on('click', hideContent);
+
+  function hideContent() {
+    $('#content').addClass('hidden');
+  };
 
   for (var i = 0; i < 150; i++) {
 
