@@ -267,7 +267,7 @@ function getRandom_marker(bounds) {
 var playerMarker = null;
 
 function autoUpdate() {
-  navigator.geolocation.getCurrentPosition(function(position) {  
+  navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     var playerIcon = {
@@ -289,7 +289,7 @@ function autoUpdate() {
     }
 
     map.setCenter(newPoint);
-  }); 
+  });
 
   setTimeout(autoUpdate, 500);
 }
@@ -309,7 +309,7 @@ function setRandMarkers(pos) {
     anchor: new google.maps.Point(15,15) // anchor
   };
 
-  // 
+  //
   var testMarker = new google.maps.Marker({
     position: { lat: pos.lat - 0.0001, lng: pos.lng + 0.0001 },
     map: map,
@@ -426,6 +426,8 @@ function setRandRedZones(pos) {
       console.log("You're in the red zone!");
     }
   }
+
+}
 };
 
 navigator.geolocation.getCurrentPosition(function(position) {
