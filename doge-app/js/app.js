@@ -145,6 +145,18 @@ DogeApp.getEvent = function() {
     console.log(data);
   });
 }
+DogeApp.getItem = function() {
+  event.preventDefault();
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/item",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data){
+    var $content = $('#content');
+    DogeApp.getTemplate("items/show", {item:data}, $content);
+    $content.removeClass('hidden');
+  });
+}
 
 DogeApp.loadPage = function() {
   event.preventDefault();
@@ -445,10 +457,10 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 
 
-$('button').on('click', hideContent);
+$('#main-map').on('click', hideContent);
 
 function hideContent() {
-  $('.pop-up').addClass('hidden');
+  $('#content').addClass('hidden');
 };
 
   // Try HTML5 geolocation. << Ed's code
