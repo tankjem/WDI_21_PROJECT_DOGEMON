@@ -7,10 +7,17 @@ DogeApp.setRequestHeader = function(jqXHR) {
   if(!!token) return jqXHR.setRequestHeader("Authorization", "Bearer " + token);
 }
 
-DogeApp.getTemplate = function(template, data) {
+DogeApp.getTemplate = function(template, data, $element) {
+
   return $.get('/templates/' + template + '.html').done(function(templateHtml) {
     var html = _.template(templateHtml)(data);
-    DogeApp.$main.html(html);
+
+    if(!$element) {
+      DogeApp.$main.html(html);
+    } else {
+      $element.html(html);
+    }
+
     DogeApp.updateUI();
   });
 }
@@ -28,6 +35,7 @@ DogeApp.getUser = function() {
     var $content = $('#content');
     DogeApp.getTemplate("user/show", { user: data }, $content);
     $content.removeClass('hidden');
+    // DogeApp.getTemplate("/user/show", { user: data });
   });
 
 }
@@ -54,7 +62,10 @@ DogeApp.getPc = function() {
     url: DogeApp.API_URL + "/pcs/" + id,
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    DogeApp.getTemplate("/pc/show", { pc: data });
+    var $content = $('#content');
+    DogeApp.getTemplate("pc/show", { pc: data }, $content);
+    $content.removeClass('hidden');
+    // DogeApp.getTemplate("/pc/show", { pc: data });
   });
 }
 
@@ -115,6 +126,23 @@ DogeApp.getEditForm = function() {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     DogeApp.getTemplate("/user/edit", { user: data });
+  });
+}
+
+//events
+DogeApp.getEvent = function() {
+  event.preventDefault();
+
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/event",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data){
+    var $content = $('#content');
+    DogeApp.getTemplate("events/show", { event: data }, $content);
+    $content.removeClass('hidden');
+
+    console.log(data);
   });
 }
 
@@ -330,7 +358,7 @@ function setRandMarkers(pos) {
 
   // 
   var testMarker = new google.maps.Marker({
-    position: {lat: pos.lat - 0.0001, lng: pos.lng + 0.0001 },
+    position: { lat: pos.lat - 0.0001, lng: pos.lng + 0.0001 },
     map: map,
     icon: icon,
     animation: google.maps.Animation.BOUNCE
@@ -353,7 +381,7 @@ function setRandMarkers(pos) {
    if (resourceCircleBoundsTest.contains(pos)) {
      console.log("A resource is close by.");
 
-     $('#content').removeClass('hidden');
+     DogeApp.getEvent();
    } 
   });
 
