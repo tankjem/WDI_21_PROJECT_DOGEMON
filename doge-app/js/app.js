@@ -1,4 +1,14 @@
+// overwriting prototype stuff. Sorry not sorry
+google.maps.Circle.prototype.contains = function(latLng) {
+  return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
+}
+
 var DogeApp = DogeApp || {};
+
+DogeApp.pos;
+DogeApp.event;
+
+var eventNumber = "";
 
 DogeApp.API_URL = "http://localhost:3000/api";
 
@@ -130,21 +140,26 @@ DogeApp.getEditForm = function() {
 }
 
 //events
-DogeApp.getEvent = function() {
-  event.preventDefault();
-
+DogeApp.getEvent = function(testMarker) {
+  // event.preventDefault();
   return $.ajax({
     method: "GET",
     url: DogeApp.API_URL + "/event",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data){
-    var $content = $('#content');
-    DogeApp.getTemplate("events/show", { event: data }, $content);
-    $content.removeClass('hidden');
+    // console.log(data);
+    DogeApp.event = data;
+    console.log(DogeApp.event, " is the event!");
+    // var $content = $('#content');
+    // DogeApp.getTemplate("events/show", { event: data }, $content);
+    // $content.removeClass('hidden');
+    DogeApp.customInfoWindow(testMarker, data);
 
-    console.log(data);
   });
+
+
 }
+
 DogeApp.getItem = function() {
   event.preventDefault();
   return $.ajax({
@@ -183,6 +198,7 @@ DogeApp.updateUI = function() {
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
+  this.$map = $("#map"); // oop the bloody map
   this.$main.on("submit", "form", this.handleForm);
   this.$content.on('click', 'h4 a.delete-pc', this.deletePc);
   this.$content.on('click', 'h4 a.pc-show', this.getPc);
@@ -194,146 +210,122 @@ DogeApp.initEventHandlers = function() {
   this.$content.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
+
   // if(pcDeath !== 0) {
   //   this.deletePc;
   // }
+
+  // the map
+  DogeApp.map = new google.maps.Map(document.getElementById('map'), {
+
+    center: {
+      lat: 51.5080072,
+      lng: -0.1019284
+    },
+    zoom: 14,
+    minZoom: 18,
+    styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative.country","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"hue":"#76ff00"}]},{"featureType":"administrative.locality","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#7e2727"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#a5a0a0"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.fill","stylers":[{"color":"#915b5b"},{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"saturation":"-19"},{"color":"#c53d3d"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#994e4e"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#a85d5d"}]},{"featureType":"poi.attraction","elementType":"geometry.stroke","stylers":[{"color":"#e10909"}]},{"featureType":"poi.place_of_worship","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#6e2e2e"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#c42222"},{"lightness":29},{"weight":0.2},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#4f5049"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#5a5353"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#aa967c"},{"lightness":17}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#486d7a"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#af9393"}]}],
+    disableDefaultUI: true
+  });
+
+  DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
+  DogeApp.map.setZoom(18);
+  DogeApp.setBounds();
+  DogeApp.getCurrentPosition(function() {
+    DogeApp.setPlayerMarker();
+    DogeApp.setRandMarkers();
+    DogeApp.setRandRedZones();
+  });
 }
 
-DogeApp.init = function() {
-  this.initEventHandlers();
-  this.updateUI();
-}.bind(DogeApp);
+// // =================== auto-updating player marker
 
-$(DogeApp.init);
+DogeApp.getCurrentPosition = function(callback) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    DogeApp.pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    }
 
+    if(callback) callback();
+  });
+}
 
+DogeApp.playerMarker = null;
 
-// The map
+DogeApp.setPlayerMarker = function() {
+  if (DogeApp.playerMarker) {
+    DogeApp.playerMarker.setPosition(DogeApp.pos);
+  }
+  else {
+    DogeApp.playerMarker = new google.maps.Marker({
+      position: DogeApp.pos,
+      map: DogeApp.map,
+      icon: {
+        url: "/images/pcmarker.png",
+        scaledSize: new google.maps.Size(60, 60),
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(25,25)
+      }
+    });
+  }
+  DogeApp.map.setCenter(DogeApp.pos);
 
-var map = new google.maps.Map(document.getElementById('map'), {
-
-  center: {
-    lat: 51.5080072,
-    lng: -0.1019284
-  },
-  zoom: 14,
-  minZoom: 18,
-  styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative.country","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"hue":"#76ff00"}]},{"featureType":"administrative.locality","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#7e2727"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#a5a0a0"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.fill","stylers":[{"color":"#915b5b"},{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"saturation":"-19"},{"color":"#c53d3d"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#994e4e"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#a85d5d"}]},{"featureType":"poi.attraction","elementType":"geometry.stroke","stylers":[{"color":"#e10909"}]},{"featureType":"poi.place_of_worship","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#6e2e2e"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#c42222"},{"lightness":29},{"weight":0.2},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#4f5049"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#5a5353"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#aa967c"},{"lightness":17}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#486d7a"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#af9393"}]}],
-  disableDefaultUI: true
-});
-
-map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
-map.setZoom(18);
+  setInterval(DogeApp.getCurrentPosition, 1000 * 10);
+}
+  
 
 // Bounds Rectangle
 
-var bounds = new google.maps.LatLngBounds(
-  new google.maps.LatLng(51.511883, -0.084863),
-  new google.maps.LatLng(51.518263, -0.061775)
-);
+DogeApp.setBounds = function() {
+  var bounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(51.511883, -0.084863),
+    new google.maps.LatLng(51.518263, -0.061775)
+  );
 
-var lastValidCenter = map.getCenter();
+  var lastValidCenter = DogeApp.map.getCenter();
 
-google.maps.event.addListener(map, 'center_changed', function() {
-  if (bounds.contains(map.getCenter())) {
-    // still within valid bounds, so save the last valid position
-    lastValidCenter = map.getCenter();
-    return;
-  }
+  google.maps.event.addListener(DogeApp.map, 'center_changed', function() {
+    if (bounds.contains(DogeApp.map.getCenter())) {
+      // still within valid bounds, so save the last valid position
+      lastValidCenter = DogeApp.map.getCenter();
+      return;
+    }
 
-  // not valid anymore => return to last valid position
-  map.panTo(lastValidCenter);
-});
+    // not valid anymore => return to last valid position
+    DogeApp.map.panTo(lastValidCenter);
+  });
 
-var rectangle = new google.maps.Rectangle({
-  strokeColor: '#FF0000',
-  strokeOpacity: 0,
-  strokeWeight: 40,
-  fillColor: '#FF0000',
-  fillOpacity: 0,
-  map: map,
-  bounds: {
-    north: 51.518263,
-    south: 51.511883,
-    east: -0.061775,
-    west: -0.084863
-  }
-});
+  DogeApp.bounds = bounds;
+}
 
 // ================= Random Resource Drops
 
-google.maps.Circle.prototype.contains = function(latLng) {
-  return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
-}
-
-function getRandom_marker(bounds) {
-  var lat_min = bounds.getSouthWest().lat(),
-    lat_range = bounds.getNorthEast().lat() - lat_min,
-    lng_min = bounds.getSouthWest().lng(),
-    lng_range = bounds.getNorthEast().lng() - lng_min;
+DogeApp.getRandomMarker = function() {
+  var lat_min = DogeApp.bounds.getSouthWest().lat(),
+    lat_range = DogeApp.bounds.getNorthEast().lat() - lat_min,
+    lng_min = DogeApp.bounds.getSouthWest().lng(),
+    lng_range = DogeApp.bounds.getNorthEast().lng() - lng_min;
 
   return new google.maps.LatLng(lat_min + (Math.random() * lat_range),
     lng_min + (Math.random() * lng_range));
 }
 
-
-// =================== auto-updating player marker
-
-var playerMarker = null;
-
-function autoUpdate() {
-  navigator.geolocation.getCurrentPosition(function(position) {  
-    var newPoint = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-    var playerIcon = {
-      url: "/images/pcmarker.png", // url
-      scaledSize: new google.maps.Size(60, 60), // scaled size
-      origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(25,25) // anchor
-    }
-
-    if (playerMarker) {
-      playerMarker.setPosition(newPoint);
-    }
-    else {
-      playerMarker = new google.maps.Marker({
-        position: newPoint,
-        map: map,
-        icon: playerIcon
-      });
-    }
-
-    map.setCenter(newPoint);
-  }); 
-
-  setTimeout(autoUpdate, 100);
-}
-
-
-
-autoUpdate();
-
-// =============== Random Marker
-
-function setRandMarkers(pos) {
-
-  var icon = {
-    url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
-    scaledSize: new google.maps.Size(30, 30), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(15,15) // anchor
-  };
-
-  // 
+DogeApp.setRandMarkers = function() {
   var testMarker = new google.maps.Marker({
-    position: { lat: pos.lat - 0.0001, lng: pos.lng + 0.0001 },
-    map: map,
-    icon: icon,
+    position: { lat: DogeApp.pos.lat + 0.0001, lng: DogeApp.pos.lng - 0.0001},
+    map: DogeApp.map,
+    icon: {
+        url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png",
+        scaledSize: new google.maps.Size(30, 30),
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(15,15)
+      },
     animation: google.maps.Animation.BOUNCE
   });
 
   var resourceCircleTest = new google.maps.Circle({
-    map: map,
+    map: DogeApp.map,
     radius: 20,
     strokeColor: '#ffffff',
     strokeOpacity: 0.2,
@@ -346,14 +338,15 @@ function setRandMarkers(pos) {
 
 // ============== The content div, showing events
 
-  testMarker.addListener("click", function() {
-   if (resourceCircleBoundsTest.contains(pos)) {
-    testMarker.setMap(null);
-    resourceCircleTest.setMap(null);
+  DogeApp.getEvent(testMarker);
 
-    DogeApp.getEvent();
-   } 
-  });
+
+  // testMarker.addListener("click", function() {
+  //   if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
+  //     testMarker.setMap(null);
+  //     resourceCircleTest.setMap(null);
+  //   } 
+  // });
 
   $('button').on('click', hideContent);
 
@@ -362,52 +355,56 @@ function setRandMarkers(pos) {
     $('#content').addClass('hidden');
   };
 
-  if (resourceCircleBoundsTest.contains(pos)) {
+  if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
     console.log("A resource is close by.");
   };
 
-// =========== Random resource markers
 
-  for (var i = 0; i < 150; i++) {
+  // for (var i = 0; i < 150; i++) {
 
-  var randMarker = new google.maps.Marker({
-    position: getRandom_marker(bounds),
-    map: map,
-    icon: icon
-  });
+  //   var randMarker = new google.maps.Marker({
+  //     position: DogeApp.getRandomMarker(),
+  //     map: DogeApp.map,
+  //     icon: {
+  //       url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
+  //       scaledSize: new google.maps.Size(30, 30), // scaled size
+  //       origin: new google.maps.Point(0,0), // origin
+  //       anchor: new google.maps.Point(15,15) // anchor
+  //     }
+  //   });
 
-  // Resource radius
-  var resourceCircle = new google.maps.Circle({
-   map: map,
-   radius: 20,
-   strokeColor: '#ffffff',
-   strokeOpacity: 0.2,
-   fillColor: '#ffffff',
-   fillOpacity: 0.3,
-  });
+  //   // Resource radius
+  //   var resourceCircle = new google.maps.Circle({
+  //     map: DogeApp.map,
+  //     radius: 20,
+  //     strokeColor: '#ffffff',
+  //     strokeOpacity: 0.2,
+  //     fillColor: '#ffffff',
+  //     fillOpacity: 0.3,
+  //   });
 
-  resourceCircle.bindTo('center', randMarker, 'position');
+  //   resourceCircle.bindTo('center', randMarker, 'position');
 
-  var resourceCircleBounds = resourceCircle.getBounds();
+  //   var resourceCircleBounds = resourceCircle.getBounds();
 
-  }; // End of loop
+  // };
 
-  randMarker.addListener("click", function() {
-    if (resourceCircleBounds.contains(pos)) {
-     randMarker.setMap(null);
-     resourceCircle.setMap(null);
+  // randMarker.addListener("click", function() {
+  //   if (resourceCircleBounds.contains(DogeApp.pos)) {
+  //     randMarker.setMap(null);
+  //     resourceCircle.setMap(null);
 
-   DogeApp.getEvent();
-    } 
-  });
+  //     DogeApp.customInfoWindow();
+  //   } 
+  // });
 }
 
 
 
-//  ============= Red Zones
 
-function setRandRedZones(pos) {
+// //  ============= Red Zones
 
+DogeApp.setRandRedZones = function() {
 
   for (var i = 0; i < 8; i++) {
     var skullIcon = {
@@ -415,47 +412,34 @@ function setRandRedZones(pos) {
       scaledSize: new google.maps.Size(60, 60), // scaled size
       origin: new google.maps.Point(0,0), // origin
       anchor: new google.maps.Point(25,25) // anchor
-  };
+    };
 
-  var randRedMarker = new google.maps.Marker({
-    position: getRandom_marker(bounds),
-    map: map,
-    icon: skullIcon
-  });
+    var randRedMarker = new google.maps.Marker({
+      position: DogeApp.getRandomMarker(),
+      map: DogeApp.map,
+      icon: skullIcon
+    });
 
-  // Resource radius
-  var redCircle = new google.maps.Circle({
-    map: map,
-    radius: 100,
-    strokeColor: '#ff0000',
-    strokeOpacity: 1,
-    fillColor: '#ff0000',
-    fillOpacity: 0.5
-  });
+    // Resource radius
+    var redCircle = new google.maps.Circle({
+      map: DogeApp.map,
+      radius: 100,
+      strokeColor: '#ff0000',
+      strokeOpacity: 1,
+      fillColor: '#ff0000',
+      fillOpacity: 0.5
+    });
 
-  redCircle.bindTo('center', randRedMarker, 'position');
+    redCircle.bindTo('center', randRedMarker, 'position');
 
-  var redCircleBounds = redCircle.getBounds();
+    var redCircleBounds = redCircle.getBounds();
 
-  if (redCircleBounds.contains(pos)) {
-   console.log("You're in the red zone!");
-  }
+    if (redCircleBounds.contains(DogeApp.pos)) {
+      console.log("You're in the red zone!");
+    }
   
-}
-};
-
-navigator.geolocation.getCurrentPosition(function(position) {
-  var pos = {
-    lat: position.coords.latitude,
-    lng: position.coords.longitude,
   }
-
-  setRandRedZones(pos);
-  setRandMarkers(pos);
-  // setPlayerMarker(pos);
-});
-
-
+};
 
 $('#main-map').on('click', hideContent);
 
@@ -463,55 +447,107 @@ function hideContent() {
   $('#content').addClass('hidden');
 };
 
-  // Try HTML5 geolocation. << Ed's code
 
-//   function currentPosition() {
-//     var infoWindow = new google.maps.InfoWindow({
-//       map: map
-//     });
+//  ============= game event logic
 
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       var pos = {
-//         lat: position.coords.latitude,
-//         lng: position.coords.longitude
-//       };
+DogeApp.customInfoWindow = function(marker, data){
 
-//       infoWindow.setPosition(pos);
-//       infoWindow.setContent('Location found.');
-//       map.setCenter(pos);
-//     }, function() {
-//       handleLocationError(true, infoWindow, map.getCenter());
-//     });
-//   } else {
-//     // Browser doesn't support Geolocation
-//     handleLocationError(false, infoWindow, map.getCenter());
-//   }
-// }
+  marker.addListener("click", function(){
+    if(data.event_number === 1) {
+      $("body").prepend("<div id='content'>" + data.name + "<br>" + "<div class='choice1'>" + data.choices[0] + "</div><br></div>)");
 
-// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-//   infoWindow.setPosition(pos);
-//   infoWindow.setContent(browserHasGeolocation ?
-//     'Error: The Geolocation service failed.' :
-//     'Error: Your browser doesn\'t support geolocation.');
-// };
+      $(".choice1").on("click", function() {
+        console.log("This is where we wanted to be at 12")
+      })
+    }
+  });
+  console.log(data, " is still the event");
+}
 
 
-// currentPosition();
+// DogeApp.customInfoWindow = function() {
+//   DogeApp.testMarker.addEventListener("click", function(){
+//     console.log("this works");
+//   })
+  // $(marker).on("click", function() {
+  //   console.log("this works")
+  // })
 
-
-// added inventory for loop
-
-// DogeApp.inventoryCreation = function(){
-//   for (var i = 0; i < 30; i++) {
-
-//     var inventory = document.createElement('div');
-//     inventory.setAttribute("class","items");
-//   }
+    // if(num === 1) {
+    //   console.log("num is indeed 1")
+    //   $('#hello').click(function(){
+    //     console.log("hello");
+    //   });
+    // }
 // }
 
 
 
-// game battle logic
 
->>>>>>> development
+// // function buttonChoices (){
+// //   var btns = document.getElementsByClassName("choice-click");
+// //   for (var i=0;i<btns.length;i++){
+// //     addEvent(btns[i], 'click', console.log("hello");
+// //   }
+// // }
+
+//   // Try HTML5 geolocation. << Ed's code
+
+
+// //   function currentPosition() {
+// //     var infoWindow = new google.maps.InfoWindow({
+// //       map: map
+// //     });
+
+// //   if (navigator.geolocation) {
+// //     navigator.geolocation.getCurrentPosition(function(position) {
+// //       var pos = {
+// //         lat: position.coords.latitude,
+// //         lng: position.coords.longitude
+// //       };
+
+// //       infoWindow.setPosition(pos);
+// //       infoWindow.setContent('Location found.');
+// //       map.setCenter(pos);
+// //     }, function() {
+// //       handleLocationError(true, infoWindow, map.getCenter());
+// //     });
+// //   } else {
+// //     // Browser doesn't support Geolocation
+// //     handleLocationError(false, infoWindow, map.getCenter());
+// //   }
+// // }
+
+// // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+// //   infoWindow.setPosition(pos);
+// //   infoWindow.setContent(browserHasGeolocation ?
+// //     'Error: The Geolocation service failed.' :
+// //     'Error: Your browser doesn\'t support geolocation.');
+// // };
+
+
+// // currentPosition();
+
+
+// // added inventory for loop
+
+// // DogeApp.inventoryCreation = function(){
+// //   for (var i = 0; i < 30; i++) {
+
+// //     var inventory = document.createElement('div');
+// //     inventory.setAttribute("class","items");
+// //   }
+// // }
+
+
+
+// // game battle logic
+
+
+
+
+
+$(function() {
+  DogeApp.initEventHandlers();
+  DogeApp.updateUI();  
+})
