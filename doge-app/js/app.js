@@ -32,7 +32,10 @@ DogeApp.getUser = function() {
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    DogeApp.getTemplate("/user/show", { user: data });
+    var $content = $('#content');
+    DogeApp.getTemplate("user/show", { user: data }, $content);
+    $content.removeClass('hidden');
+    // DogeApp.getTemplate("/user/show", { user: data });
   });
 }
 
@@ -58,7 +61,10 @@ DogeApp.getPc = function() {
     url: DogeApp.API_URL + "/pcs/" + id,
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    DogeApp.getTemplate("/pc/show", { pc: data });
+    var $content = $('#content');
+    DogeApp.getTemplate("pc/show", { pc: data }, $content);
+    $content.removeClass('hidden');
+    // DogeApp.getTemplate("/pc/show", { pc: data });
   });
 }
 
@@ -74,21 +80,6 @@ DogeApp.deletePc = function() {
   }).done(DogeApp.getUser);
 }
 
-// events
-
-DogeApp.getEvent = function() {
-  event.preventDefault();
-
-  var id = $(this).data('id');
-
-  return $.ajax({
-    method: "GET",
-    url: DogeApp.API_URL + "/pcs/" + id,
-    beforeSend: DogeApp.setRequestHeader
-  }).done(function(data) {
-    DogeApp.getTemplate("/pc/show", { pc: data });
-  });
-}
 
 // forms (edit/new)
 
@@ -137,6 +128,7 @@ DogeApp.getEditForm = function() {
   });
 }
 
+//events
 DogeApp.getEvent = function() {
   event.preventDefault();
 
