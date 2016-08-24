@@ -37,6 +37,7 @@ DogeApp.getUser = function() {
     $content.removeClass('hidden');
     // DogeApp.getTemplate("/user/show", { user: data });
   });
+
 }
 
 DogeApp.deleteUser = function() {
@@ -55,14 +56,14 @@ DogeApp.getPc = function() {
   event.preventDefault();
 
   var id = $(this).data('id');
-
+  console.log(id);
   return $.ajax({
     method: "GET",
     url: DogeApp.API_URL + "/pcs/" + id,
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     var $content = $('#content');
-    DogeApp.getTemplate("pc/show", { pc: data }, $content);
+    DogeApp.getTemplate("/pc/show", { pc: data }, $content);
     $content.removeClass('hidden');
     // DogeApp.getTemplate("/pc/show", { pc: data });
   });
@@ -169,18 +170,21 @@ DogeApp.updateUI = function() {
 
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
+  this.$content = $("#content");
   this.$main.on("submit", "form", this.handleForm);
-  this.$main.on('click', 'h4 a.pc-show', this.getPc);
-  this.$main.on('click', 'h4 a.delete-pc', this.deletePc);
+  this.$content.on('click', 'h4 a.delete-pc', this.deletePc);
+  this.$content.on('click', 'h4 a.pc-show', this.getPc);
   $(".menu a").not(".logout, .profile, .edit-user, .pc-show").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
-  $(".menu a").on('click', '.user-profile', this.getUser);
   $(".menu a.logout").on('click', this.logout);
   $(".edit-user").on("click", this.getEditForm);
-  this.$main.on("focus", "form input", function() {
+  this.$content.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
+  // if(pcDeath !== 0) {
+  //   this.deletePc;
+  // }
 }
 
 DogeApp.init = function() {
@@ -292,6 +296,8 @@ function autoUpdate() {
 
   setTimeout(autoUpdate, 500);
 }
+
+
 
 autoUpdate();
 
@@ -436,3 +442,64 @@ navigator.geolocation.getCurrentPosition(function(position) {
   setRandMarkers(pos);
   // setPlayerMarker(pos);
 });
+
+
+
+$('button').on('click', hideContent);
+
+function hideContent() {
+  $('.pop-up').addClass('hidden');
+};
+
+  // Try HTML5 geolocation. << Ed's code
+
+//   function currentPosition() {
+//     var infoWindow = new google.maps.InfoWindow({
+//       map: map
+//     });
+
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var pos = {
+//         lat: position.coords.latitude,
+//         lng: position.coords.longitude
+//       };
+
+//       infoWindow.setPosition(pos);
+//       infoWindow.setContent('Location found.');
+//       map.setCenter(pos);
+//     }, function() {
+//       handleLocationError(true, infoWindow, map.getCenter());
+//     });
+//   } else {
+//     // Browser doesn't support Geolocation
+//     handleLocationError(false, infoWindow, map.getCenter());
+//   }
+// }
+
+// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//   infoWindow.setPosition(pos);
+//   infoWindow.setContent(browserHasGeolocation ?
+//     'Error: The Geolocation service failed.' :
+//     'Error: Your browser doesn\'t support geolocation.');
+// };
+
+
+// currentPosition();
+
+
+// added inventory for loop
+
+// DogeApp.inventoryCreation = function(){
+//   for (var i = 0; i < 30; i++) {
+
+//     var inventory = document.createElement('div');
+//     inventory.setAttribute("class","items");
+//   }
+// }
+
+
+
+// game battle logic
+
+>>>>>>> development
