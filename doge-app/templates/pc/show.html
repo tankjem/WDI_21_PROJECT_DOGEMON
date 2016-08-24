@@ -6,28 +6,23 @@
   </div>
   <div class="right">
     <p>Health</p>
-    <progress id="health-value" value="<%= pc.health %>" max="100"><%= pc.health %></progress>
+    <progress id="health-value" value="<%= pc.health %>" max="100">
+      <%= pc.health %>
+    </progress>
     <p>Armour</p>
-    <progress id="armour-value" value="<%= pc.armour %>" max="100"><%= pc.armour %></progress>
+    <progress id="armour-value" value="<%= pc.armour %>" max="100">
+      <%= pc.armour %>
+    </progress>
     <p>Hunger</p>
-    <progress id="hunger-value" value="<%= pc.hunger %>" max="100"><%= pc.hunger %></progress>
+    <progress id="hunger-value" value="<%= pc.hunger %>" max="100">
+      <%= pc.hunger %>
+    </progress>
     <p>Thirst</p>
-    <progress id="thirst-value" value="<%= pc.thirst %>" max="100"><%= pc.thirst %></progress>
+    <progress id="thirst-value" value="<%= pc.thirst %>" max="100">
+      <%= pc.thirst %>
+    </progress>
   </div>
 </div>
-
-<<<<<<< HEAD
-<p>Health</p>
-<progress id="health-value" value="79" max="100"></progress>
-<p>Armour</p>
-<progress id="armour-value" value="32" max="100"></progress>
-<p>Hunger</p>
-<progress id="hunger-value" value="69" max="100"></progress>
-<p>Thirst</p>
-<progress id="thirst-value" value="12" max="100"></progress>
-
-
-
 <h1><%= pc.health %> </h1>
 
 <h4><a href="#" data-id="<%= pc._id %>" class="delete-pc">Delete PC</a></h4>
@@ -44,22 +39,4 @@
     <% }) %>
   </ul>
 </h4>
-=======
-<div class="inventory">
-  <h4><a href="#" class="pc-inventory">Inventory</a></h4>
-  <h4>
-    <ul class="item-list">
-      <% pc.inventory.forEach(function(item) { %>
-        <li class="list-group-item">
-          <img src="http://localhost:3000<%= item.image_url %>">
-          <ul>
-            <li><%= item.name %></li>
-            <li><%= item.description %></li>
-            <li><%= item.type %></li>
-          </ul>
-        </li>
-      <% }) %>
-    </ul>
-  </h4>
 </div>
->>>>>>> development
