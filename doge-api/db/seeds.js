@@ -378,7 +378,7 @@ Item.create([{
     // WARNING WARNING WARNING
     },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Baller",
+    name: "Ballers",
     description: "You see a zombie lurches towards you, he seems to be saying something. You distinctly make out, Baaaaallllllerrrs! It shuffles past and offers a fist bump",
     image_url: "/events/baller_icon.png",
     event_type: "random_encounter",
@@ -402,6 +402,96 @@ Item.create([{
     event_type: "random_encounter",
     choices: ["Join in with the laughing", "Attack", "Edge away slowly"],
     event_number:9
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Cam's Armour Emporium",
+    description: "A young lad is on the side of the road pushing a shopping trolley filled with armour, he makes an offer you can't refuse",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Take the sexy armour", "Attack", "Ignore"],
+    event_number:10
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "A Chanse Encounter",
+    description: "A very pretty and athletic man is passed out by the side of the motorway, you wake him and give him some water. He tells you he's from Leeds and that he's pretty hungover. He says you should visit him in Leeds at some point. Wait. Did he mention he was from Leeds?",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Where's Leeds?", "Sorry, where are you from again?", "I'd love to visit Leeds"],
+    event_number:11
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "The Screaming Kiwi",
+    description: "You see a tall man with a semi-afro riding a bike and eating kebab, while blasting recorder music out of a radio strapped to the bike. He screams at a zombie and nearly drops his kebab",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Ask where he got the kebab?", "Attack", "Steal Kebab"],
+    event_number:12
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Sleepy Jason",
+    description: "A man is napping in a dumpster. There is a name tag on his shirt that says Jason",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Wake him up", "Ignore him", "Steal Everything"],
+    event_number:13
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Zombie Fishing",
+    description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Ask for a fish", "Attack", "Ignore"],
+    event_number:14
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Bex's Utopia",
+    description: "You encounter a woman with a steely look in her eyes, she seems completely at ease in the apocalyptic environment. She grins like a cheshire cat as she bashes in a zombies head",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Ask her why she's happy", "Bash a nearby zombie", "Run away"],
+    event_number:15
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Jem's Gem",
+    description: "A man is decked out in the finset gems you have ever seen. He looks like a king. He smiles at you and waves regally",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Wave back", "Make a danger face at him", "Run away"],
+    event_number:16
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Smithy's business",
+    description: "A man is sat atop a grassy knoll on what can only be described as a portable deck chair. The sun is shining and all is calm. He seems busy",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Join him atop the knoll", "Ask about chair", "Enjoy the sunshine and carry on"],
+    event_number:17
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Adri's Apocalypse",
+    description: "A lady is walking casually down the street. She seems pretty chilled and oblivious to the danger all around her, or she just doesn't care...",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Warn her about the danger", "Make a new friend", "Chill"],
+    event_number:18
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Queen Kaitlyn",
+    description: "You stumble across what appears to be an empty building. However, a woman appears surrounded several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Punt the minion back", "Wave", "Run Away"],
+    event_number:19
     // WARNING WARNING WARNING
   }]);
 }).then(function(events) {
