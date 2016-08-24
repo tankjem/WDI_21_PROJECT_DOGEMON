@@ -270,12 +270,12 @@ DogeApp.setPlayerMarker = function() {
     });
   }
   DogeApp.map.setCenter(DogeApp.pos);
-
   setInterval(DogeApp.getCurrentPosition, 1000 * 10);
 }
   
 
 // Bounds Rectangle
+
 
 DogeApp.setBounds = function() {
   var bounds = new google.maps.LatLngBounds(
@@ -291,7 +291,6 @@ DogeApp.setBounds = function() {
       lastValidCenter = DogeApp.map.getCenter();
       return;
     }
-
     // not valid anymore => return to last valid position
     DogeApp.map.panTo(lastValidCenter);
   });
@@ -480,7 +479,6 @@ DogeApp.customInfoWindow = function(marker, data){
     //   });
     // }
 // }
-
 
 
 
