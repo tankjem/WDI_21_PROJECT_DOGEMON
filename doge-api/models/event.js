@@ -8,7 +8,8 @@ var eventSchema = new mongoose.Schema({
   // resource - for when the player clicks on the resource
   // red zone - for random dangerous encounters in the red zone
   // random - for random normal encounters (i.e. flavour encounters)
-  choices: []
+  choices: [],
+  event_number: Number
 }, {
   timestamps: true
 });

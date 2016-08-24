@@ -487,10 +487,10 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 
 
-$('button').on('click', hideContent);
+$('#main-map').on('click', hideContent);
 
 function hideContent() {
-  $('.pop-up').addClass('hidden');
+  $('#content').addClass('hidden');
 };
 
   // Try HTML5 geolocation. << Ed's code
