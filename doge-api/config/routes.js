@@ -47,8 +47,7 @@ router.route('/pcs/:id')
 router.route('/items/:id')
   .get(secureRoute, itemsController.show)
 // event - only show
-router.get('/event')
-  .get(secureRoute, eventsController.show)
+router.get('/event', secureRoute, eventsController.show)
 // hook up our controller methods to urls/paths
 
 router.post("/register", authController.register);
