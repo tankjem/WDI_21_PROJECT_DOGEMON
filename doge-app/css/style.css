@@ -2,7 +2,7 @@ html, body, main {
   height: 94.5vh;
   padding: 0;
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Bitter', sans-serif;
 }
 #map {
   height: 94.5vh;
@@ -105,6 +105,8 @@ ul li {
   flex-direction: column;
   align-items: center;
   background-color: rgb(47, 52, 59);
+  font-family: 'Raleway';
+
 }
 .register-title {
   display: block;
@@ -112,6 +114,8 @@ ul li {
   flex-basis: 2.5em;
   text-align: center;
   color: white;
+  font-family: 'Bitter';
+
 }
 .form-flex h2 {
   color: white;
@@ -166,12 +170,14 @@ ul li {
   align-items: flex-start;
   background-color: rgba(227, 205, 163, 0.7);
   flex-wrap: wrap;
-  z-index: -1;
+  z-index: 1;
   width: 50vw;
   height: auto;
   box-shadow: 0 0 0 rgba(26, 26, 26, 0.64);
   border-radius: 1.5em;
   padding: 2.5em;
+  font-family: 'Raleway';
+
 }
 
 /* PC bars styling */
@@ -210,7 +216,7 @@ progress#thirst-value[value]::-webkit-progress-value {
   text-align: left;
   border-right: 1px solid black;
   align-self: flex-start;
-  flex: 1 0 auto;
+  flex: 1;
 }
 .pc-info p, progress {
   margin: .5em;
@@ -222,12 +228,51 @@ progress#thirst-value[value]::-webkit-progress-value {
   flex: 1;
   justify-content: center;
   align-items: flex-start;
-  font-size: 1.5em
+  font-size: .8em;
+  width: 50%;
+  overflow-y: scroll;
+  position: relative;
+
 }
-.inventory a{
+.inventory-title{
+  color: black;
+  text-decoration: none;
+  display: flex;
+  width: 100%;
+  justify-content:center;
+  align-self: flex-start;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2.5em;
+}
+.inventory-title a{
   color: black;
   text-decoration: none;
 }
-.item-list {
+.inventory img{
+  width: 45px;
+  height: 45px;
+}
+.list-group {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 0 5em;
+  margin: 1em;
+  padding: .5em 2em .5em 2em;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  transition: .5s ease;
+  cursor: pointer;
+
+}
+
+.list-group:hover{
+  background-color: rgb(199, 121, 102);
+}
+.list-group h5{
+  font-size: 1.2em;
+  font-weight: 400;
 }
