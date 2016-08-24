@@ -14,8 +14,9 @@ var userSchema = new mongoose.Schema({
   image_url: String,
   health: { type: Number, default: 100 },
   inventory: [Item.schema],
-  food: { type: Number, default: 0 },
-  water: { type: Number, default: 0 },
+  food: { type: Number, default: 100 },
+  water: { type: Number, default: 100 },
+  attack: { type: Number, default: 10 },
   armour: { type: Number, default: 10 }
 });
 
