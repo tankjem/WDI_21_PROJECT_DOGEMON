@@ -1,5 +1,12 @@
 ##Web Development Immersive 21, Project 3 - Group Project.
 
+Contributors:
+
+Becky Bolton (Github: @BexB1)
+Edward Kemp (@tankjem)
+Jeremy Smith (@Steadyx)
+Shu-yang Chia (@SyangC)
+
 ##Zoogle
 
 Zoogle is a browser-based game utilizing Google's JS Maps API. Zoogle allows the user to collect resources and encounter zombies while walking around central London.
@@ -43,11 +50,11 @@ Slack for communication
 
 ### Approach taken
 
-!()[http://i13.photobucket.com/albums/a296/BexB/Screen%20Shot%202016-08-24%20at%2012.47.54.png]
+![](http://i13.photobucket.com/albums/a296/BexB/Screen%20Shot%202016-08-24%20at%2012.47.54.png)
 
-!()[http://i13.photobucket.com/albums/a296/BexB/Screen%20Shot%202016-08-24%20at%2012.48.04.png]
+![](http://i13.photobucket.com/albums/a296/BexB/Screen%20Shot%202016-08-24%20at%2012.48.04.png)
 
-!()[http://i13.photobucket.com/albums/a296/BexB/Screen%20Shot%202016-08-24%20at%2012.48.23.png]
+![](http://i13.photobucket.com/albums/a296/BexB/Screen%20Shot%202016-08-24%20at%2012.48.23.png)
 
 
 ### Bugs
