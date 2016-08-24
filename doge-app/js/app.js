@@ -144,6 +144,18 @@ DogeApp.getEvent = function() {
     console.log(data);
   });
 }
+DogeApp.getItem = function() {
+  event.preventDefault();
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/item",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data){
+    var $content = $('#content');
+    DogeApp.getTemplate("items/show", {item:data}, $content);
+    $content.removeClass('hidden');
+  });
+}
 
 DogeApp.loadPage = function() {
   event.preventDefault();
