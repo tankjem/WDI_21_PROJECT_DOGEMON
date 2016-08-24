@@ -47,7 +47,7 @@ router.route('/pcs/:id')
 router.route('/items/:id')
   .get(secureRoute, itemsController.show)
 // event - only show
-router.route('/events/:id')
+router.get('/event')
   .get(secureRoute, eventsController.show)
 // hook up our controller methods to urls/paths
 
