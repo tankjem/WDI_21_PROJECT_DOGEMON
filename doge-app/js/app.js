@@ -7,6 +7,7 @@ var DogeApp = DogeApp || {};
 
 DogeApp.pos;
 DogeApp.event;
+DogeApp.user;
 
 var eventNumber = "";
 
@@ -34,7 +35,7 @@ DogeApp.getTemplate = function(template, data, $element) {
 
 // user show
 
-DogeApp.getUser = function() {
+DogeApp.getUser = function(button) {
   event.preventDefault();
 
   return $.ajax({
@@ -42,10 +43,12 @@ DogeApp.getUser = function() {
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    var $content = $('#content');
-    DogeApp.getTemplate("user/show", { user: data }, $content);
-    $content.removeClass('hidden');
+    DogeApp.user = data;
+    // var $content = $('#content');
+    // DogeApp.getTemplate("user/show", { user: data }, $content);
+    // $content.removeClass('hidden');
     // DogeApp.getTemplate("/user/show", { user: data });
+    DogeApp.gameLogic(button, data);
   });
 
 }
@@ -149,7 +152,6 @@ DogeApp.getEvent = function(testMarker) {
   }).done(function(data){
     // console.log(data);
     DogeApp.event = data;
-    console.log(DogeApp.event, " is the event!");
     // var $content = $('#content');
     // DogeApp.getTemplate("events/show", { event: data }, $content);
     // $content.removeClass('hidden');
@@ -228,9 +230,10 @@ DogeApp.initEventHandlers = function() {
     disableDefaultUI: true
   });
 
-  DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
+  // 
+  // DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
   DogeApp.map.setZoom(18);
-  DogeApp.setBounds();
+  // DogeApp.setBounds();
   DogeApp.getCurrentPosition(function() {
     DogeApp.setPlayerMarker();
     DogeApp.setRandMarkers();
@@ -450,20 +453,27 @@ function hideContent() {
 //  ============= game event logic
 
 DogeApp.customInfoWindow = function(marker, data){
-
+  
+  var button = data.choices[0]
+  DogeApp.getUser(button)
   marker.addListener("click", function(){
-    if(data.event_number === 1) {
-      $("body").prepend("<div id='content'>" + data.name + "<br>" + "<div class='choice1'>" + data.choices[0] + "</div><br></div>)");
-
-      $(".choice1").on("click", function() {
-        console.log("This is where we wanted to be at 12")
-      })
+    if((data.choices).length === 2) {
+      $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1] + "</div><br></div>");
+      DogeApp.gameLogic();
+    } else {
+      $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1]  + "</div><div class='choice3'>" + data.choices[2] + "</div><br></div>");
+      DogeApp.gameLogic();
     }
   });
+
   console.log(data, " is still the event");
 }
 
-
+DogeApp.gameLogic = function(button, data) {
+  $(".choice1").on("click", function() {
+    
+  })
+}
 // DogeApp.customInfoWindow = function() {
 //   DogeApp.testMarker.addEventListener("click", function(){
 //     console.log("this works");
