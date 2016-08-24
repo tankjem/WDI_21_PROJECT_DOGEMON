@@ -335,74 +335,74 @@ Item.create([{
     event_type: "red_zone_encounter",
     choices: ["attack", "flee"],
     event_number:1
-    }, {
-    name: "Yoga-Rosie",
-    description:"A bizarre sight unravels before you. A girl is doing yoga on top of a van which is surrounded by zombies. She seems perfectly at ease.",
-    image_url: "https://cdn0.iconfinder.com/data/icons/sport-and-fitness/500/Fitness_meditation_sport_yoga_Eexercise_exercises_fitness_gym_health-512.png",
-    event_type: "random_encounter",
-    choices: ["Curious you jump on the van next to her and join in", "Watch", "Run away"],
-    event_number: 2
-    }, {
-    name: "Consumable Found",
-    description: "You found a consumable item",
-    image_url: "/events/resource_icon.png",
-    event_type: "resource_encounter",
-    choices: ["collect", "leave"],
-    event_number:3
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Armour Found",
-    description: "You found some new armour",
-    image_url: "/events/resource_icon.png",
-    event_type: "resource_encounter",
-    choices: ["collect", "leave"],
-    event_number:4
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Weapon Found",
-    description: "You found a new weapon",
-    image_url: "/events/resource_icon.png",
-    event_type: "resource_encounter",
-    choices: ["collect", "leave"],
-    event_number:5
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Survivor Fight",
-    description: "Zombies aren't the only worry",
-    image_url: "/events/attack_icon.png",
-    event_type: "random_encounter",
-    choices: ["fight", "run", "hide"],
-    event_number:6
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Baller",
-    description: "You see a zombie lurches towards you, he seems to be saying something. You distinctly make out, Baaaaallllllerrrs! It shuffles past and offers a fist bump",
-    image_url: "/events/baller_icon.png",
-    event_type: "random_encounter",
-    choices: ["Leave it hanging", "Chop off Zombie's hand", "Bump back"],
-    event_number:7
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "The Blue or the Red Pill",
-    description: "You find a sealed bag on the floor containing two pills one red or blue. Curiosity get the better of you",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Blue Pill", "Red Pill", "Winners don't do drugs"],
-    event_number:8
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Lord Shu",
-    description: "You see a man standing on top of a pile of bodies laughing maniacally",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Join in with the laughing", "Attack", "Edge away slowly"],
-    event_number:9
-    // WARNING WARNING WARNING
+    // }, {
+    // name: "Yoga-Rosie",
+    // description:"A bizarre sight unravels before you. A girl is doing yoga on top of a van which is surrounded by zombies. She seems perfectly at ease.",
+    // image_url: "https://cdn0.iconfinder.com/data/icons/sport-and-fitness/500/Fitness_meditation_sport_yoga_Eexercise_exercises_fitness_gym_health-512.png",
+    // event_type: "random_encounter",
+    // choices: ["Curious you jump on the van next to her and join in", "Watch", "Run away"],
+    // event_number: 2
+    // }, {
+    // name: "Consumable Found",
+    // description: "You found a consumable item",
+    // image_url: "/events/resource_icon.png",
+    // event_type: "resource_encounter",
+    // choices: ["collect", "leave"],
+    // event_number:3
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "Armour Found",
+    // description: "You found some new armour",
+    // image_url: "/events/resource_icon.png",
+    // event_type: "resource_encounter",
+    // choices: ["collect", "leave"],
+    // event_number:4
+    // // WARNING WARNING WARNING
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "Weapon Found",
+    // description: "You found a new weapon",
+    // image_url: "/events/resource_icon.png",
+    // event_type: "resource_encounter",
+    // choices: ["collect", "leave"],
+    // event_number:5
+    // // WARNING WARNING WARNING
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "Survivor Fight",
+    // description: "Zombies aren't the only worry",
+    // image_url: "/events/attack_icon.png",
+    // event_type: "random_encounter",
+    // choices: ["fight", "run", "hide"],
+    // event_number:6
+    // // WARNING WARNING WARNING
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "Baller",
+    // description: "You see a zombie lurches towards you, he seems to be saying something. You distinctly make out, Baaaaallllllerrrs! It shuffles past and offers a fist bump",
+    // image_url: "/events/baller_icon.png",
+    // event_type: "random_encounter",
+    // choices: ["Leave it hanging", "Chop off Zombie's hand", "Bump back"],
+    // event_number:7
+    // // WARNING WARNING WARNING
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "The Blue or the Red Pill",
+    // description: "You find a sealed bag on the floor containing two pills one red or blue. Curiosity get the better of you",
+    // image_url: "/events/event_marker.png",
+    // event_type: "random_encounter",
+    // choices: ["Blue Pill", "Red Pill", "Winners don't do drugs"],
+    // event_number:8
+    // // WARNING WARNING WARNING
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "Lord Shu",
+    // description: "You see a man standing on top of a pile of bodies laughing maniacally",
+    // image_url: "/events/event_marker.png",
+    // event_type: "random_encounter",
+    // choices: ["Join in with the laughing", "Attack", "Edge away slowly"],
+    // event_number:9
+    // // WARNING WARNING WARNING
   }]);
 }).then(function(events) {
   console.log(events);
