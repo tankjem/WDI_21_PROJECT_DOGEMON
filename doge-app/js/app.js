@@ -428,7 +428,6 @@ function setRandRedZones(pos) {
   }
 
 }
-};
 
 navigator.geolocation.getCurrentPosition(function(position) {
   var pos = {
