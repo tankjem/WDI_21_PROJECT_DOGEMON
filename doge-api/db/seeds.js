@@ -42,7 +42,7 @@ Item.create([{
     item_heal: 0
   },{
     name: "Rosie's Rose",
-    description: "A Rose, it smells funny",
+    description: "A Rose, it smells pretty",
     image_url: "https://cdn4.iconfinder.com/data/icons/flowers-2/500/Ecology_environment_flower_flowers_leaf_nature_plant_botanic_cultivated_eco_garden_rose_bouquet_1-512.png",
     image_attack: 0,
     image_defense: 10,
@@ -78,7 +78,7 @@ Item.create([{
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Leather Armour",
-    description: "A lovely tunic",
+    description: "A lightweight leather bodypiece.",
     image_url: "/items/A_Armour01.png",
     item_type: "Armour",
     image_attack: 0,
@@ -88,7 +88,7 @@ Item.create([{
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Iron Armour",
-    description: "A lovely tunic",
+    description: "Solid metal body armour.",
     image_url: "/items/A_Armour04.png",
     item_type: "Armour",
     image_attack: 0,
@@ -98,7 +98,7 @@ Item.create([{
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Gold Armour",
-    description: "Yes its a terrible idea but somehow its better than expected",
+    description: "Yes, its a terrible idea. But somehow its better than expected",
     image_url: "/items/A_Armour03.png",
     item_type: "Armour",
     image_attack: 0,
@@ -148,7 +148,7 @@ Item.create([{
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Fish on a Stick",
-    description: "Its a fish on a stick",
+    description: "It's a fish on a stick.",
     image_url: "/items/I_C_RawFish.png",
     item_type: "Consumable",
     image_attack: 0,
@@ -168,7 +168,7 @@ Item.create([{
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Pineapple",
-    description: "Great on pizza",
+    description: "If you put this on pizza, you deserve to get eaten by zombies.",
     image_url: "/items/I_C_Pineapple.png",
     item_type: "Consumable",
     image_attack: 0,

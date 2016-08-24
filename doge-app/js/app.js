@@ -513,5 +513,3 @@ function hideContent() {
 
 
 // game battle logic
-
->>>>>>> development
