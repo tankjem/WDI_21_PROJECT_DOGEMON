@@ -13,7 +13,7 @@ html, body, main {
   display:none;
 }
 
-#content {
+.pop-up {
   position: absolute;
   height: 75%;
   width: 75%;
@@ -85,4 +85,49 @@ footer .menu span {
 .menu ul li a:hover {  
   color: red;
   text-decoration: none;
+}
+
+
+/* PC bars styling */
+
+progress[value] {
+  -webkit-appearance: none;
+   appearance: none;
+
+  width: 250px;
+  height: 20px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress#health-value[value]::-webkit-progress-value {
+  background-color: red;
+
+  border-radius: 2px; 
+  background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+progress#armour-value[value]::-webkit-progress-value {
+  background-image:
+   -webkit-linear-gradient(-45deg, 
+                           transparent 33%, rgba(0, 0, 0, .1) 33%, 
+                           rgba(0,0, 0, .1) 66%, transparent 66%),
+   -webkit-linear-gradient(top, 
+                           rgba(255, 255, 255, .25), 
+                           rgba(0, 0, 0, .25)),
+   -webkit-linear-gradient(left, grey, white);
+
+  border-radius: 2px; 
+  background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+progress#thirst-value[value]::-webkit-progress-value {
+  background-color: blue;
+
+  border-radius: 2px; 
+  background-size: 35px 20px, 100% 100%, 100% 100%;
 }

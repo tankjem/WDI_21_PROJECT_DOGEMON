@@ -25,8 +25,11 @@ DogeApp.getUser = function() {
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    DogeApp.getTemplate("/user/show", { user: data });
+    var $content = $('#content');
+    DogeApp.getTemplate("user/show", { user: data }, $content);
+    $content.removeClass('hidden');
   });
+
 }
 
 DogeApp.deleteUser = function() {
@@ -67,21 +70,6 @@ DogeApp.deletePc = function() {
   }).done(DogeApp.getUser);
 }
 
-// events
-
-DogeApp.getEvent = function() {
-  event.preventDefault();
-
-  var id = $(this).data('id');
-
-  return $.ajax({
-    method: "GET",
-    url: DogeApp.API_URL + "/pcs/" + id,
-    beforeSend: DogeApp.setRequestHeader
-  }).done(function(data) {
-    DogeApp.getTemplate("/pc/show", { pc: data });
-  });
-}
 
 // forms (edit/new)
 
@@ -166,6 +154,9 @@ DogeApp.initEventHandlers = function() {
   this.$main.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
+  // if(pcDeath !== 0) {
+  //   this.deletePc;
+  // }
 }
 
 DogeApp.init = function() {
@@ -321,6 +312,8 @@ function autoUpdate() {
   setTimeout(autoUpdate, 500);
 }
 
+
+
 autoUpdate();
 
 // rand marker
@@ -363,13 +356,6 @@ function setRandMarkers(pos) {
      $('#content').removeClass('hidden');
    } 
   });
-
-  $('button').on('click', hideContent);
-
-
-  function hideContent() {
-    $('#content').addClass('hidden');
-  };
 
   for (var i = 0; i < 150; i++) {
 
@@ -460,6 +446,13 @@ navigator.geolocation.getCurrentPosition(function(position) {
 });
 
 
+
+$('button').on('click', hideContent);
+
+function hideContent() {
+  $('.pop-up').addClass('hidden');
+};
+
   // Try HTML5 geolocation. << Ed's code
 
 //   function currentPosition() {
@@ -506,4 +499,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
 //     inventory.setAttribute("class","items");
 //   }
 // }
+
+
+
+// game battle logic
 

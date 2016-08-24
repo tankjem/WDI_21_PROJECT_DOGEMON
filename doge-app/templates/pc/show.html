@@ -1,5 +1,17 @@
 <h1>Character</h1>
-<img src="<%=pc.image_url %>">
+<img src="<%=pc.image_url %>" height="200">
+
+<p>Health</p>
+<progress id="health-value" value="79" max="100"></progress>
+<p>Armour</p>
+<progress id="armour-value" value="32" max="100"></progress>
+<p>Hunger</p>
+<progress id="hunger-value" value="69" max="100"></progress>
+<p>Thirst</p>
+<progress id="thirst-value" value="12" max="100"></progress>
+
+
+
 <h1><%= pc.health %> </h1>
 
 <h4><a href="#" data-id="<%= pc._id %>" class="delete-pc">Delete PC</a></h4>
