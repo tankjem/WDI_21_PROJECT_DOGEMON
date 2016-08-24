@@ -427,7 +427,7 @@ Item.create([{
     description: "You see a tall man with a semi-afro riding a bike and eating kebab, while blasting recorder music out of a radio strapped to the bike. He screams at a zombie and nearly drops his kebab",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Ask where he got the kebab", "Attack", "Steal Kebab"],
+    choices: ["Ask where he got the kebab", "Steal Kebab", "Ignore"],
     event_number:12
     // WARNING WARNING WARNING
   },{
@@ -492,6 +492,60 @@ Item.create([{
     event_type: "random_encounter",
     choices: ["Punt the minion back", "Help the minion", "Ignore"],
     event_number:19
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Chetan's Erotic Coffee",
+    description: "A man approaches you and offers a cup of coffee, but before you drink it he insists on telling you about his business idea for apocalyptic coffee with an erotic twist. This is the first time you've blushed since the apocalypse.",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Listen Intently", "Sip the coffee anyway", "Ignore"],
+    event_number:20
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Julian's Russian Palava",
+    description: "A man runs up to you and declares the Russian's are coming, watch out",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Ask for more info", "Pretend to be Russian", "Ignore"],
+    event_number:21
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Andy the Urban Warrior",
+    description: "You see a man hunched over with a sword strapped to his back. Suddenly he bolts forward leaping between cars and zombies, eventually landing in front of you.",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Bow", "Fight", "Ignore"],
+    event_number:22
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Overwatch Ben",
+    description: "You come across a tower in it is a man with a rifle. He says he's friendly and asks if you would like to join him in the tower.",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Join man on tower", "Wave", "Ignore"],
+    event_number:23
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Axel's battle of the baguette",
+    description: "A man is fighting a horde of zombies with what looks like a stale baguette.",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Help the man", "Watch", "Ignore"],
+    event_number:24
+    // WARNING WARNING WARNING
+  },{
+    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    name: "Christian's code",
+    description: "You see a man slowly but methodically chopping heads off corpses, he looks like he's doing it for the safety of others",
+    image_url: "/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Help him", "Watch", "Ignore"],
+    event_number:25
     // WARNING WARNING WARNING
   }]);
 }).then(function(events) {
