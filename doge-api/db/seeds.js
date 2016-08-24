@@ -333,7 +333,7 @@ Item.create([{
     description: "You are attacked by a zombie",
     image_url: "https://cdn0.iconfinder.com/data/icons/black-religious-icons/256/Zombie.png",
     event_type: "red_zone_encounter",
-    choices: ["attack", "flee"],
+    choices: ["fight", "flee"],
     event_number:1
     }, {
     name: "Yoga-Rosie",
@@ -400,7 +400,7 @@ Item.create([{
     description: "You see a man standing on top of a pile of bodies laughing maniacally",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Join in with the laughing", "Attack", "Edge away slowly"],
+    choices: ["Join in with the laughing", "Fight", "Ignore"],
     event_number:9
     // WARNING WARNING WARNING
   },{
@@ -409,7 +409,7 @@ Item.create([{
     description: "A young lad is on the side of the road pushing a shopping trolley filled with armour, he makes an offer you can't refuse",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Take the sexy armour", "Attack", "Ignore"],
+    choices: ["Take the sexy armour", "Fight", "Ignore"],
     event_number:10
     // WARNING WARNING WARNING
   },{
@@ -418,7 +418,7 @@ Item.create([{
     description: "A very pretty and athletic man is passed out by the side of the motorway, you wake him and give him some water. He tells you he's from Leeds and that he's pretty hungover. He says you should visit him in Leeds at some point. Wait. Did he mention he was from Leeds?",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Where's Leeds?", "Sorry, where are you from again?", "I'd love to visit Leeds"],
+    choices: ["Where's Leeds?", "Sorry, where are you from again?", "Ignore"],
     event_number:11
     // WARNING WARNING WARNING
   },{
@@ -427,16 +427,16 @@ Item.create([{
     description: "You see a tall man with a semi-afro riding a bike and eating kebab, while blasting recorder music out of a radio strapped to the bike. He screams at a zombie and nearly drops his kebab",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Ask where he got the kebab?", "Attack", "Steal Kebab"],
+    choices: ["Ask where he got the kebab", "Attack", "Steal Kebab"],
     event_number:12
     // WARNING WARNING WARNING
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Sleepy Jason",
-    description: "A man is napping in a dumpster. There is a name tag on his shirt that says Jason",
+    description: "A man is napping in a dumpster. Cocktails are littered around him. There is a name tag on his shirt that says Json",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Wake him up", "Ignore him", "Steal Everything"],
+    choices: ["Wake him up", "Ignore", "Take a cocktail"],
     event_number:13
     // WARNING WARNING WARNING
   },{
@@ -445,7 +445,7 @@ Item.create([{
     description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Ask for a fish", "Attack", "Ignore"],
+    choices: ["Ask for a fish", "Learn to fish", "Ignore"],
     event_number:14
     // WARNING WARNING WARNING
   },{
@@ -460,10 +460,10 @@ Item.create([{
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Jem's Gem",
-    description: "A man is decked out in the finset gems you have ever seen. He looks like a king. He smiles at you and waves regally",
+    description: "A man is decked out in the finest gems you have ever seen. He looks like a king. He smiles at you and waves regally",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Wave back", "Make a danger face at him", "Run away"],
+    choices: ["Wave back", "Make a danger face at him", "Ignore"],
     event_number:16
     // WARNING WARNING WARNING
   },{
@@ -472,7 +472,7 @@ Item.create([{
     description: "A man is sat atop a grassy knoll on what can only be described as a portable deck chair. The sun is shining and all is calm. He seems busy",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Join him atop the knoll", "Ask about chair", "Enjoy the sunshine and carry on"],
+    choices: ["Join him atop the knoll", "Ask about chair", "Ignore"],
     event_number:17
     // WARNING WARNING WARNING
   },{
@@ -481,16 +481,16 @@ Item.create([{
     description: "A lady is walking casually down the street. She seems pretty chilled and oblivious to the danger all around her, or she just doesn't care...",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Warn her about the danger", "Make a new friend", "Chill"],
+    choices: ["Warn her about the danger", "Make a new friend", "Ignore"],
     event_number:18
     // WARNING WARNING WARNING
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Queen Kaitlyn",
-    description: "You stumble across what appears to be an empty building. However, a woman appears surrounded several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
+    description: "You stumble across what appears to be an empty building. However, a woman appears surrounded by several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
     image_url: "/events/event_marker.png",
     event_type: "random_encounter",
-    choices: ["Punt the minion back", "Wave", "Run Away"],
+    choices: ["Punt the minion back", "Help the minion", "Ignore"],
     event_number:19
     // WARNING WARNING WARNING
   }]);
