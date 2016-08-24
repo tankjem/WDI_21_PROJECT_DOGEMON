@@ -309,8 +309,11 @@ Item.create([{
   console.log(items);
   return Pc.create({
   image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
-  health: 100,
-  inventory: [items[6], items[7], items[8], items[9], items[10], items[5]]
+  health: 69,
+  inventory: [items[6], items[7], items[8], items[9], items[10], items[5]],
+  hunger: 37,
+  thirst: 45,
+  armour: 10
   })
 }).then(function(pc1) {
   console.log(pc1);
