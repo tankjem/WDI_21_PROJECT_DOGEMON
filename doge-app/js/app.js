@@ -337,7 +337,7 @@ function autoUpdate() {
     map.setCenter(newPoint);
   }); 
 
-  setTimeout(autoUpdate, 500);
+  setTimeout(autoUpdate, 100);
 }
 
 
