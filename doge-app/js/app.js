@@ -56,14 +56,14 @@ DogeApp.getPc = function() {
   event.preventDefault();
 
   var id = $(this).data('id');
-
+  console.log(id);
   return $.ajax({
     method: "GET",
     url: DogeApp.API_URL + "/pcs/" + id,
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     var $content = $('#content');
-    DogeApp.getTemplate("pc/show", { pc: data }, $content);
+    DogeApp.getTemplate("/pc/show", { pc: data }, $content);
     $content.removeClass('hidden');
     // DogeApp.getTemplate("/pc/show", { pc: data });
   });
@@ -145,6 +145,18 @@ DogeApp.getEvent = function() {
     console.log(data);
   });
 }
+DogeApp.getItem = function() {
+  event.preventDefault();
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/item",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data){
+    var $content = $('#content');
+    DogeApp.getTemplate("items/show", {item:data}, $content);
+    $content.removeClass('hidden');
+  });
+}
 
 DogeApp.loadPage = function() {
   event.preventDefault();
@@ -170,16 +182,16 @@ DogeApp.updateUI = function() {
 
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
+  this.$content = $("#content");
   this.$main.on("submit", "form", this.handleForm);
-  this.$main.on('click', 'h4 a.pc-show', this.getPc);
-  this.$main.on('click', 'h4 a.delete-pc', this.deletePc);
+  this.$content.on('click', 'h4 a.delete-pc', this.deletePc);
+  this.$content.on('click', 'h4 a.pc-show', this.getPc);
   $(".menu a").not(".logout, .profile, .edit-user, .pc-show").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
-  $(".menu a").on('click', '.user-profile', this.getUser);
   $(".menu a.logout").on('click', this.logout);
   $(".edit-user").on("click", this.getEditForm);
-  this.$main.on("focus", "form input", function() {
+  this.$content.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
   // if(pcDeath !== 0) {
@@ -194,16 +206,7 @@ DogeApp.init = function() {
 
 $(DogeApp.init);
 
-// Drop down menu
 
-// var ready = $(function() {
-//   $(".menu").hide();
-//   $(".hamburger").click(function() {
-//     $(".menu").slideToggle("slow", function() {});
-//   });
-// });
-
-// ready;
 
 // The map
 
@@ -219,42 +222,8 @@ var map = new google.maps.Map(document.getElementById('map'), {
   disableDefaultUI: true
 });
 
-// Try HTML5 geolocation.
-
-
-// initMap();
-
 map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
 map.setZoom(18);
-
-// map.addListener('click', function(e) {
-
-//   var marker = new google.maps.Marker({
-//     position: e.latLng,
-//     map: map,
-//     animation: google.maps.Animation.BOUNCE,
-//     icon: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
-//   });
-
-//     marker.addListener('click', function() {
-//       this.setAnimation(null);
-//     });
-//   });
-
-// navigator.geolocation.getCurrentPosition(function(position) {
-//  var marker = new google.maps.Marker({
-//     position: { lat: position.coords.latitude, lng: position.coords.longitude },
-//   map: map,
-//   animation: google.maps.Animation.DROP,
-//       url: "./images/safe-icon.png", // url
-//       scaledSize: new google.maps.Size(30, 30), // scaled size
-//       origin: new google.maps.Point(0,0), // origin
-//       anchor: new google.maps.Point(0, 0) // anchor
-//   });
-
-//  map.panTo(marker.getPosition());
-//  map.setZoom(16);
-// });
 
 // Bounds Rectangle
 
@@ -291,7 +260,7 @@ var rectangle = new google.maps.Rectangle({
   }
 });
 
-// Resource Drops
+// ================= Random Resource Drops
 
 google.maps.Circle.prototype.contains = function(latLng) {
   return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
@@ -308,7 +277,7 @@ function getRandom_marker(bounds) {
 }
 
 
-// auto-updating player marker
+// =================== auto-updating player marker
 
 var playerMarker = null;
 
@@ -344,10 +313,9 @@ function autoUpdate() {
 
 autoUpdate();
 
-// rand marker
+// =============== Random Marker
 
 function setRandMarkers(pos) {
-
 
   var icon = {
     url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
@@ -376,53 +344,67 @@ function setRandMarkers(pos) {
   resourceCircleTest.bindTo('center', testMarker, 'position');
   var resourceCircleBoundsTest = resourceCircleTest.getBounds();
 
-  testMarker.addListener("click", function() {
-   console.log(pos);
-   if (resourceCircleBoundsTest.contains(pos)) {
-     console.log("A resource is close by.");
+// ============== The content div, showing events
 
-     DogeApp.getEvent();
+  testMarker.addListener("click", function() {
+   if (resourceCircleBoundsTest.contains(pos)) {
+    testMarker.setMap(null);
+    resourceCircleTest.setMap(null);
+
+    DogeApp.getEvent();
    } 
   });
 
+  $('button').on('click', hideContent);
+
+
+  function hideContent() {
+    $('#content').addClass('hidden');
+  };
+
+  if (resourceCircleBoundsTest.contains(pos)) {
+    console.log("A resource is close by.");
+  };
+
+// =========== Random resource markers
+
   for (var i = 0; i < 150; i++) {
 
-    var randMarker = new google.maps.Marker({
-      position: getRandom_marker(bounds),
-      map: map,
-      icon: icon
-    });
+  var randMarker = new google.maps.Marker({
+    position: getRandom_marker(bounds),
+    map: map,
+    icon: icon
+  });
 
-   // Resource radius
-   var resourceCircle = new google.maps.Circle({
-     map: map,
-     radius: 20,
-     strokeColor: '#ffffff',
-     strokeOpacity: 0.2,
-     fillColor: '#ffffff',
-     fillOpacity: 0.3,
-   });
+  // Resource radius
+  var resourceCircle = new google.maps.Circle({
+   map: map,
+   radius: 20,
+   strokeColor: '#ffffff',
+   strokeOpacity: 0.2,
+   fillColor: '#ffffff',
+   fillOpacity: 0.3,
+  });
 
-    resourceCircle.bindTo('center', randMarker, 'position');
+  resourceCircle.bindTo('center', randMarker, 'position');
 
-   var resourceCircleBounds = resourceCircle.getBounds();
+  var resourceCircleBounds = resourceCircle.getBounds();
 
-   // if (resourceCircleBoundsTest.contains(pos)) {
-   //   console.log("A resource is close by.");
-     
-   // }
+  }; // End of loop
 
-  }
+  randMarker.addListener("click", function() {
+    if (resourceCircleBounds.contains(pos)) {
+     randMarker.setMap(null);
+     resourceCircle.setMap(null);
+
+   DogeApp.getEvent();
+    } 
+  });
 }
 
 
 
-// google.maps.event.addListener(map, 'zoom_changed', function() {
-//   if (map.getZoom() < 18) map.setZoom(18);
-// });
-
-
-// Red Zones
+//  ============= Red Zones
 
 function setRandRedZones(pos) {
 
@@ -475,10 +457,10 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 
 
-$('button').on('click', hideContent);
+$('#main-map').on('click', hideContent);
 
 function hideContent() {
-  $('.pop-up').addClass('hidden');
+  $('#content').addClass('hidden');
 };
 
   // Try HTML5 geolocation. << Ed's code
@@ -532,3 +514,4 @@ function hideContent() {
 
 // game battle logic
 
+>>>>>>> development

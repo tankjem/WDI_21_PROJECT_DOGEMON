@@ -10,7 +10,8 @@ html, body, main {
 .hidden {
   display: none;
 }
-.pop-up {
+.pop-up {}
+#content {
   position: absolute;
   height: 75%;
   width: 75%;
@@ -20,6 +21,7 @@ html, body, main {
   margin: auto;
   background-color: #FFF;
   z-index: 10;
+  text-align: center;
 }
 
 /* Menu CSS */
@@ -188,4 +190,24 @@ progress#thirst-value[value]::-webkit-progress-value {
   background-color: blue;
   border-radius: 2px;
   background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+/*pc styling*/
+
+.pc-info {
+  display: inline-block;
+  width: 70%;
+}
+.pc-info .left {
+  float: left;
+}
+.pc-info .right {
+  float: right;
+}
+.inventory {
+  display: inline-block;
+}
+.item-list {
+  list-style: none;
+  display: inline-block;
 }
