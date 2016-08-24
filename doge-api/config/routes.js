@@ -33,7 +33,7 @@ router.route('/user')
   .all(secureRoute)
   .get(userController.show)
   .put(userController.update)
-  .patch(userController.update)
+  .patch(userController.update);
 // PC  - restful routes apart from index
 router.route('/pcs')
   .post(secureRoute, pcsController.create);
@@ -45,7 +45,7 @@ router.route('/pcs/:id')
 // items - only show
 
 router.route('/items/:id')
-  .get(secureRoute, itemsController.show)
+  .get(secureRoute, itemsController.show);
 // event - only show
 router.get('/event', secureRoute, eventsController.show);
 // hook up our controller methods to urls/paths

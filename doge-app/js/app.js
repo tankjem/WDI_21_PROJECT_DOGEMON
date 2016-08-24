@@ -56,14 +56,14 @@ DogeApp.getPc = function() {
   event.preventDefault();
 
   var id = $(this).data('id');
-
+  console.log(id);
   return $.ajax({
     method: "GET",
     url: DogeApp.API_URL + "/pcs/" + id,
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     var $content = $('#content');
-    DogeApp.getTemplate("pc/show", { pc: data }, $content);
+    DogeApp.getTemplate("/pc/show", { pc: data }, $content);
     $content.removeClass('hidden');
     // DogeApp.getTemplate("/pc/show", { pc: data });
   });
@@ -170,16 +170,16 @@ DogeApp.updateUI = function() {
 
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
+  this.$content = $("#content");
   this.$main.on("submit", "form", this.handleForm);
-  this.$main.on('click', 'h4 a.pc-show', this.getPc);
-  this.$main.on('click', 'h4 a.delete-pc', this.deletePc);
+  this.$content.on('click', 'h4 a.delete-pc', this.deletePc);
+  this.$content.on('click', 'h4 a.pc-show', this.getPc);
   $(".menu a").not(".logout, .profile, .edit-user, .pc-show").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
-  $(".menu a").on('click', '.user-profile', this.getUser);
   $(".menu a.logout").on('click', this.logout);
   $(".edit-user").on("click", this.getEditForm);
-  this.$main.on("focus", "form input", function() {
+  this.$content.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
   // if(pcDeath !== 0) {
