@@ -86,7 +86,7 @@ DogeApp.deleteUser = function() {
     method: "DELETE",
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
-  }).done(DogeApp.getUser);// should be landing page instead of getUser, but it isn't done yet.
+  }).done(DogeApp.getUser); // should be landing page instead of getUser, but it isn't done yet.
 }
 
 // forms (edit/new)
@@ -241,7 +241,7 @@ DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
   this.$map = $("#map");
-  this.$main.on("submit", "form", this.handleForm);
+  this.$content.on("submit", "form", this.handleForm);
   $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   // $(".menu a.register").on('click', this.getRegister);
