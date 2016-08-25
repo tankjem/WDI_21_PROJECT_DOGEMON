@@ -13,7 +13,7 @@ DogeApp.item;
 
 var eventNumber = "";
 
-DogeApp.API_URL = "https://zoogle.herokuapp.com";
+DogeApp.API_URL = "https://zoogle.herokuapp.com/api";
 
 DogeApp.setRequestHeader = function(jqXHR) {
   var token = window.localStorage.getItem("token");
