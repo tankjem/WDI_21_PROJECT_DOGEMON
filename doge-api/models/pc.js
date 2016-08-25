@@ -3,11 +3,11 @@ var Item = require('./item');
 
 var pcSchema = new mongoose.Schema({
   image_url: String,
-  health: Number,
+  health: { type: Number, default: 100 },
   inventory: [Item.schema],
-  hunger: Number,
-  thirst: Number,
-  armour: Number
+  food: { type: Number, default: 0 },
+  water: { type: Number, default: 0 },
+  armour: { type: Number, default: 10 }
 }, {
   timestamps: true
 });

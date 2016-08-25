@@ -11,6 +11,7 @@ html, body, main {
   display: none;
 }
 .pop-up {}
+
 #content {
   justify-content: center;
   align-items: center;
@@ -19,7 +20,7 @@ html, body, main {
   top: 50%;
   transform: translate(-50%, -50%);
   margin: auto;
-  background-color: rgba(227, 205, 163, 0.7);
+  background-color: rgba(227, 205, 163, 1);
   z-index: 10;
   text-align: center;
   border-radius: 1.5em;
@@ -31,37 +32,43 @@ footer {
   position: absolute;
   margin: 0;
   width: 100%;
-  height: auto;
+  height: 50px;
 }
+
 .menu {
-  z-index: 1000000;
+  z-index: 1000;
   font-weight: bold;
   font-size: 0.5em;
+  margin: 0;
   width: 100%;
   height: auto;
-  background: rgba(227, 205, 163, 0.6);
+  background: rgba(227,205,164, 0.8);
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.menu ul li span {
+  font-family: 'Creepster', cursive;
+  display: inline-block;
+  font-size: 45px;
+  margin: 0;
+}
+
 .menu ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
   list-style-image: none;
-  display: flex;
-  width: 100%;
-  height: auto;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
+
 ul li {
+  display: inline-block;
   border-bottom: transparent 1px solid;
   padding: 0 1em 0 1em;
   flex-basis: 25em;
-  margin: 2em;
+  height: auto;
   text-align: center;
 }
 
@@ -75,12 +82,15 @@ ul li {
   letter-spacing: .5em;
   text-decoration: none;
   color: black;
-  margin-left: 1em;
 }
+
 .menu ul li a {
   text-decoration: none;
   color: #000;
   font-size: 2em;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
   letter-spacing: 3px;
   text-transform: uppercase;
   transition: .5s ease;
@@ -276,6 +286,7 @@ progress#thirst-value[value]::-webkit-progress-value {
   font-size: 1.2em;
   font-weight: 400;
 }
+<<<<<<< HEAD
 @media (max-width: 1030px) {
   .pc-info {
     justify-content: center;
