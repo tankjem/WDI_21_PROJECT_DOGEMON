@@ -14,7 +14,7 @@ html, body, main {
 
 .pop-up {}
 
-#content {
+#content, #content-event {
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -24,14 +24,15 @@ html, body, main {
   top: 50%;
   transform: translate(-50%, -50%);
   margin: auto;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, .8);
   padding: 1.5em;
+  color: black;
   z-index: 10;
   text-align: center;
   border-radius: 1.5em;
 }
 
-#content #close {
+#content #close, #content-event #close {
   text-decoration: none;
   color: #000;
   font-size: 150%;
@@ -326,10 +327,6 @@ progress#thirst-value[value]::-webkit-progress-value {
   font-size: 1.2em;
   font-weight: 400;
 }
-
-// Responsive code
-
-// Menu
 
 @media only screen and (max-width: 960px) {
 
