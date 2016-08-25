@@ -30,7 +30,7 @@ html, body, main {
   border-radius: 1.5em;
 }
 
-#content #close {
+#close {
   text-decoration: none;
   color: #000;
   font-size: 150%;
@@ -38,6 +38,12 @@ html, body, main {
 
 #content a:hover {
   color: #FFF;
+}
+
+#close-profile {
+  text-decoration: none;
+  color: #000;
+  font-size: 150%;
 }
 
 .choice1, .choice2, .choice3 {

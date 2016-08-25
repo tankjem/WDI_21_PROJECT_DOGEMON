@@ -1052,11 +1052,18 @@ DogeApp.gameLogic = function(button, data) {
   }
   // missing Ed, Toni
 
+
+  //  ===== Closing buttons
+
   $('#content #close').on('click', function() {
     $('#content').addClass('hidden');
   })
 
   $('.choice1, .choice2, .choice3').on('click', function() {
+    $('#content').addClass('hidden');
+  })
+
+  $('#content #close-profile').on('click', function() {
     $('#content').addClass('hidden');
   })
 
