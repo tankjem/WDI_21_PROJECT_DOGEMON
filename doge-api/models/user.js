@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 var bcrypt = require("bcrypt");
 
-var Pc = require("./pc")
 var Item = require('./item');
 // var beautifulUnique = require("mongoose-beautiful-unique-validation");
 
