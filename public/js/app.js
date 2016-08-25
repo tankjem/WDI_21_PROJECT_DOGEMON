@@ -664,7 +664,7 @@ DogeApp.setRandRedZones = function() {
 $('#main-map').on('click', hideContent);
 
 function hideContent() {
-  $('#content').addClass('hidden');
+  $('#content-event').addClass('hidden');
 };
 
 
@@ -1050,11 +1050,11 @@ DogeApp.gameLogic = function(button, data) {
   // missing Ed, Toni
 
   $('#content #close').on('click', function() {
-    $('#content').addClass('hidden');
+    $('#content-event').addClass('hidden');
   })
 
   $('.choice1, .choice2, .choice3').on('click', function() {
-    $('#content').addClass('hidden');
+    $('#content-event').addClass('hidden');
   })
 
 }

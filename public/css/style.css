@@ -30,6 +30,10 @@ html, body, main {
   border-radius: 1.5em;
 }
 
+#content-event {
+  font-size: 25px;
+}
+
 #content #close, #content-event #close {
   text-decoration: none;
   color: #000;
@@ -53,7 +57,7 @@ html, body, main {
   background-color: rgba(255, 255, 255, 0.6);
   height: auto;
   text-align: center;
-  font-size: 25px;
+  font-size: 35px;
 }
 
 /* Menu CSS */
