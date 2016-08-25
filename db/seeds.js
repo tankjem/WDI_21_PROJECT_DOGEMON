@@ -5,7 +5,7 @@ var User = require('../models/user');
 var Item = require('../models/item');
 var Event = require('../models/event');
 
-var databaseUri = require('../config/db')('development');
+var databaseUri = require('../config/db')('production');
 mongoose.connect(databaseUri);
 
 User.collection.drop();
