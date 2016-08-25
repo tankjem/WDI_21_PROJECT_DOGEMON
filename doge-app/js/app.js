@@ -230,10 +230,10 @@ DogeApp.initEventHandlers = function() {
     disableDefaultUI: true
   });
 
-  // 
-  // DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
+  //
+  DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
   DogeApp.map.setZoom(18);
-  // DogeApp.setBounds();
+  DogeApp.setBounds();
   DogeApp.getCurrentPosition(function() {
     DogeApp.setPlayerMarker();
     DogeApp.setRandMarkers();
@@ -275,7 +275,7 @@ DogeApp.setPlayerMarker = function() {
   DogeApp.map.setCenter(DogeApp.pos);
   setInterval(DogeApp.getCurrentPosition, 1000 * 10);
 }
-  
+
 
 // Bounds Rectangle
 
@@ -347,7 +347,7 @@ DogeApp.setRandMarkers = function() {
   //   if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
   //     testMarker.setMap(null);
   //     resourceCircleTest.setMap(null);
-  //   } 
+  //   }
   // });
 
   $('button').on('click', hideContent);
@@ -397,7 +397,7 @@ DogeApp.setRandMarkers = function() {
   //     resourceCircle.setMap(null);
 
   //     DogeApp.customInfoWindow();
-  //   } 
+  //   }
   // });
 }
 
@@ -439,7 +439,7 @@ DogeApp.setRandRedZones = function() {
     if (redCircleBounds.contains(DogeApp.pos)) {
       console.log("You're in the red zone!");
     }
-  
+
   }
 };
 
@@ -453,7 +453,7 @@ function hideContent() {
 //  ============= game event logic
 
 DogeApp.customInfoWindow = function(marker, data){
-  
+
   var button = data.choices[0]
   DogeApp.getUser(button)
   marker.addListener("click", function(){
@@ -471,7 +471,7 @@ DogeApp.customInfoWindow = function(marker, data){
 
 DogeApp.gameLogic = function(button, data) {
   $(".choice1").on("click", function() {
-    
+
   })
 }
 // DogeApp.customInfoWindow = function() {
@@ -557,5 +557,5 @@ DogeApp.gameLogic = function(button, data) {
 
 $(function() {
   DogeApp.initEventHandlers();
-  DogeApp.updateUI();  
+  DogeApp.updateUI();
 })
