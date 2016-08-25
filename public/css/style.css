@@ -14,7 +14,7 @@ html, body, main {
 
 .pop-up {}
 
-#content {
+#content, #content-event {
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -22,22 +22,32 @@ html, body, main {
   top: 50%;
   transform: translate(-50%, -50%);
   margin: auto;
-  background: rgba(199, 121, 102, .6);
-  padding: 1.5em;``
-  color: white;
+  background: rgba(255, 255, 255, .8);
+  padding: 1.5em;
+  color: black;
   z-index: 10;
   text-align: center;
   border-radius: 1.5em;
 }
 
-#content #close {
+#content-event {
+  font-size: 25px;
+}
+
+#content #close, #content-event #close {
   text-decoration: none;
   color: #000;
   font-size: 150%;
 }
 
-#content a:hover {
+#content #close:hover, #content-event #close:hover {
   color: #FFF;
+}
+
+#close-profile {
+  text-decoration: none;
+  color: #000;
+  font-size: 150%;
 }
 
 .choice1, .choice2, .choice3 {
@@ -53,7 +63,7 @@ html, body, main {
   background-color: rgba(255, 255, 255, 0.6);
   height: auto;
   text-align: center;
-  font-size: 25px;
+  font-size: 35px;
 }
 
 /* Menu CSS */
