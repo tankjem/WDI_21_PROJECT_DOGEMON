@@ -724,8 +724,7 @@ DogeApp.customInfoWindow = function(marker, data){
 
 
 
-$('#content #close').on('click', function() {
-  var $content = $('#content');
+$('#content').on('click', '#content-close', function() {
   $content.addClass('hidden');
 })
 
