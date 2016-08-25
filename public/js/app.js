@@ -664,7 +664,7 @@ DogeApp.setRandRedZones = function() {
 $('#main-map').on('click', hideContent);
 
 function hideContent() {
-  $('#content').addClass('hidden');
+  $('#content-event').addClass('hidden');
 };
 
 
@@ -712,13 +712,14 @@ DogeApp.customInfoWindow = function(marker, data){
         DogeApp.gameLogic();
     }
   });
-
-  console.log(data, " is still the event");
 }
 
 
 
-
+$('#content #close').on('click', function() {
+  var $content = $('#content');
+  $content.addClass('hidden');
+})
 
 // events logic. Massive and needs to be refactored if at all possible. Sounds like future Shu work. Sucker.
 
@@ -1054,12 +1055,15 @@ DogeApp.gameLogic = function(button, data) {
   }
   // missing Ed, Toni
 
-  $('#content #close').on('click', function() {
-    $('#content').addClass('hidden');
+
+  //  ===== Closing buttons
+
+  $('#content-event #close').on('click', function() {
+    $('#content-event').addClass('hidden');
   })
 
   $('.choice1, .choice2, .choice3').on('click', function() {
-    $('#content').addClass('hidden');
+    $('#content-event').addClass('hidden');
   })
 
 }

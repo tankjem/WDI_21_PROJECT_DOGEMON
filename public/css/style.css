@@ -32,6 +32,10 @@ html, body, main {
   border-radius: 1.5em;
 }
 
+#content-event {
+  font-size: 25px;
+}
+
 #content #close, #content-event #close {
   text-decoration: none;
   color: #000;
@@ -58,8 +62,14 @@ html, body, main {
   width: 100%;
 }
 
-#content a:hover {
+#content #close:hover, #content-event #close:hover {
   color: #FFF;
+}
+
+#close-profile {
+  text-decoration: none;
+  color: #000;
+  font-size: 150%;
 }
 
 .choice1, .choice2, .choice3 {
@@ -87,7 +97,7 @@ html, body, main {
 
   height: auto;
   text-align: center;
-  font-size: 25px;
+  font-size: 35px;
 }
 
 /* Menu CSS */
