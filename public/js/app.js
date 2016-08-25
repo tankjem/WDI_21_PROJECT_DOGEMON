@@ -678,37 +678,45 @@ DogeApp.customInfoWindow = function(marker, data){
     if((data.choices).length === 2) {
       $("body").prepend("<div id='content-event'>"
         + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br><br>'
+        + "<div class='choice-title'>"
         + "<h3>"
         + data.name
         + "</h3>"
+        + "</div>"
+        + "<div class='choice-info'>"
         + "<br><img src='"
         + data.image_url
-        + "' width='100' height='100'><div>"
+        + "' width='100' height='100'>"
         + data.description
         + "</div><div class='choice1'>"
         + data.choices[0]
         + "</div><div class='choice2'>"
         + data.choices[1]
-        + "</div><br></div>");
+        + "</div></div</div>");
       DogeApp.gameLogic();
     } else {
       $("body").prepend("<div id='content-event'>"
-        + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a>'
-        + "<h3>"
-        + data.name
-        + "</h3>"        + "<br><img src='"
-        + data.image_url
-        + "' width='100' height='100'><div>"
-        + data.description
-        +"</div>"
-        +"<div class='choice-list'>"
-        + "<div class='choice1'>"
-        + data.choices[0]
-        + "</div><div class='choice2'>"
-        + data.choices[1]
-        + "</div><div class='choice3'>"
-        + data.choices[2]
-        + "</div></div></div>");
+      + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a>'
+      + "<div class='choice-title'>"
+      + "<h3>"
+      + data.name
+      + "</h3>"
+      + "</div>"
+      + "<div class='choice-info'>"
+      + "<br><img src='"
+      + data.image_url
+      + "' width='100' height='100'><div>"
+      + data.description
+      +"</div>"
+      +"<div class='choice-list'>"
+      + "<div class='choice1'>"
+      + data.choices[0]
+      + "</div>"
+      + "<div class='choice2'>"
+      + data.choices[1]
+      + "</div>"
+      +"</div>"
+      + "</div</div>");
         DogeApp.gameLogic();
     }
   });
