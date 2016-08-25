@@ -210,6 +210,11 @@ DogeApp.initEventHandlers = function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
 
+  this.$content.on('click', '#close', function() {
+    event.preventDefault();
+    DogeApp.$content.addClass('hidden');
+  });
+
 
   // if(pcDeath !== 0) {
   //   this.deletePc;
