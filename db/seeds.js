@@ -57,7 +57,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Light Tunic",
     description: "A lovely tunic",
-    image_url: "/items/A_Clothing01.png",
+    image_url: "/images/items/A_Clothing01.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 10,
@@ -67,7 +67,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Medium Tunic",
     description: "Tunics are in this year...",
-    image_url: "/items/A_Clothing02.png",
+    image_url: "/images/items/A_Clothing02.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 20,
@@ -77,7 +77,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Leather Armour",
     description: "A lightweight leather bodypiece.",
-    image_url: "/items/A_Armour01.png",
+    image_url: "/images/items/A_Armour01.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 25,
@@ -87,7 +87,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Iron Armour",
     description: "Solid metal body armour.",
-    image_url: "/items/A_Armour04.png",
+    image_url: "/images/items/A_Armour04.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 50,
@@ -97,7 +97,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Gold Armour",
     description: "Yes, its a terrible idea. But somehow its better than expected",
-    image_url: "/items/A_Armour03.png",
+    image_url: "/images/items/A_Armour03.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 65,
@@ -107,7 +107,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "The Mighty Doge Shield",
     description: "Tremble at its awesomeness",
-    image_url: "/items/E_Bones03.png",
+    image_url: "/images/items/E_Bones03.png",
     item_type: "Armour",
     image_attack: 0,
     image_defense: 85,
@@ -117,7 +117,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Healing Potion",
     description: "I can't believe I drank the whole thing",
-    image_url: "/items/I_Antidote.png",
+    image_url: "/images/items/I_Antidote.png",
     item_type: "Consumable",
     image_attack: 0,
     image_defense: 0,
@@ -127,7 +127,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Bread",
     description: "What? Bread makes you fat?",
-    image_url: "/items/I_C_Bread.png",
+    image_url: "/images/items/I_C_Bread.png",
     item_type: "Consumable",
     image_attack: 0,
     image_defense: 0,
@@ -137,7 +137,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Banana",
     description: "Great in a milkshake. Warning: May bring boys to the yard",
-    image_url: "/items/I_C_Banana.png",
+    image_url: "/images/items/I_C_Banana.png",
     item_type: "Consumable",
     image_attack: 0,
     image_defense: 0,
@@ -147,7 +147,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Fish on a Stick",
     description: "It's a fish on a stick.",
-    image_url: "/items/I_C_RawFish.png",
+    image_url: "/images/items/I_C_RawFish.png",
     item_type: "Consumable",
     image_attack: 0,
     image_defense: 0,
@@ -157,7 +157,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Steak",
     description: "Medium rare",
-    image_url: "/items/I_C_Meat.png",
+    image_url: "/images/items/I_C_Meat.png",
     item_type: "Consumable",
     image_attack: 0,
     image_defense: 0,
@@ -167,7 +167,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Pineapple",
     description: "If you put this on pizza, you deserve to get eaten by zombies.",
-    image_url: "/items/I_C_Pineapple.png",
+    image_url: "/images/items/I_C_Pineapple.png",
     item_type: "Consumable",
     image_attack: 0,
     image_defense: 0,
@@ -177,7 +177,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Cheese",
     description: "A hunk of cheese",
-    image_url: "/items/I_C_Cheese.png",
+    image_url: "/images/items/I_C_Cheese.png",
     item_type: "Consumable",
     image_attack: 0,
     image_defense: 0,
@@ -187,7 +187,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Bow and Arrow",
     description: "Loosen the shaft...",
-    image_url: "/items/W_Bow01.png",
+    image_url: "/images/items/W_Bow01.png",
     item_type: "Weapon",
     image_attack: 20,
     image_defense: 0,
@@ -197,7 +197,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Fire Sword",
     description: "Sharp and flamey",
-    image_url: "/items/S_Sword01.png",
+    image_url: "/images/items/S_Sword01.png",
     item_type: "Weapon",
     image_attack: 45,
     image_defense: 0,
@@ -207,7 +207,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Hatchet",
     description: "I hope I don't lose a hand",
-    image_url: "/items/W_Axe001.png",
+    image_url: "/images/items/W_Axe001.png",
     item_type: "Weapon",
     image_attack: 25,
     image_defense: 0,
@@ -217,7 +217,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Machete",
     description: "Slash and gash",
-    image_url: "/items/W_Dagger005.png",
+    image_url: "/images/items/W_Dagger005.png",
     item_type: "Weapon",
     image_attack: 40,
     image_defense: 0,
@@ -227,7 +227,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Dagger",
     description: "Stick 'em with the pointy end",
-    image_url: "/items/W_Dagger002.png",
+    image_url: "/images/items/W_Dagger002.png",
     item_type: "Weapon",
     image_attack: 25,
     image_defense: 0,
@@ -237,7 +237,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Candy Cane",
     description: "Rock hard but very sweet",
-    image_url: "/items/W_Mace010.png",
+    image_url: "/images/items/W_Mace010.png",
     item_type: "Weapon",
     image_attack: 35,
     image_defense: 0,
@@ -247,7 +247,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Revolver",
     description: "Hello cowboy",
-    image_url: "/items/W_Gun001.png",
+    image_url: "/images/items/W_Gun001.png",
     item_type: "Weapon",
     image_attack: 40,
     image_defense: 0,
@@ -257,7 +257,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "9mm",
     description: "Pew-Pew",
-    image_url: "/items/W_Gun003.png",
+    image_url: "/images/items/W_Gun003.png",
     item_type: "Weapon",
     image_attack: 55,
     image_defense: 0,
@@ -267,7 +267,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Hammer",
     description: "Can't touch this",
-    image_url: "/items/W_Mace003.png",
+    image_url: "/images/items/W_Mace003.png",
     item_type: "Weapon",
     image_attack: 45,
     image_defense: 0,
@@ -277,7 +277,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Battle Axe",
     description: "A battle axe from years gone by",
-    image_url: "/items/W_Axe009.png",
+    image_url: "/images/items/W_Axe009.png",
     item_type: "Weapon",
     image_attack: 55,
     image_defense: 0,
@@ -287,7 +287,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Demon Bow",
     description: "Just a bow with a fancy name",
-    image_url: "/items/W_Bow13.png",
+    image_url: "/images/items/W_Bow13.png",
     item_type: "Weapon",
     image_attack: 35,
     image_defense: 0,
@@ -297,7 +297,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "A trident",
     description: "Not much different from a pitchfork",
-    image_url: "/items/W_Spear007.png",
+    image_url: "/images/items/W_Spear007.png",
     item_type: "Weapon",
     image_attack: 45,
     image_defense: 0,
@@ -319,21 +319,21 @@ Item.create([{
   return Event.create([{
     name: "Zombie Attack",
     description: "You are attacked by a zombie",
-    image_url: "http://localhost:3000/events/zombie_icon.png",
+    image_url: "/images/events/zombie_icon.png",
     event_type: "red_zone_encounter",
     choices: ["fight", "flee"],
     event_number:1
     }, {
     name: "Yoga-Rosie",
     description:"A bizarre sight unravels before you. A girl is doing yoga on top of a van which is surrounded by zombies. She seems perfectly at ease.",
-    image_url: "http://localhost:3000/events/yoga_rosie.png",
+    image_url: "/images/events/yoga_rosie.png",
     event_type: "random_encounter",
     choices: ["Curious you jump on the van next to her and join in", "Watch", "Run away"],
     event_number: 2
     }, {
     name: "Item Found",
     description: "You have found an item",
-    image_url: "http://localhost:3000/events/resource_icon.png",
+    image_url: "/images/events/resource_icon.png",
     event_type: "resource_encounter",
     choices: ["collect", "leave"],
     event_number:3
@@ -341,7 +341,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Survivor Fight",
     description: "Zombies aren't the only worry",
-    image_url: "http://localhost:3000/events/attack_icon.png",
+    image_url: "/images/events/attack_icon.png",
     event_type: "random_encounter",
     choices: ["fight", "run", "hide"],
     event_number:6
@@ -350,7 +350,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Baller",
     description: "You see a zombie lurches towards you, he seems to be saying something. You distinctly make out, Baaaaallllllerrr! It shuffles past and offers a fist bump",
-    image_url: "http://localhost:3000/events/baller_icon.png",
+    image_url: "/images/events/baller_icon.png",
     event_type: "random_encounter",
     choices: ["Leave it hanging", "Chop off Zombie's hand", "Bump back"],
     event_number:7
@@ -359,7 +359,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "The Blue or the Red Pill",
     description: "You find a sealed bag on the floor containing two pills one red or blue. Curiosity get the better of you",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Blue Pill", "Red Pill", "Winners don't do drugs"],
     event_number:8
@@ -368,7 +368,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Lord Shu",
     description: "You see a man standing on top of a pile of bodies laughing maniacally",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Join in with the laughing", "Fight", "Ignore"],
     event_number:9
@@ -377,7 +377,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Cam's Armour Emporium",
     description: "A young lad is on the side of the road pushing a shopping trolley filled with armour, he makes an offer you can't refuse",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Take the sexy armour", "Fight", "Ignore"],
     event_number:10
@@ -386,7 +386,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "A Chanse Encounter",
     description: "A very pretty and athletic man is passed out by the side of the motorway, you wake him and give him some water. He tells you he's from Leeds and that he's pretty hungover. He says you should visit him in Leeds at some point. Wait. Did he mention he was from Leeds?",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Where's Leeds?", "Sorry, where are you from again?", "Ignore"],
     event_number:11
@@ -395,7 +395,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "The Screaming Kiwi",
     description: "You see a tall man with a semi-afro riding a bike and eating kebab, while blasting recorder music out of a radio strapped to the bike. He screams at a zombie and nearly drops his kebab",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Ask where he got the kebab", "Steal Kebab", "Ignore"],
     event_number:12
@@ -404,7 +404,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Sleepy Jason",
     description: "A man is napping in a dumpster. Cocktails are littered around him. There is a name tag on his shirt that says Json",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Wake him up", "Take a cocktail", "Ignore"],
     event_number:13
@@ -413,7 +413,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Zombie Fishing",
     description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Ask for a fish", "Learn to fish", "Ignore"],
     event_number:14
@@ -422,7 +422,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Bex's Utopia",
     description: "You encounter a woman with a steely look in her eyes, she seems completely at ease in the apocalyptic environment. She grins like a cheshire cat as she bashes in a zombies head",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Ask her why she's happy", "Bash a nearby zombie", "Run away"],
     event_number:15
@@ -431,7 +431,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Jem's Gem",
     description: "A man is decked out in the finest gems you have ever seen. He looks like a king. He smiles at you and waves regally",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Wave back", "Make a danger face at him", "Ignore"],
     event_number:16
@@ -440,7 +440,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Smithy's business",
     description: "A man is sat atop a grassy knoll on what can only be described as a portable deck chair. The sun is shining and all is calm. He seems busy",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Join him atop the knoll", "Ask about chair", "Ignore"],
     event_number:17
@@ -449,7 +449,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Adri's Apocalypse",
     description: "A lady is walking casually down the street. She seems pretty chilled and oblivious to the danger all around her, or she just doesn't care...",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Warn her about the danger", "Make a new friend", "Ignore"],
     event_number:18
@@ -458,7 +458,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Queen Kaitlyn",
     description: "You stumble across what appears to be an empty building. However, a woman appears surrounded by several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Punt the minion back", "Help the minion", "Ignore"],
     event_number:19
@@ -467,7 +467,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Chetan's Erotic Coffee",
     description: "A man approaches you and offers a cup of coffee, but before you drink it he insists on telling you about his business idea for apocalyptic coffee with an erotic twist. This is the first time you've blushed since the apocalypse.",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Listen Intently", "Sip the coffee anyway", "Ignore"],
     event_number:20
@@ -476,7 +476,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Julian's Russian Palava",
     description: "A man runs up to you and declares the Russian's are coming, watch out",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Ask for more info", "Pretend to be Russian", "Ignore"],
     event_number:21
@@ -485,7 +485,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Andy the Urban Warrior",
     description: "You see a man hunched over with a sword strapped to his back. Suddenly he bolts forward leaping between cars and zombies, eventually landing in front of you.",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Bow", "Fight", "Ignore"],
     event_number:22
@@ -494,7 +494,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Overwatch Ben",
     description: "You come across a tower in it is a man with a rifle. He says he's friendly and asks if you would like to join him in the tower.",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Join man on tower", "Wave", "Ignore"],
     event_number:23
@@ -503,7 +503,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Axel's battle of the baguette",
     description: "A man is fighting a horde of zombies with what looks like a stale baguette.",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Help the man", "Watch", "Ignore"],
     event_number:24
@@ -512,7 +512,7 @@ Item.create([{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Christian's code",
     description: "You see a man slowly but methodically chopping heads off corpses, he looks like he's doing it for the safety of others",
-    image_url: "http://localhost:3000/events/event_marker.png",
+    image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Help him", "Watch", "Ignore"],
     event_number:25
