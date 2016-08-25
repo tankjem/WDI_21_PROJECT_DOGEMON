@@ -21,17 +21,14 @@ DogeApp.setRequestHeader = function(jqXHR) {
 }
 
 DogeApp.getTemplate = function(template, data, $element) {
-
   return $.get('/templates/' + template + '.html').done(function(templateHtml) {
     var html = _.template(templateHtml)(data);
-
     if (!$element) {
       DogeApp.$content.html(html);
       DogeApp.$content.removeClass('hidden');
     } else {
       $element.html(html);
     }
-
     DogeApp.updateUI();
   });
 }
@@ -105,24 +102,16 @@ DogeApp.handleForm = function() {
       method: method,
       data: data,
       beforeSend: DogeApp.setRequestHeader,
-    //   success: function(data, textStatus) {
-    //     if (data.redirect) {
-    //         // data.redirect contains the string URL to redirect to
-    //         window.location.href = data.redirect;
-    //     }
-    //     else {
-    //         // data.form contains the HTML for the replacement form
-    //         $(".form-flex").replaceWith(data.form);
-    //     }
-    // }
   })
     .done(function(data) {
       var $form = $('.form-flex');
       $form.remove();
+
       if (!!data.token) {
+
         window.localStorage.setItem("token", data.token);
       }
-
+      DogeApp.updateUI();
       DogeApp.getUser();
     })
     .fail(DogeApp.handleFormErrors);
@@ -164,7 +153,7 @@ DogeApp.getEvent = function(testMarker) {
     // DogeApp.getTemplate("events/show", { event: data }, $content);
     // $content.removeClass('hidden');
     DogeApp.customInfoWindow(testMarker, data);
-
+    DogeApp.getItem();
   });
 }
 
@@ -176,16 +165,19 @@ DogeApp.getItem = function() {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data){
     DogeApp.item = data;
-    DogeApp.randItemDrop(data)
     // var $content = $('#content');
     // DogeApp.getTemplate("items/show", {item:data}, $content);
     // $content.removeClass('hidden');
   });
 }
 
+
+
 DogeApp.loadPage = function() {
   event.preventDefault();
+  var $content = $('#content');
   DogeApp.getTemplate($(this).data("template"));
+  // $content.removeClass('hidden');
 }
 
 DogeApp.logout = function() {
@@ -722,9 +714,9 @@ DogeApp.customInfoWindow = function(marker, data){
 // events logic. Massive and needs to be refactored if at all possible. Sounds like future Shu work. Sucker.
 
 DogeApp.gameLogic = function(button, data) {
-  $(".choice1").on("click", function() {
+  // $(".choice1").on("click", function() {
 
-  })
+  // })
   var event = DogeApp.event
   var hud = document.getElementById('hud');
 
@@ -748,10 +740,11 @@ DogeApp.gameLogic = function(button, data) {
         document.getElementById('hud').innerHTML = "That was idiotic. You had to flee from the zombie. Like a scardy cat. You have taken " + damageTaken + " damage.";
       }
       DogeApp.user.health = DogeApp.user.health - damageTaken;
-      DogeApp.user.inventory << DogeApp.randItemDrop;
-      console.log(DogeApp.user.health);
-      console.log(DogeApp.user.inventory);
-      DogeApp.getItem(DogeApp.user);
+      DogeApp.user.inventory.push(DogeApp.item);
+
+      // console.log(DogeApp.user.health);
+      console.log("The user now needs clarity ", DogeApp.user.inventory);
+      // DogeApp.getItem(DogeApp.user);
       DogeApp.updateUserData(DogeApp.user);
     })
     $(".choice2").on("click", function() {
@@ -1067,11 +1060,6 @@ DogeApp.gameLogic = function(button, data) {
     $('#content').addClass('hidden');
   })
 
-}
-
-
-DogeApp.randItemDrop = function(data) {
-  console.log(data);
 }
 // function buttonChoices (){
 //   var btns = document.getElementsByClassName("choice-click");
