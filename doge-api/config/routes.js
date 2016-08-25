@@ -10,7 +10,6 @@ var authController = require('../controllers/authentications');
 var userController = require('../controllers/user');
 var itemsController = require('../controllers/items');
 var eventsController = require('../controllers/events');
-var pcsController = require('../controllers/pcs');
 
 // middleware to check for token
 function secureRoute(req, res, next) {
