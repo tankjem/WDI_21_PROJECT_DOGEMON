@@ -7,9 +7,11 @@ html, body, main {
 #map {
   height: 94.5vh;
 }
+
 .hidden {
   display: none;
 }
+
 .pop-up {}
 
 #content {
@@ -24,6 +26,16 @@ html, body, main {
   z-index: 10;
   text-align: center;
   border-radius: 1.5em;
+}
+
+#content #close {
+  text-decoration: none;
+  color: #000;
+  font-size: 150%;
+}
+
+#content a:hover {
+  color: #FFF;
 }
 
 /* Menu CSS */

@@ -324,7 +324,7 @@ Item.create([{
     last_name: "McTest",
     password: "password",
     passwordConfirmation: "password",
-    created_pc: [pc1]
+    image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg"
   });
 }).then(function(u1) {
   console.log(u1);
@@ -343,30 +343,12 @@ Item.create([{
     choices: ["Curious you jump on the van next to her and join in", "Watch", "Run away"],
     event_number: 2
     }, {
-    name: "Consumable Found",
-    description: "You found a consumable item",
+    name: "Item Found",
+    description: "You have found an item",
     image_url: "/events/resource_icon.png",
     event_type: "resource_encounter",
     choices: ["collect", "leave"],
     event_number:3
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Armour Found",
-    description: "You found some new armour",
-    image_url: "/events/resource_icon.png",
-    event_type: "resource_encounter",
-    choices: ["collect", "leave"],
-    event_number:4
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Weapon Found",
-    description: "You found a new weapon",
-    image_url: "/events/resource_icon.png",
-    event_type: "resource_encounter",
-    choices: ["collect", "leave"],
-    event_number:5
-    // WARNING WARNING WARNING
     },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Survivor Fight",
@@ -431,122 +413,122 @@ Item.create([{
     event_number:12
     // WARNING WARNING WARNING
   },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Sleepy Jason",
-    description: "A man is napping in a dumpster. Cocktails are littered around him. There is a name tag on his shirt that says Json",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Wake him up", "Ignore", "Take a cocktail"],
-    event_number:13
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Zombie Fishing",
-    description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Ask for a fish", "Learn to fish", "Ignore"],
-    event_number:14
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Bex's Utopia",
-    description: "You encounter a woman with a steely look in her eyes, she seems completely at ease in the apocalyptic environment. She grins like a cheshire cat as she bashes in a zombies head",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Ask her why she's happy", "Bash a nearby zombie", "Run away"],
-    event_number:15
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Jem's Gem",
-    description: "A man is decked out in the finest gems you have ever seen. He looks like a king. He smiles at you and waves regally",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Wave back", "Make a danger face at him", "Ignore"],
-    event_number:16
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Smithy's business",
-    description: "A man is sat atop a grassy knoll on what can only be described as a portable deck chair. The sun is shining and all is calm. He seems busy",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Join him atop the knoll", "Ask about chair", "Ignore"],
-    event_number:17
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Adri's Apocalypse",
-    description: "A lady is walking casually down the street. She seems pretty chilled and oblivious to the danger all around her, or she just doesn't care...",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Warn her about the danger", "Make a new friend", "Ignore"],
-    event_number:18
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Queen Kaitlyn",
-    description: "You stumble across what appears to be an empty building. However, a woman appears surrounded by several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Punt the minion back", "Help the minion", "Ignore"],
-    event_number:19
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Chetan's Erotic Coffee",
-    description: "A man approaches you and offers a cup of coffee, but before you drink it he insists on telling you about his business idea for apocalyptic coffee with an erotic twist. This is the first time you've blushed since the apocalypse.",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Listen Intently", "Sip the coffee anyway", "Ignore"],
-    event_number:20
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Julian's Russian Palava",
-    description: "A man runs up to you and declares the Russian's are coming, watch out",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Ask for more info", "Pretend to be Russian", "Ignore"],
-    event_number:21
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Andy the Urban Warrior",
-    description: "You see a man hunched over with a sword strapped to his back. Suddenly he bolts forward leaping between cars and zombies, eventually landing in front of you.",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Bow", "Fight", "Ignore"],
-    event_number:22
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Overwatch Ben",
-    description: "You come across a tower in it is a man with a rifle. He says he's friendly and asks if you would like to join him in the tower.",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Join man on tower", "Wave", "Ignore"],
-    event_number:23
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Axel's battle of the baguette",
-    description: "A man is fighting a horde of zombies with what looks like a stale baguette.",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Help the man", "Watch", "Ignore"],
-    event_number:24
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Christian's code",
-    description: "You see a man slowly but methodically chopping heads off corpses, he looks like he's doing it for the safety of others",
-    image_url: "/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Help him", "Watch", "Ignore"],
-    event_number:25
-    // WARNING WARNING WARNING
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Sleepy Jason",
+  //   description: "A man is napping in a dumpster. Cocktails are littered around him. There is a name tag on his shirt that says Json",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Wake him up", "Ignore", "Take a cocktail"],
+  //   event_number:13
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Zombie Fishing",
+  //   description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Ask for a fish", "Learn to fish", "Ignore"],
+  //   event_number:14
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Bex's Utopia",
+  //   description: "You encounter a woman with a steely look in her eyes, she seems completely at ease in the apocalyptic environment. She grins like a cheshire cat as she bashes in a zombies head",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Ask her why she's happy", "Bash a nearby zombie", "Run away"],
+  //   event_number:15
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Jem's Gem",
+  //   description: "A man is decked out in the finest gems you have ever seen. He looks like a king. He smiles at you and waves regally",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Wave back", "Make a danger face at him", "Ignore"],
+  //   event_number:16
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Smithy's business",
+  //   description: "A man is sat atop a grassy knoll on what can only be described as a portable deck chair. The sun is shining and all is calm. He seems busy",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Join him atop the knoll", "Ask about chair", "Ignore"],
+  //   event_number:17
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Adri's Apocalypse",
+  //   description: "A lady is walking casually down the street. She seems pretty chilled and oblivious to the danger all around her, or she just doesn't care...",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Warn her about the danger", "Make a new friend", "Ignore"],
+  //   event_number:18
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Queen Kaitlyn",
+  //   description: "You stumble across what appears to be an empty building. However, a woman appears surrounded by several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Punt the minion back", "Help the minion", "Ignore"],
+  //   event_number:19
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Chetan's Erotic Coffee",
+  //   description: "A man approaches you and offers a cup of coffee, but before you drink it he insists on telling you about his business idea for apocalyptic coffee with an erotic twist. This is the first time you've blushed since the apocalypse.",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Listen Intently", "Sip the coffee anyway", "Ignore"],
+  //   event_number:20
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Julian's Russian Palava",
+  //   description: "A man runs up to you and declares the Russian's are coming, watch out",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Ask for more info", "Pretend to be Russian", "Ignore"],
+  //   event_number:21
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Andy the Urban Warrior",
+  //   description: "You see a man hunched over with a sword strapped to his back. Suddenly he bolts forward leaping between cars and zombies, eventually landing in front of you.",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Bow", "Fight", "Ignore"],
+  //   event_number:22
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Overwatch Ben",
+  //   description: "You come across a tower in it is a man with a rifle. He says he's friendly and asks if you would like to join him in the tower.",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Join man on tower", "Wave", "Ignore"],
+  //   event_number:23
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Axel's battle of the baguette",
+  //   description: "A man is fighting a horde of zombies with what looks like a stale baguette.",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Help the man", "Watch", "Ignore"],
+  //   event_number:24
+  //   // WARNING WARNING WARNING
+  // },{
+  //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+  //   name: "Christian's code",
+  //   description: "You see a man slowly but methodically chopping heads off corpses, he looks like he's doing it for the safety of others",
+  //   image_url: "/events/event_marker.png",
+  //   event_type: "random_encounter",
+  //   choices: ["Help him", "Watch", "Ignore"],
+  //   event_number:25
+  //   // WARNING WARNING WARNING
   }]);
 }).then(function(events) {
   console.log(events);

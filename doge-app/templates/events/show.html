@@ -1,6 +1,12 @@
+
+<a href="#" aria-label="Close Account Info Modal Box">&times;</a>
+<h3 id="eventNumber" class="hidden"></h3>
 <h3 id="eventName"><%=event.name%></h3>
 <p id="eventDescription"><%=event.description%></p>
 <% event.choices.forEach(function(event) { %>
-  <button class="choice" data-choice="<%= event %>"><%= event %></button>
+  <div class="choice-click" data-choice="<%= event %>"><%= event %></div>
 <% }) %>
-<!-- <button id="back">Back</button> -->
+
+<!-- <div id="hello">YOYOYOOOO</div> -->
+<button id="back">Back</button>
+
