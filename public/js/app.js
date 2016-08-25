@@ -1043,6 +1043,17 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = ":(";
     })
   }
+  if( event.event_number === 26) {
+    $(".choice1").on("click", function() {
+      document.getElementById('hud').innerHTML = "The leaning tower of pasta falls on you and you just escape with your life";
+    })
+    $(".choice2").on("click", function() {
+      document.getElementById('hud').innerHTML = "A man called Antonio gives you a bag of pasta.";
+    })
+    $(".choice3").on("click", function() {
+      document.getElementById('hud').innerHTML = ":(";
+    })
+  }
   // missing Ed, Toni
 
   $('#content #close').on('click', function() {

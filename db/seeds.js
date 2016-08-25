@@ -517,6 +517,13 @@ Item.create([{
     choices: ["Help him", "Watch", "Ignore"],
     event_number:25
     // WARNING WARNING WARNING
+  },{
+    name: "Antonio's leaning tower of pasta",
+    description: "You see an open warehouse and venture in. Inside is the biggest of collection of dried pasta you have ever seen.",
+    image_url: "/images/events/event_marker.png",
+    event_type: "random_encounter",
+    choices: ["Take some pasta", "Pause and see if their is anyone about", "Ignore"],
+    event_number:26
   }]);
 }).then(function(events) {
   console.log(events);
