@@ -448,6 +448,7 @@ DogeApp.initEventHandlers = function() {
   DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
   DogeApp.map.setZoom(18);
   DogeApp.setBounds();
+
   DogeApp.getCurrentPosition(function() {
     DogeApp.setPlayerMarker();
     DogeApp.setRandMarkers();
@@ -463,6 +464,7 @@ DogeApp.getCurrentPosition = function(callback) {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
     }
+    console.log("Moving" + DogeApp.pos.lat + DogeApp.pos.lng);
 
     if (callback) callback();
   });
@@ -485,9 +487,11 @@ DogeApp.setPlayerMarker = function() {
       }
     });
   }
+
   DogeApp.map.setCenter(DogeApp.pos);
-  setInterval(DogeApp.getCurrentPosition, 1000 * 10);
 }
+
+setInterval(DogeApp.getCurrentPosition, 1000 * 3);
 
 
 // Bounds Rectangle
@@ -576,7 +580,7 @@ DogeApp.setRandMarkers = function() {
   };
 
 
-  for (var i = 0; i < 175; i++) {
+  for (var i = 0; i < 150; i++) {
 
     var randMarker = new google.maps.Marker({
       position: DogeApp.getRandomMarker(),
@@ -592,7 +596,7 @@ DogeApp.setRandMarkers = function() {
     // Resource radius
     var resourceCircle = new google.maps.Circle({
       map: DogeApp.map,
-      radius: 25,
+      radius: 30,
       strokeColor: '#ffffff',
       strokeOpacity: 0.2,
       fillColor: '#ffffff',
@@ -622,7 +626,7 @@ DogeApp.setRandMarkers = function() {
 
 DogeApp.setRandRedZones = function() {
 
-  for (var i = 0; i < 8; i++) {
+  for (var i = 0; i < 5; i++) {
     var skullIcon = {
       url: "./images/skull.png", // url
       scaledSize: new google.maps.Size(60, 60), // scaled size
@@ -672,7 +676,7 @@ DogeApp.customInfoWindow = function(marker, data){
   DogeApp.getUserData(button)
   marker.addListener("click", function(){
     if((data.choices).length === 2) {
-      $("body").prepend("<div id='content'>"
+      $("body").prepend("<div id='content-event'>"
         + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br><br>'
         + data.name
         + "<br><img src='"
@@ -686,7 +690,7 @@ DogeApp.customInfoWindow = function(marker, data){
         + "</div><br></div>");
       DogeApp.gameLogic();
     } else {
-      $("body").prepend("<div id='content'>"
+      $("body").prepend("<div id='content-event'>"
         + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br><br>'
         + data.name
         + "<br><img src='"
