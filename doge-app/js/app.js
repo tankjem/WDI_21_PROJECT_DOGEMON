@@ -25,7 +25,8 @@ DogeApp.getTemplate = function(template, data, $element) {
     var html = _.template(templateHtml)(data);
 
     if (!$element) {
-      DogeApp.$main.html(html);
+      DogeApp.$content.html(html);
+      DogeApp.$content.removeClass('hidden');
     } else {
       $element.html(html);
     }
@@ -103,17 +104,17 @@ DogeApp.handleForm = function() {
       method: method,
       data: data,
       beforeSend: DogeApp.setRequestHeader,
-      success: function(data, textStatus) {
-        if (data.redirect) {
-            // data.redirect contains the string URL to redirect to
-            window.location.href = data.redirect;
-        }
-        else {
-            // data.form contains the HTML for the replacement form
-            $(".form-flex").replaceWith(data.form);
-        }
-    }
-    })
+    //   success: function(data, textStatus) {
+    //     if (data.redirect) {
+    //         // data.redirect contains the string URL to redirect to
+    //         window.location.href = data.redirect;
+    //     }
+    //     else {
+    //         // data.form contains the HTML for the replacement form
+    //         $(".form-flex").replaceWith(data.form);
+    //     }
+    // }
+  })
     .done(function(data) {
       var $form = $('.form-flex');
       $form.remove();
@@ -208,7 +209,7 @@ DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
   this.$map = $("#map"); // oop the bloody map
-  this.$main.on("submit", "form", this.handleForm);
+  this.$content.on("submit", "form", this.handleForm);
   $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
