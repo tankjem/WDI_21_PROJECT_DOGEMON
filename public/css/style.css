@@ -40,7 +40,7 @@ html, body, main {
   font-size: 150%;
 }
 
-#content a:hover {
+#content #close:hover, #content-event #close:hover {
   color: #FFF;
 }
 

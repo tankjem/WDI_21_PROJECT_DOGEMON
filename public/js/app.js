@@ -707,13 +707,14 @@ DogeApp.customInfoWindow = function(marker, data){
         DogeApp.gameLogic();
     }
   });
-
-  console.log(data, " is still the event");
 }
 
 
 
-
+$('#content #close').on('click', function() {
+  var $content = $('#content');
+  $content.addClass('hidden');
+})
 
 // events logic. Massive and needs to be refactored if at all possible. Sounds like future Shu work. Sucker.
 
@@ -1052,16 +1053,12 @@ DogeApp.gameLogic = function(button, data) {
 
   //  ===== Closing buttons
 
-  $('#content #close').on('click', function() {
+  $('#content-event #close').on('click', function() {
     $('#content-event').addClass('hidden');
   })
 
   $('.choice1, .choice2, .choice3').on('click', function() {
     $('#content-event').addClass('hidden');
-  })
-
-  $('#content #close-profile').on('click', function() {
-    $('#content').addClass('hidden');
   })
 
 }
