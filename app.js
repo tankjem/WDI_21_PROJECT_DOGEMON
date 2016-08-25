@@ -22,7 +22,8 @@ app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('assets'));
+
+app.use(express.static("public"));
 
 app.use('/api', routes);
 
