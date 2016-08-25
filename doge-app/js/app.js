@@ -113,10 +113,14 @@ DogeApp.handleForm = function() {
       beforeSend: DogeApp.setRequestHeader
     })
     .done(function(data) {
+      var $content = $('#content');
+      // DogeApp.getTemplate("/login", $content);
+      $content.addClass('hidden');
+      console.log(data +"Here I am to save the day");
       if(!!data.token) {
         window.localStorage.setItem("token", data.token);
       }
-
+      DogeApp.updateUI();
       DogeApp.getUser();
     })
     .fail(DogeApp.handleFormErrors);
@@ -177,7 +181,9 @@ DogeApp.getItem = function() {
 
 DogeApp.loadPage = function() {
   event.preventDefault();
+  var $content = $('#content');
   DogeApp.getTemplate($(this).data("template"));
+  // $content.removeClass('hidden');
 }
 
 DogeApp.logout = function() {
@@ -231,9 +237,9 @@ DogeApp.initEventHandlers = function() {
   });
 
   // 
-  // DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
+  DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
   DogeApp.map.setZoom(18);
-  // DogeApp.setBounds();
+  DogeApp.setBounds();
   DogeApp.getCurrentPosition(function() {
     DogeApp.setPlayerMarker();
     DogeApp.setRandMarkers();
