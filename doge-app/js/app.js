@@ -45,17 +45,6 @@ DogeApp.getUserData = function(button, damage) {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     DogeApp.user = data;
-<<<<<<< HEAD
-    var $content = $('#content');
-    DogeApp.getTemplate("user/show", {
-      user: data
-    }, $content);
-    $content.removeClass('hidden');
-    DogeApp.getTemplate("/user/show", {
-      user: data
-    });
-=======
->>>>>>> development
     DogeApp.gameLogic(button, data);
   });
 }
@@ -66,13 +55,9 @@ DogeApp.updateUserData = function(user) {
     url: DogeApp.API_URL + "/user",
     data: user,
     beforeSend: DogeApp.setRequestHeader
-<<<<<<< HEAD
-  }).done(DogeApp.getUser); // should be landing page instead of getUser, but it isn't done yet.
-=======
   }).done(function(data) {
     console.log(data.health);
   });
->>>>>>> development
 }
 
 
@@ -87,13 +72,7 @@ DogeApp.getUser = function() {
     // DogeApp.user = data;
     // $("body").prepend("<div id='content'>" + DogeApp.user.username + "<br><img src='" + DogeApp.user.image_url + "' width='100' height='100'><div>" + DogeApp.user.health + "</div><br></div>");
     var $content = $('#content');
-<<<<<<< HEAD
-    DogeApp.getTemplate("/pc/show", {
-      pc: data
-    }, $content);
-=======
     DogeApp.getTemplate("/user/show", { user: data }, $content);
->>>>>>> development
     $content.removeClass('hidden');
   });
 }
@@ -176,12 +155,8 @@ DogeApp.getEvent = function(testMarker) {
     method: "GET",
     url: DogeApp.API_URL + "/event",
     beforeSend: DogeApp.setRequestHeader
-<<<<<<< HEAD
-  }).done(function(data) {
-=======
   }).done(function(data){
     console.log(data)
->>>>>>> development
     // console.log(data);
     DogeApp.event = data;
     // var $content = $('#content');
@@ -198,21 +173,12 @@ DogeApp.getItem = function() {
     method: "GET",
     url: DogeApp.API_URL + "/item",
     beforeSend: DogeApp.setRequestHeader
-<<<<<<< HEAD
-  }).done(function(data) {
-    var $content = $('#content');
-    DogeApp.getTemplate("items/show", {
-      item: data
-    }, $content);
-    $content.removeClass('hidden');
-=======
   }).done(function(data){
     DogeApp.item = data;
     DogeApp.randItemDrop(data)
     // var $content = $('#content');
     // DogeApp.getTemplate("items/show", {item:data}, $content);
     // $content.removeClass('hidden');
->>>>>>> development
   });
 }
 
@@ -481,11 +447,6 @@ DogeApp.initEventHandlers = function() {
     disableDefaultUI: true
   });
 
-<<<<<<< HEAD
-  //
-=======
-  // 
->>>>>>> development
   DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
   DogeApp.map.setZoom(18);
   DogeApp.setBounds();
@@ -709,21 +670,12 @@ function hideContent() {
 
 //  ============= game event logic
 
-<<<<<<< HEAD
-DogeApp.customInfoWindow = function(marker, data) {
-
-  var button = data.choices[0]
-  DogeApp.getUser(button)
-  marker.addListener("click", function() {
-    if ((data.choices).length === 2) {
-=======
 DogeApp.customInfoWindow = function(marker, data){
   // Will this work if I take out the [0]?
   var button = data.choices[0]
   DogeApp.getUserData(button)
   marker.addListener("click", function(){
     if((data.choices).length === 2) {
->>>>>>> development
       $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1] + "</div><br></div>");
       DogeApp.gameLogic();
     } else {
@@ -742,17 +694,6 @@ DogeApp.customInfoWindow = function(marker, data){
 // events logic. Massive and needs to be refactored if at all possible. Sounds like future Shu work. Sucker.
 
 DogeApp.gameLogic = function(button, data) {
-<<<<<<< HEAD
-    $(".choice1").on("click", function() {
-
-    })
-  }
-  // DogeApp.customInfoWindow = function() {
-  //   DogeApp.testMarker.addEventListener("click", function(){
-  //     console.log("this works");
-  //   })
-=======
-
   var event = DogeApp.event
   if(event.event_number === 1 ) {
     $(".choice1").on("click", function() {
@@ -1090,7 +1031,6 @@ DogeApp.randItemDrop = function(data) {
 //   DogeApp.testMarker.addEventListener("click", function(){
 //     console.log("this works");
 //   })
->>>>>>> development
   // $(marker).on("click", function() {
   //   console.log("this works")
   // })
