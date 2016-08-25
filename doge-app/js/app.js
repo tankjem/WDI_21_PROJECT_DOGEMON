@@ -15,7 +15,7 @@ DogeApp.API_URL = "http://localhost:3000/api";
 
 DogeApp.setRequestHeader = function(jqXHR) {
   var token = window.localStorage.getItem("token");
-  if(!!token) return jqXHR.setRequestHeader("Authorization", "Bearer " + token);
+  if (!!token) return jqXHR.setRequestHeader("Authorization", "Bearer " + token);
 }
 
 DogeApp.getTemplate = function(template, data, $element) {
@@ -23,7 +23,7 @@ DogeApp.getTemplate = function(template, data, $element) {
   return $.get('/templates/' + template + '.html').done(function(templateHtml) {
     var html = _.template(templateHtml)(data);
 
-    if(!$element) {
+    if (!$element) {
       DogeApp.$main.html(html);
     } else {
       $element.html(html);
@@ -44,10 +44,14 @@ DogeApp.getUser = function(button) {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     DogeApp.user = data;
-    // var $content = $('#content');
-    // DogeApp.getTemplate("user/show", { user: data }, $content);
-    // $content.removeClass('hidden');
-    // DogeApp.getTemplate("/user/show", { user: data });
+    var $content = $('#content');
+    DogeApp.getTemplate("user/show", {
+      user: data
+    }, $content);
+    $content.removeClass('hidden');
+    DogeApp.getTemplate("/user/show", {
+      user: data
+    });
     DogeApp.gameLogic(button, data);
   });
 
@@ -60,7 +64,7 @@ DogeApp.deleteUser = function() {
     method: "DELETE",
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
-  }).done(DogeApp.getUser);// should be landing page instead of getUser, but it isn't done yet.
+  }).done(DogeApp.getUser); // should be landing page instead of getUser, but it isn't done yet.
 }
 
 // pcs
@@ -76,7 +80,9 @@ DogeApp.getPc = function() {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     var $content = $('#content');
-    DogeApp.getTemplate("/pc/show", { pc: data }, $content);
+    DogeApp.getTemplate("/pc/show", {
+      pc: data
+    }, $content);
     $content.removeClass('hidden');
     // DogeApp.getTemplate("/pc/show", { pc: data });
   });
@@ -110,10 +116,22 @@ DogeApp.handleForm = function() {
       url: url,
       method: method,
       data: data,
-      beforeSend: DogeApp.setRequestHeader
+      beforeSend: DogeApp.setRequestHeader,
+      success: function(data, textStatus) {
+        if (data.redirect) {
+            // data.redirect contains the string URL to redirect to
+            window.location.href = data.redirect;
+        }
+        else {
+            // data.form contains the HTML for the replacement form
+            $(".form-flex").replaceWith(data.form);
+        }
+    }
     })
     .done(function(data) {
-      if(!!data.token) {
+      var $form = $('.form-flex');
+      $form.remove();
+      if (!!data.token) {
         window.localStorage.setItem("token", data.token);
       }
 
@@ -124,7 +142,7 @@ DogeApp.handleForm = function() {
 
 DogeApp.handleFormErrors = function(jqXHR) {
   var $form = $("form");
-  for(field in jqXHR.responseJSON.errors) {
+  for (field in jqXHR.responseJSON.errors) {
     $form.find("input[name=" + field + "]").parent(".form-group").addClass("has-error");
   }
   $form.find("button").removeAttr("disabled");
@@ -138,7 +156,9 @@ DogeApp.getEditForm = function() {
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    DogeApp.getTemplate("/user/edit", { user: data });
+    DogeApp.getTemplate("/user/edit", {
+      user: data
+    });
   });
 }
 
@@ -149,7 +169,7 @@ DogeApp.getEvent = function(testMarker) {
     method: "GET",
     url: DogeApp.API_URL + "/event",
     beforeSend: DogeApp.setRequestHeader
-  }).done(function(data){
+  }).done(function(data) {
     // console.log(data);
     DogeApp.event = data;
     // var $content = $('#content');
@@ -168,9 +188,11 @@ DogeApp.getItem = function() {
     method: "GET",
     url: DogeApp.API_URL + "/item",
     beforeSend: DogeApp.setRequestHeader
-  }).done(function(data){
+  }).done(function(data) {
     var $content = $('#content');
-    DogeApp.getTemplate("items/show", {item:data}, $content);
+    DogeApp.getTemplate("items/show", {
+      item: data
+    }, $content);
     $content.removeClass('hidden');
   });
 }
@@ -188,7 +210,7 @@ DogeApp.logout = function() {
 
 DogeApp.updateUI = function() {
   var loggedIn = !!window.localStorage.getItem("token");
-  if(loggedIn) {
+  if (loggedIn) {
     $(".logged-in").removeClass("hidden");
     $(".logged-out").addClass("hidden");
   } else {
@@ -226,7 +248,223 @@ DogeApp.initEventHandlers = function() {
     },
     zoom: 14,
     minZoom: 18,
-    styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative.country","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"hue":"#76ff00"}]},{"featureType":"administrative.locality","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#7e2727"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#a5a0a0"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.fill","stylers":[{"color":"#915b5b"},{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"saturation":"-19"},{"color":"#c53d3d"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#994e4e"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#a85d5d"}]},{"featureType":"poi.attraction","elementType":"geometry.stroke","stylers":[{"color":"#e10909"}]},{"featureType":"poi.place_of_worship","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#6e2e2e"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#c42222"},{"lightness":29},{"weight":0.2},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#4f5049"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#5a5353"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#aa967c"},{"lightness":17}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#486d7a"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#af9393"}]}],
+    styles: [{
+      "featureType": "all",
+      "elementType": "labels.text.fill",
+      "stylers": [{
+        "saturation": 36
+      }, {
+        "color": "#000000"
+      }, {
+        "lightness": 40
+      }]
+    }, {
+      "featureType": "all",
+      "elementType": "labels.text.stroke",
+      "stylers": [{
+        "visibility": "on"
+      }, {
+        "color": "#000000"
+      }, {
+        "lightness": 16
+      }]
+    }, {
+      "featureType": "all",
+      "elementType": "labels.icon",
+      "stylers": [{
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "administrative",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 20
+      }]
+    }, {
+      "featureType": "administrative",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 17
+      }, {
+        "weight": 1.2
+      }]
+    }, {
+      "featureType": "administrative.country",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "visibility": "off"
+      }, {
+        "hue": "#76ff00"
+      }]
+    }, {
+      "featureType": "administrative.locality",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "visibility": "on"
+      }, {
+        "color": "#7e2727"
+      }]
+    }, {
+      "featureType": "administrative.locality",
+      "elementType": "labels.text.fill",
+      "stylers": [{
+        "visibility": "on"
+      }, {
+        "color": "#a5a0a0"
+      }]
+    }, {
+      "featureType": "administrative.neighborhood",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "#915b5b"
+      }, {
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "administrative.neighborhood",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "visibility": "off"
+      }, {
+        "saturation": "-19"
+      }, {
+        "color": "#c53d3d"
+      }]
+    }, {
+      "featureType": "landscape",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 20
+      }]
+    }, {
+      "featureType": "landscape.natural.landcover",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "visibility": "off"
+      }, {
+        "color": "#994e4e"
+      }]
+    }, {
+      "featureType": "poi",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 21
+      }]
+    }, {
+      "featureType": "poi.attraction",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "visibility": "off"
+      }, {
+        "color": "#a85d5d"
+      }]
+    }, {
+      "featureType": "poi.attraction",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "color": "#e10909"
+      }]
+    }, {
+      "featureType": "poi.place_of_worship",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "visibility": "off"
+      }, {
+        "color": "#6e2e2e"
+      }]
+    }, {
+      "featureType": "road.highway",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 17
+      }]
+    }, {
+      "featureType": "road.highway",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "color": "#c42222"
+      }, {
+        "lightness": 29
+      }, {
+        "weight": 0.2
+      }, {
+        "visibility": "on"
+      }]
+    }, {
+      "featureType": "road.highway",
+      "elementType": "labels.text.fill",
+      "stylers": [{
+        "visibility": "on"
+      }, {
+        "color": "#4f5049"
+      }]
+    }, {
+      "featureType": "road.arterial",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 18
+      }]
+    }, {
+      "featureType": "road.local",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 16
+      }]
+    }, {
+      "featureType": "road.local",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "visibility": "on"
+      }, {
+        "color": "#5a5353"
+      }]
+    }, {
+      "featureType": "transit",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#000000"
+      }, {
+        "lightness": 19
+      }]
+    }, {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#aa967c"
+      }, {
+        "lightness": 17
+      }]
+    }, {
+      "featureType": "water",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "#486d7a"
+      }, {
+        "visibility": "on"
+      }]
+    }, {
+      "featureType": "water",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "visibility": "off"
+      }, {
+        "color": "#af9393"
+      }]
+    }],
     disableDefaultUI: true
   });
 
@@ -250,7 +488,7 @@ DogeApp.getCurrentPosition = function(callback) {
       lng: position.coords.longitude,
     }
 
-    if(callback) callback();
+    if (callback) callback();
   });
 }
 
@@ -259,16 +497,15 @@ DogeApp.playerMarker = null;
 DogeApp.setPlayerMarker = function() {
   if (DogeApp.playerMarker) {
     DogeApp.playerMarker.setPosition(DogeApp.pos);
-  }
-  else {
+  } else {
     DogeApp.playerMarker = new google.maps.Marker({
       position: DogeApp.pos,
       map: DogeApp.map,
       icon: {
         url: "/images/pcmarker.png",
         scaledSize: new google.maps.Size(60, 60),
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(25,25)
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(25, 25)
       }
     });
   }
@@ -315,14 +552,17 @@ DogeApp.getRandomMarker = function() {
 
 DogeApp.setRandMarkers = function() {
   var testMarker = new google.maps.Marker({
-    position: { lat: DogeApp.pos.lat + 0.0001, lng: DogeApp.pos.lng - 0.0001},
+    position: {
+      lat: DogeApp.pos.lat + 0.0001,
+      lng: DogeApp.pos.lng - 0.0001
+    },
     map: DogeApp.map,
     icon: {
-        url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png",
-        scaledSize: new google.maps.Size(30, 30),
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(15,15)
-      },
+      url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png",
+      scaledSize: new google.maps.Size(30, 30),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(15, 15)
+    },
     animation: google.maps.Animation.BOUNCE
   });
 
@@ -338,7 +578,7 @@ DogeApp.setRandMarkers = function() {
   resourceCircleTest.bindTo('center', testMarker, 'position');
   var resourceCircleBoundsTest = resourceCircleTest.getBounds();
 
-// ============== The content div, showing events
+  // ============== The content div, showing events
 
   DogeApp.getEvent(testMarker);
 
@@ -412,8 +652,8 @@ DogeApp.setRandRedZones = function() {
     var skullIcon = {
       url: "./images/skull.png", // url
       scaledSize: new google.maps.Size(60, 60), // scaled size
-      origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(25,25) // anchor
+      origin: new google.maps.Point(0, 0), // origin
+      anchor: new google.maps.Point(25, 25) // anchor
     };
 
     var randRedMarker = new google.maps.Marker({
@@ -452,16 +692,16 @@ function hideContent() {
 
 //  ============= game event logic
 
-DogeApp.customInfoWindow = function(marker, data){
+DogeApp.customInfoWindow = function(marker, data) {
 
   var button = data.choices[0]
   DogeApp.getUser(button)
-  marker.addListener("click", function(){
-    if((data.choices).length === 2) {
+  marker.addListener("click", function() {
+    if ((data.choices).length === 2) {
       $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1] + "</div><br></div>");
       DogeApp.gameLogic();
     } else {
-      $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1]  + "</div><div class='choice3'>" + data.choices[2] + "</div><br></div>");
+      $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1] + "</div><div class='choice3'>" + data.choices[2] + "</div><br></div>");
       DogeApp.gameLogic();
     }
   });
@@ -470,24 +710,24 @@ DogeApp.customInfoWindow = function(marker, data){
 }
 
 DogeApp.gameLogic = function(button, data) {
-  $(".choice1").on("click", function() {
+    $(".choice1").on("click", function() {
 
-  })
-}
-// DogeApp.customInfoWindow = function() {
-//   DogeApp.testMarker.addEventListener("click", function(){
-//     console.log("this works");
-//   })
+    })
+  }
+  // DogeApp.customInfoWindow = function() {
+  //   DogeApp.testMarker.addEventListener("click", function(){
+  //     console.log("this works");
+  //   })
   // $(marker).on("click", function() {
   //   console.log("this works")
   // })
 
-    // if(num === 1) {
-    //   console.log("num is indeed 1")
-    //   $('#hello').click(function(){
-    //     console.log("hello");
-    //   });
-    // }
+// if(num === 1) {
+//   console.log("num is indeed 1")
+//   $('#hello').click(function(){
+//     console.log("hello");
+//   });
+// }
 // }
 
 
