@@ -22,7 +22,9 @@ html, body, main {
   top: 50%;
   transform: translate(-50%, -50%);
   margin: auto;
-  background-color: rgba(227, 205, 163, 1);
+  background: rgba(199, 121, 102, .6);
+  padding: 1.5em;``
+  color: white;
   z-index: 10;
   text-align: center;
   border-radius: 1.5em;
@@ -70,7 +72,7 @@ footer {
   margin: 0;
   width: 100%;
   height: auto;
-  background: rgba(227,205,164, 0.8);
+  background: rgba(227,205,164, 0.3);
   position: absolute;
   display: flex;
   justify-content: center;
@@ -89,6 +91,10 @@ footer {
   padding: 0;
   list-style-type: none;
   list-style-image: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
 }
 
 ul li {
@@ -137,12 +143,12 @@ ul li {
 
 .form-flex {
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(47, 52, 59);
+  background-color: rgba(47, 52, 59, .3);
   font-family: 'Raleway';
 
 }
@@ -324,5 +330,3 @@ progress#thirst-value[value]::-webkit-progress-value {
   footer span {
     font-size: 20px;
   }
-
-
