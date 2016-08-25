@@ -184,34 +184,6 @@ DogeApp.getItem = function() {
     // $content.removeClass('hidden');
   });
 }
-// DogeApp.getRegister = function() {
-//   event.preventDefault();
-
-//   return $.ajax({
-//     method: "GET",
-//     url: DogeApp.API_URL + "/user",
-//     beforeSend: DogeApp.setRequestHeader
-//   }).done(function(data) {
-//     // DogeApp.user = data;
-//     // $("body").prepend("<div id='content'>" + DogeApp.user.username + "<br><img src='" + DogeApp.user.image_url + "' width='100' height='100'><div>" + DogeApp.user.health + "</div><br></div>");
-//     var $content = $('#content');
-//     DogeApp.getTemplate("/user/show", { user: data }, $content);
-//     $content.removeClass('hidden');
-//   });
-// }
-// DogeApp.getLogin = function() {
-//   event.preventDefault();
-
-//   return $.ajax({
-//     method: "POST",
-//     url: DogeApp.API_URL + "/login",
-//     beforeSend: DogeApp.setRequestHeader
-//   }).done(function(data) {
-//     var $content = $('#content');
-//     DogeApp.getTemplate("/login", $content);
-//     $content.removeClass('hidden');
-//   });
-// }
 
 DogeApp.loadPage = function() {
   event.preventDefault();
@@ -244,8 +216,6 @@ DogeApp.initEventHandlers = function() {
   this.$content.on("submit", "form", this.handleForm);
   $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
-  // $(".menu a.register").on('click', this.getRegister);
-  // $(".menu a.login").on('click', this.getLogin);
   $(".delete-user").on('click', this.deleteUser);
   $(".menu a.logout").on('click', this.logout);
   $(".edit-user").on("click", this.getEditForm);
