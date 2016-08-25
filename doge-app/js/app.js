@@ -8,6 +8,7 @@ var DogeApp = DogeApp || {};
 DogeApp.pos;
 DogeApp.event;
 DogeApp.user;
+DogeApp.item;
 
 var eventNumber = "";
 
@@ -35,7 +36,7 @@ DogeApp.getTemplate = function(template, data, $element) {
 
 // user show
 
-DogeApp.getUser = function(button) {
+DogeApp.getUserData = function(button, damage) {
   event.preventDefault();
 
   return $.ajax({
@@ -44,6 +45,7 @@ DogeApp.getUser = function(button) {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
     DogeApp.user = data;
+<<<<<<< HEAD
     var $content = $('#content');
     DogeApp.getTemplate("user/show", {
       user: data
@@ -52,9 +54,48 @@ DogeApp.getUser = function(button) {
     DogeApp.getTemplate("/user/show", {
       user: data
     });
+=======
+>>>>>>> development
     DogeApp.gameLogic(button, data);
   });
+}
+DogeApp.updateUserData = function(user) {
+  event.preventDefault();
+  return $.ajax({
+    method: "PUT",
+    url: DogeApp.API_URL + "/user",
+    data: user,
+    beforeSend: DogeApp.setRequestHeader
+<<<<<<< HEAD
+  }).done(DogeApp.getUser); // should be landing page instead of getUser, but it isn't done yet.
+=======
+  }).done(function(data) {
+    console.log(data.health);
+  });
+>>>>>>> development
+}
 
+
+DogeApp.getUser = function() {
+  event.preventDefault();
+
+  return $.ajax({
+    method: "GET",
+    url: DogeApp.API_URL + "/user",
+    beforeSend: DogeApp.setRequestHeader
+  }).done(function(data) {
+    // DogeApp.user = data;
+    // $("body").prepend("<div id='content'>" + DogeApp.user.username + "<br><img src='" + DogeApp.user.image_url + "' width='100' height='100'><div>" + DogeApp.user.health + "</div><br></div>");
+    var $content = $('#content');
+<<<<<<< HEAD
+    DogeApp.getTemplate("/pc/show", {
+      pc: data
+    }, $content);
+=======
+    DogeApp.getTemplate("/user/show", { user: data }, $content);
+>>>>>>> development
+    $content.removeClass('hidden');
+  });
 }
 
 DogeApp.deleteUser = function() {
@@ -64,42 +105,8 @@ DogeApp.deleteUser = function() {
     method: "DELETE",
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
-  }).done(DogeApp.getUser); // should be landing page instead of getUser, but it isn't done yet.
+  }).done(DogeApp.getUser);// should be landing page instead of getUser, but it isn't done yet.
 }
-
-// pcs
-
-DogeApp.getPc = function() {
-  event.preventDefault();
-
-  var id = $(this).data('id');
-  console.log(id);
-  return $.ajax({
-    method: "GET",
-    url: DogeApp.API_URL + "/pcs/" + id,
-    beforeSend: DogeApp.setRequestHeader
-  }).done(function(data) {
-    var $content = $('#content');
-    DogeApp.getTemplate("/pc/show", {
-      pc: data
-    }, $content);
-    $content.removeClass('hidden');
-    // DogeApp.getTemplate("/pc/show", { pc: data });
-  });
-}
-
-DogeApp.deletePc = function() {
-  event.preventDefault();
-
-  var id = $(this).data('id');
-
-  return $.ajax({
-    method: "DELETE",
-    url: DogeApp.API_URL + "/pcs/" + id,
-    beforeSend: DogeApp.setRequestHeader
-  }).done(DogeApp.getUser);
-}
-
 
 // forms (edit/new)
 
@@ -169,7 +176,12 @@ DogeApp.getEvent = function(testMarker) {
     method: "GET",
     url: DogeApp.API_URL + "/event",
     beforeSend: DogeApp.setRequestHeader
+<<<<<<< HEAD
   }).done(function(data) {
+=======
+  }).done(function(data){
+    console.log(data)
+>>>>>>> development
     // console.log(data);
     DogeApp.event = data;
     // var $content = $('#content');
@@ -178,22 +190,29 @@ DogeApp.getEvent = function(testMarker) {
     DogeApp.customInfoWindow(testMarker, data);
 
   });
-
-
 }
 
 DogeApp.getItem = function() {
-  event.preventDefault();
+  // event.preventDefault();
   return $.ajax({
     method: "GET",
     url: DogeApp.API_URL + "/item",
     beforeSend: DogeApp.setRequestHeader
+<<<<<<< HEAD
   }).done(function(data) {
     var $content = $('#content');
     DogeApp.getTemplate("items/show", {
       item: data
     }, $content);
     $content.removeClass('hidden');
+=======
+  }).done(function(data){
+    DogeApp.item = data;
+    DogeApp.randItemDrop(data)
+    // var $content = $('#content');
+    // DogeApp.getTemplate("items/show", {item:data}, $content);
+    // $content.removeClass('hidden');
+>>>>>>> development
   });
 }
 
@@ -224,9 +243,7 @@ DogeApp.initEventHandlers = function() {
   this.$content = $("#content");
   this.$map = $("#map"); // oop the bloody map
   this.$main.on("submit", "form", this.handleForm);
-  this.$content.on('click', 'h4 a.delete-pc', this.deletePc);
-  this.$content.on('click', 'h4 a.pc-show', this.getPc);
-  $(".menu a").not(".logout, .profile, .edit-user, .pc-show").on('click', this.loadPage);
+  $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
   $(".menu a.logout").on('click', this.logout);
@@ -234,10 +251,6 @@ DogeApp.initEventHandlers = function() {
   this.$content.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
-
-  // if(pcDeath !== 0) {
-  //   this.deletePc;
-  // }
 
   // the map
   DogeApp.map = new google.maps.Map(document.getElementById('map'), {
@@ -468,7 +481,11 @@ DogeApp.initEventHandlers = function() {
     disableDefaultUI: true
   });
 
+<<<<<<< HEAD
   //
+=======
+  // 
+>>>>>>> development
   DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
   DogeApp.map.setZoom(18);
   DogeApp.setBounds();
@@ -692,12 +709,21 @@ function hideContent() {
 
 //  ============= game event logic
 
+<<<<<<< HEAD
 DogeApp.customInfoWindow = function(marker, data) {
 
   var button = data.choices[0]
   DogeApp.getUser(button)
   marker.addListener("click", function() {
     if ((data.choices).length === 2) {
+=======
+DogeApp.customInfoWindow = function(marker, data){
+  // Will this work if I take out the [0]?
+  var button = data.choices[0]
+  DogeApp.getUserData(button)
+  marker.addListener("click", function(){
+    if((data.choices).length === 2) {
+>>>>>>> development
       $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1] + "</div><br></div>");
       DogeApp.gameLogic();
     } else {
@@ -709,7 +735,14 @@ DogeApp.customInfoWindow = function(marker, data) {
   console.log(data, " is still the event");
 }
 
+
+
+
+
+// events logic. Massive and needs to be refactored if at all possible. Sounds like future Shu work. Sucker.
+
 DogeApp.gameLogic = function(button, data) {
+<<<<<<< HEAD
     $(".choice1").on("click", function() {
 
     })
@@ -718,6 +751,346 @@ DogeApp.gameLogic = function(button, data) {
   //   DogeApp.testMarker.addEventListener("click", function(){
   //     console.log("this works");
   //   })
+=======
+
+  var event = DogeApp.event
+  if(event.event_number === 1 ) {
+    $(".choice1").on("click", function() {
+      var successBase = 0.5;
+      var totalSuccess = successBase + 0.4 * ( (1/55) * DogeApp.user.attack );
+      var damageTaken = 0;
+      if(Math.random() < totalSuccess) {
+        if(Math.random() > 0.7 ) {
+          damageTaken = Math.ceil(10-DogeApp.user.armour + 10*Math.random());
+        }
+        console.log("You have killed the zombie. You sustained " + damageTaken + " damage.");
+      } else {
+        if(Math.random() > 0.7 ) {
+          damageTaken = Math.ceil(20-DogeApp.user.armour + 15*Math.random());
+        } else {
+          damageTaken = Math.ceil(30-DogeApp.user.armour + 20*Math.random());
+        }
+        console.log("That was idiotic. You had to flee from the zombie. Like a scardy cat. You have taken " + damageTaken + " damage.")
+      }
+      DogeApp.user.health = DogeApp.user.health - damageTaken;
+      DogeApp.user.inventory << DogeApp.randItemDrop;
+      console.log(DogeApp.user.health);
+      console.log(DogeApp.user.inventory);
+      DogeApp.getItem(DogeApp.user);
+      DogeApp.updateUserData(DogeApp.user);
+    })
+    $(".choice2").on("click", function() {
+      console.log("You nope'd out of the situation. You did not manage to obtain any loot.")
+    })
+  }
+  if(event.event_number === 2 ) {
+    $(".choice1").on("click", function() {
+      console.log("Rosie gives you a delighted smile, and hands you a rose.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("The young woman finishes up her routine and nimbly escapes the zombies. You wonder if you'll see her again...")
+    })
+    $(".choice3").on("click", function() {
+      console.log("You nope'd out of the situation. You did not manage to obtain any loot.")
+    })
+  }
+  if( event.event_number === 3) {
+    $(".choice1").on("click", function() {
+      console.log("You get an item!")
+    })
+    $(".choice2").on("click", function() {
+      console.log("You nope'd out of the situation. You did not manage to obtain any loot.")
+    })
+  }
+  if( event.event_number === 6) {
+    $(".choice1").on("click", function() {
+      var successBase = 0.5;
+      var totalSuccess = successBase + 0.4 * ( (1/55) * DogeApp.user.attack );
+      var damageTaken = 0;
+      if(Math.random() < totalSuccess) {
+        if(Math.random() > 0.85 ) {
+          damageTaken = Math.ceil(10-DogeApp.user.armour + 10*Math.random());
+        }
+        console.log("You have killed the other human. Oh the horrow! The hu-manatee!. You sustained " + damageTaken + " damage.");
+      } else {
+        if(Math.random() > 0.7 ) {
+          damageTaken = Math.ceil(20-DogeApp.user.armour + 15*Math.random());
+        } else {
+          damageTaken = Math.ceil(30-DogeApp.user.armour + 20*Math.random());
+        }
+        console.log("You had to run away. You are sad. Sadface. :(. You have taken " + damageTaken + " damage.")
+      }
+      DogeApp.user.health = DogeApp.user.health - damageTaken;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice2").on("click", function() {
+      console.log("You nope'd out of the situation. You did not manage to obtain any loot.")
+    })
+    $(".choice3").on("click", function() {
+      var chanceFound = 0.5
+      if(Math.random() > chanceFound) {
+        console.log("You successfully hide from them. You wonder if you made the right call...")
+      } else {
+        damageTaken = Math.ceil(20-DogeApp.user.armour + 15*Math.random());
+        console.log("AHHHHHHHHHHH, they found you! RUN AWAAAAAAAAAAAY. You take " + damageTaken + " damage.")
+      }
+    })
+  }
+  if( event.event_number === 7) {
+    $(".choice1").on("click", function() {
+      console.log("The zombie looks sad. A single, zombified tear falls majestically down its cheek.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("Wow. That was mean. I hope this doesn't happen in the presentation...")//neon easter egg?
+    })
+    $(".choice3").on("click", function() {
+      console.log("YOYOYOSUP! You receive an item!")
+    })
+  }
+  if( event.event_number === 8) {
+    $(".choice1").on("click", function() {
+      console.log("Kids - never do drugs. They're bad and tasty.")
+      DogeApp.user.health = DogeApp.user.health - 25;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice2").on("click", function() {
+      console.log("Kids - never do drugs. They're bad and tasty.")
+      DogeApp.user.health = DogeApp.user.health - 25;
+      console.log(DogeApp.user.health);
+
+    })
+    $(".choice3").on("click", function() {
+      console.log("Correct. But they sure are tasty though...")
+    })
+  }
+  if( event.event_number === 9) {
+    $(".choice1").on("click", function() {
+      console.log("Ahh, welcome. I see you're a fan of mass murder too. I like your style. Have an item.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("As I'm coding this, Shu always wins. WELCOME TO MY SHUTOPIA!")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log("Ignore eh? This feels just like my interaction with my parents growing up. Sadface.")
+    })
+  }
+  if( event.event_number === 10) {
+    $(".choice1").on("click", function() {
+      console.log("Slightly awkwardly, you take the armour from him. You quickly beat a retreat when he starts telling you about his bank robbing past.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("You cannot hope to beat a man with a shit ton of armour. AND a shopping trolley.")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 11) {
+    $(".choice1").on("click", function() {
+      console.log("You try to think of something to say to distract from Leeds. Your brain betrays you and you mention Leeds again. In small talk. The worst kind of talk. Apart from the one that your significant other wants to have with you. Dear god, he is still going on about Leeds...")
+    })
+    $(".choice2").on("click", function() {
+      console.log("You can see the 'North of the wall' Wildling rage as he brings the full force of his fury and indignation and Northern-ness down on you.")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 12) {
+    $(".choice1").on("click", function() {
+      console.log("KWAAAAAAAAAAAAAAAAK") // should be a wav file for surprise. Bex - looking at you...
+    })
+    $(".choice2").on("click", function() {
+      console.log("You never mess with a Kiwi's kebab...")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 13) {
+    $(".choice1").on("click", function() {
+      console.log("BEFORE YOU GO GO")
+    })
+    $(".choice2").on("click", function() {
+      console.log("That's a bad mistake. You should never take Json's cocktails...")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 14) {
+    $(".choice1").on("click", function() {
+      console.log("No. You must learn to help yourself.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("He shows you how to fish. A little while later, you manage to fish out this item!")
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 15) {
+    $(".choice1").on("click", function() {
+      console.log("Something something Doge, something something meme. Giphy.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("Hey - nice style. Have an item!")
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 16) {
+    $(".choice1").on("click", function() {
+      console.log("He nods and throws you an item!")
+    })
+    $(".choice2").on("click", function() {
+      console.log("Oh noes. You woke the dragon. You have no defence against his onslaught")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 17) {
+    $(".choice1").on("click", function() {
+      console.log("Hey, how's it going? Have an item.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("My chair? It's mine. DON'T TRY TO STEAL IT!")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 18) {
+    $(".choice1").on("click", function() {
+      console.log("Thank you for the advice - here, have this item.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("She runs away, screaming 'Stranger danger! Stranger dangerrrrrrrrr!'")
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 19) {
+    $(".choice1").on("click", function() {
+      console.log("Nice punt. Have an item")
+    })
+    $(".choice2").on("click", function() {
+      console.log("Hey - no touching!")
+      DogeApp.user.health = DogeApp.user.health - 9999999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 20) {
+    $(".choice1").on("click", function() {
+      console.log("Hah, just joking! You run away.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("Well, why not? You're already here. After you drink the coffee, you bolt.")
+      DogeApp.user.health = DogeApp.user.health + 10;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log("You back away slowly, then run when you have the chance.")
+    })
+  }
+  if( event.event_number === 21) {
+    $(".choice1").on("click", function() {
+      console.log("You need to be wary. Have this item to shield you against them")
+    })
+    $(".choice2").on("click", function() {
+      console.log("Ahhhhh! Dieeeee!")
+      DogeApp.user.health = DogeApp.user.health - 99999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 22) {
+    $(".choice1").on("click", function() {
+      console.log("He doesn't say a word.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("He doesn't say a word. But he beats you to death.")
+      DogeApp.user.health = DogeApp.user.health - 99999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log("He doesn't say a word.")
+    })
+  }
+  if( event.event_number === 23) {
+    $(".choice1").on("click", function() {
+      console.log("Hey, you're alright. Have this item.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("Ignore my invitation, eh? Die!")
+      DogeApp.user.health = DogeApp.user.health - 99999;
+      console.log(DogeApp.user.health);
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 24) {
+    $(".choice1").on("click", function() {
+      console.log("Oui. Baguette. Bibliotheque. Bonjour. Other French words. Have an item.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("This man is mesmerizing. You watch his sexy French dance of death.")
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  if( event.event_number === 25) {
+    $(".choice1").on("click", function() {
+      console.log("Hey, you're alright. Have this item.")
+    })
+    $(".choice2").on("click", function() {
+      console.log("He continues to chop off heads. You're not sure how you feel about this situation.")
+    })
+    $(".choice3").on("click", function() {
+      console.log(":(")
+    })
+  }
+  // missing Ed, Toni
+}
+
+
+DogeApp.randItemDrop = function(data) {
+  console.log(data);
+}
+
+
+
+
+
+// DogeApp.customInfoWindow = function() {
+//   DogeApp.testMarker.addEventListener("click", function(){
+//     console.log("this works");
+//   })
+>>>>>>> development
   // $(marker).on("click", function() {
   //   console.log("this works")
   // })

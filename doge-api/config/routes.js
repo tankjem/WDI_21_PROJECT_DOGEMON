@@ -10,7 +10,6 @@ var authController = require('../controllers/authentications');
 var userController = require('../controllers/user');
 var itemsController = require('../controllers/items');
 var eventsController = require('../controllers/events');
-var pcsController = require('../controllers/pcs');
 
 // middleware to check for token
 function secureRoute(req, res, next) {
@@ -34,14 +33,7 @@ router.route('/user')
   .get(userController.show)
   .put(userController.update)
   .patch(userController.update);
-// PC  - restful routes apart from index
-router.route('/pcs')
-  .post(secureRoute, pcsController.create);
 
-router.route('/pcs/:id')
-  .all(secureRoute)
-  .get(pcsController.show)
-  .delete(pcsController.delete);
 // items - only show
 
 router.get('/item', secureRoute, itemsController.show)

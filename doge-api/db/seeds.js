@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var bluebird = require('bluebird');
 mongoose.Promise = bluebird;
 var User = require('../models/user');
-var Pc = require('../models/pc');
 var Item = require('../models/item');
 var Event = require('../models/event');
 
@@ -10,7 +9,6 @@ var databaseUri = require('../config/db')('development');
 mongoose.connect(databaseUri);
 
 User.collection.drop();
-Pc.collection.drop();
 Item.collection.drop();
 Event.collection.drop();
 
@@ -307,16 +305,6 @@ Item.create([{
     // WARNING WARNING WARNING
 }]).then(function(items) {
   console.log(items);
-  return Pc.create({
-  image_url: "https://i.ytimg.com/vi/hEJnMQG9ev8/maxresdefault.jpg",
-  health: 69,
-  inventory: [items[6], items[7], items[8], items[9], items[10], items[5]],
-  food: 37,
-  water: 45,
-  armour: 10
-  })
-}).then(function(pc1) {
-  console.log(pc1);
   return User.create({
     username: "Test",
     email: "test@test.com",
