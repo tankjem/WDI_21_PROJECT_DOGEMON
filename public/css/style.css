@@ -38,6 +38,21 @@ html, body, main {
   font-size: 150%;
   align-self: flex-end;
 }
+#content-event div:first-of-type{
+  padding: 1.5em;
+  font-size: 1.5em;
+  text-align: left;
+  line-height: 2em;
+  width: 75%;
+}
+#content-event img{
+  padding-top: 3em;
+}
+#content-event h3{
+ font-size: 2.5em;
+ border-bottom: 1px solid black;
+ padding-bottom: .5em;
+}
 .choices-container{
   display: flex;
   width: 100%;
@@ -49,11 +64,21 @@ html, body, main {
 
 .choice1, .choice2, .choice3 {
   border: 1px solid black;
-  font-size: 20px;
-  margin: 1.2em;
+  font-size: 1em;
+  margin: .5em;
   padding: .5em;
+  transition: .5s ease;
+  cursor: pointer;
+  text-align: center;
 }
-
+.choice1:hover, .choice2:hover, .choice3:hover {
+  background: rgb(199, 121, 102);
+}
+.choice-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 #hud {
   position: absolute;
   top: 1em;
