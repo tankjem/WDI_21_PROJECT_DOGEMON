@@ -759,18 +759,18 @@ DogeApp.gameLogic = function(button, data) {
   }
   if(event.event_number === 2 ) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Rosie gives you a delighted smile, and hands you a rose.";
+      document.getElementById('hud').innerHTML = "Rosie gives you a delighted smile, and hands you a rose. It smells funny.";
     })
     $(".choice2").on("click", function() {
      document.getElementById('hud').innerHTML = "The young woman finishes up her routine and nimbly escapes the zombies. You wonder if you'll see her again...";
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot."
+      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot :("
     })
   }
   if( event.event_number === 3) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "You get an item!";
+      document.getElementById('hud').innerHTML = "You get an item! Huzzah!";
     })
     $(".choice2").on("click", function() {
       document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot."
@@ -785,14 +785,14 @@ DogeApp.gameLogic = function(button, data) {
         if(Math.random() > 0.85 ) {
           damageTaken = Math.ceil(10-DogeApp.user.armour + 10*Math.random());
         }
-        document.getElementById('hud').innerHTML = "You have killed the other human. Oh the horrow! The hu-manatee!. You sustained " + damageTaken + " damage.";
+        document.getElementById('hud').innerHTML = "You have killed the other human. Oh the horror! The hu-manatee!. You sustained " + damageTaken + " damage.";
       } else {
         if(Math.random() > 0.7 ) {
           damageTaken = Math.ceil(20-DogeApp.user.armour + 15*Math.random());
         } else {
           damageTaken = Math.ceil(30-DogeApp.user.armour + 20*Math.random());
         }
-        document.getElementById('hud').innerHTML = "You had to run away. You are sad. Sadface. :(. You have taken " + damageTaken + " damage.";
+        document.getElementById('hud').innerHTML = "You had to run away. You are sad. :( You have taken " + damageTaken + " damage.";
       }
       DogeApp.user.health = DogeApp.user.health - damageTaken;
       console.log(DogeApp.user.health);
@@ -818,7 +818,7 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = "Wow. That was mean. I hope this doesn't happen in the presentation...";//neon easter egg?
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "YOYOYOSUP! You receive an item!";
+      document.getElementById('hud').innerHTML = "YOYOYOSUP! You receive an item! Yea Boi!";
     })
   }
   if( event.event_number === 8) {
@@ -842,12 +842,12 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = "Ahh, welcome. I see you're a fan of mass murder too. I like your style. Have an item.";
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "As I'm coding this, Shu always wins. WELCOME TO MY SHUTOPIA!";
+      document.getElementById('hud').innerHTML = "As I'm coding this, Shu always wins. WELCOME TO MY SHUTOPIA! MWAH HAHAHAHA!";
       DogeApp.user.health = DogeApp.user.health - 9999999;
       console.log(DogeApp.user.health);
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "Ignore eh? This feels just like my interaction with my parents growing up. Sadface.";
+      document.getElementById('hud').innerHTML = "Ignore eh? This feels just like my interaction with my parents growing up. :(";
     })
   }
   if( event.event_number === 10) {
@@ -865,7 +865,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 11) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "You try to think of something to say to distract from Leeds. Your brain betrays you and you mention Leeds again. In small talk. The worst kind of talk. Apart from the one that your significant other wants to have with you. Dear god, he is still going on about Leeds...";
+      document.getElementById('hud').innerHTML = "You try to think of something to say to distract from Leeds. Your brain betrays you and you mention Leeds again. In small talk. The worst kind of talk. Apart from the one that your significant other wants to have with you. Dear god, he is still going on about Leeds...Eventually you receive an item";
     })
     $(".choice2").on("click", function() {
       document.getElementById('hud').innerHTML = "You can see the 'North of the wall' Wildling rage as he brings the full force of his fury and indignation and Northern-ness down on you.";
@@ -878,7 +878,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 12) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "KWAAAAAAAAAAAAAAAAK"; // should be a wav file for surprise. Bex - looking at you...
+      document.getElementById('hud').innerHTML = "KWAAAAAAAAAAAAAAAAK! He give you the kebab!"; // should be a wav file for surprise. Bex - looking at you...
     })
     $(".choice2").on("click", function() {
       document.getElementById('hud').innerHTML = "You never mess with a Kiwi's kebab...";
@@ -915,7 +915,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 15) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Something something Doge, something something meme. Giphy.";
+      document.getElementById('hud').innerHTML = "Something something Doge, something something meme. Giphy. Dank.";
     })
     $(".choice2").on("click", function() {
       document.getElementById('hud').innerHTML = "Hey - nice style. Have an item!";
@@ -926,10 +926,10 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 16) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "He nods and throws you an item!";
+      document.getElementById('hud').innerHTML = "He nods and throws you an item! Huzzah!";
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Oh noes. You woke the dragon. You have no defence against his onslaught";
+      document.getElementById('hud').innerHTML = "Oh nooooooooes. You woke the dragon. You have no defence against his onslaught";
       DogeApp.user.health = DogeApp.user.health - 9999999;
       console.log(DogeApp.user.health);
     })
@@ -1015,10 +1015,10 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 23) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey, you're alright. Have this item.";
+      document.getElementById('hud').innerHTML = "I like the cut of you jib. Have this item.";
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Ignore my invitation, eh? Die!";
+      document.getElementById('hud').innerHTML = "Ignore my invitation, eh? Now all your bases belong to me!";
       DogeApp.user.health = DogeApp.user.health - 99999;
       console.log(DogeApp.user.health);
     })
@@ -1028,10 +1028,10 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 24) {
     $(".choice1").on("click", function() {
-     document.getElementById('hud').innerHTML = "Oui. Baguette. Bibliotheque. Bonjour. Other French words. Have an item.";
+     document.getElementById('hud').innerHTML = "Oui. Baguette. Bibliotheque. Bonjour. Other French words. Have an item. Its Cheese...";
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "This man is mesmerizing. You watch his sexy French dance of death.";
+      document.getElementById('hud').innerHTML = "This man is mesmerizing. You watch his sexy French dance of death. Never have you seen someone wield a baguette like that";
     })
     $(".choice3").on("click", function() {
       document.getElementById('hud').innerHTML = ":(";
@@ -1039,10 +1039,10 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 25) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey, you're alright. Have this item.";
+      document.getElementById('hud').innerHTML = "Hey, you're not too bad. Have this item.";
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "He continues to chop off heads. You're not sure how you feel about this situation.";
+      document.getElementById('hud').innerHTML = "He continues to chop off heads. You're not sure how you feel about this situation. You shrug and head off";
     })
     $(".choice3").on("click", function() {
       document.getElementById('hud').innerHTML = ":(";
@@ -1050,7 +1050,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 26) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "The leaning tower of pasta falls on you and you just escape with your life";
+      document.getElementById('hud').innerHTML = "The leaning tower of pasta falls on you and you just about escape with your life";
     })
     $(".choice2").on("click", function() {
       document.getElementById('hud').innerHTML = "A man called Antonio gives you a bag of pasta.";
