@@ -160,7 +160,6 @@ DogeApp.getEvent = function(testMarker) {
 
   });
 
-
 }
 
 DogeApp.getItem = function() {
@@ -201,7 +200,7 @@ DogeApp.updateUI = function() {
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
-  this.$map = $("#map"); // oop the bloody map
+  this.$map = $("#map"); 
   this.$main.on("submit", "form", this.handleForm);
   this.$content.on('click', 'h4 a.delete-pc', this.deletePc);
   this.$content.on('click', 'h4 a.pc-show', this.getPc);
@@ -218,7 +217,9 @@ DogeApp.initEventHandlers = function() {
   //   this.deletePc;
   // }
 
-  // the map
+            // THE MAP
+
+
   DogeApp.map = new google.maps.Map(document.getElementById('map'), {
 
     center: {
@@ -363,43 +364,43 @@ DogeApp.setRandMarkers = function() {
   };
 
 
-  // for (var i = 0; i < 150; i++) {
+  for (var i = 0; i < 150; i++) {
 
-  //   var randMarker = new google.maps.Marker({
-  //     position: DogeApp.getRandomMarker(),
-  //     map: DogeApp.map,
-  //     icon: {
-  //       url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
-  //       scaledSize: new google.maps.Size(30, 30), // scaled size
-  //       origin: new google.maps.Point(0,0), // origin
-  //       anchor: new google.maps.Point(15,15) // anchor
-  //     }
-  //   });
+    var randMarker = new google.maps.Marker({
+      position: DogeApp.getRandomMarker(),
+      map: DogeApp.map,
+      icon: {
+        url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
+        scaledSize: new google.maps.Size(30, 30), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(15,15) // anchor
+      }
+    });
 
-  //   // Resource radius
-  //   var resourceCircle = new google.maps.Circle({
-  //     map: DogeApp.map,
-  //     radius: 20,
-  //     strokeColor: '#ffffff',
-  //     strokeOpacity: 0.2,
-  //     fillColor: '#ffffff',
-  //     fillOpacity: 0.3,
-  //   });
+    // Resource radius
+    var resourceCircle = new google.maps.Circle({
+      map: DogeApp.map,
+      radius: 20,
+      strokeColor: '#ffffff',
+      strokeOpacity: 0.2,
+      fillColor: '#ffffff',
+      fillOpacity: 0.3,
+    });
 
-  //   resourceCircle.bindTo('center', randMarker, 'position');
+    resourceCircle.bindTo('center', randMarker, 'position');
 
-  //   var resourceCircleBounds = resourceCircle.getBounds();
+    var resourceCircleBounds = resourceCircle.getBounds();
 
-  // };
+  };
 
-  // randMarker.addListener("click", function() {
-  //   if (resourceCircleBounds.contains(DogeApp.pos)) {
-  //     randMarker.setMap(null);
-  //     resourceCircle.setMap(null);
+  randMarker.addListener("click", function() {
+    if (resourceCircleBounds.contains(DogeApp.pos)) {
+      randMarker.setMap(null);
+      resourceCircle.setMap(null);
 
-  //     DogeApp.customInfoWindow();
-  //   } 
-  // });
+      DogeApp.customInfoWindow();
+    } 
+  });
 }
 
 
@@ -505,84 +506,12 @@ DogeApp.gameLogic = function(button, data) {
 }
 
 
-// DogeApp.customInfoWindow = function() {
-//   DogeApp.testMarker.addEventListener("click", function(){
-//     console.log("this works");
-//   })
-  // $(marker).on("click", function() {
-  //   console.log("this works")
-  // })
-
-    // if(num === 1) {
-    //   console.log("num is indeed 1")
-    //   $('#hello').click(function(){
-    //     console.log("hello");
-    //   });
-    // }
+// function buttonChoices (){
+//   var btns = document.getElementsByClassName("choice-click");
+//   for (var i=0;i<btns.length;i++){
+//     addEvent(btns[i], 'click', console.log("hello");
+//   }
 // }
-
-
-
-// // function buttonChoices (){
-// //   var btns = document.getElementsByClassName("choice-click");
-// //   for (var i=0;i<btns.length;i++){
-// //     addEvent(btns[i], 'click', console.log("hello");
-// //   }
-// // }
-
-//   // Try HTML5 geolocation. << Ed's code
-
-
-// //   function currentPosition() {
-// //     var infoWindow = new google.maps.InfoWindow({
-// //       map: map
-// //     });
-
-// //   if (navigator.geolocation) {
-// //     navigator.geolocation.getCurrentPosition(function(position) {
-// //       var pos = {
-// //         lat: position.coords.latitude,
-// //         lng: position.coords.longitude
-// //       };
-
-// //       infoWindow.setPosition(pos);
-// //       infoWindow.setContent('Location found.');
-// //       map.setCenter(pos);
-// //     }, function() {
-// //       handleLocationError(true, infoWindow, map.getCenter());
-// //     });
-// //   } else {
-// //     // Browser doesn't support Geolocation
-// //     handleLocationError(false, infoWindow, map.getCenter());
-// //   }
-// // }
-
-// // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-// //   infoWindow.setPosition(pos);
-// //   infoWindow.setContent(browserHasGeolocation ?
-// //     'Error: The Geolocation service failed.' :
-// //     'Error: Your browser doesn\'t support geolocation.');
-// // };
-
-
-// // currentPosition();
-
-
-// // added inventory for loop
-
-// // DogeApp.inventoryCreation = function(){
-// //   for (var i = 0; i < 30; i++) {
-
-// //     var inventory = document.createElement('div');
-// //     inventory.setAttribute("class","items");
-// //   }
-// // }
-
-
-
-// // game battle logic
-
-
 
 
 

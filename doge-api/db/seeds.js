@@ -360,8 +360,8 @@ Item.create([{
   //   // WARNING WARNING WARNING
   //   },{
   //   // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-  //   name: "Ballers",
-  //   description: "You see a zombie lurches towards you, he seems to be saying something. You distinctly make out, Baaaaallllllerrrs! It shuffles past and offers a fist bump",
+  //   name: "Baller",
+  //   description: "You see a zombie lurches towards you, he seems to be saying something. You distinctly make out, Baaaaallllllerrr! It shuffles past and offers a fist bump",
   //   image_url: "/events/baller_icon.png",
   //   event_type: "random_encounter",
   //   choices: ["Leave it hanging", "Chop off Zombie's hand", "Bump back"],
