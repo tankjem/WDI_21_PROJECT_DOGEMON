@@ -68,8 +68,6 @@ DogeApp.getUser = function() {
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    // DogeApp.user = data;
-    // $("body").prepend("<div id='content'>" + DogeApp.user.username + "<br><img src='" + DogeApp.user.image_url + "' width='100' height='100'><div>" + DogeApp.user.health + "</div><br></div>");
     var $content = $('#content');
     DogeApp.getTemplate("/user/show", { user: data }, $content);
     $content.removeClass('hidden');
@@ -197,6 +195,7 @@ DogeApp.updateUI = function() {
   }
 }
 
+
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
@@ -210,6 +209,7 @@ DogeApp.initEventHandlers = function() {
   this.$content.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
+
 
   // if(pcDeath !== 0) {
   //   this.deletePc;
@@ -568,12 +568,6 @@ DogeApp.setRandMarkers = function() {
       resourceCircleTest.setMap(null);
     }
   });
-  $('button').on('click', hideContent);
-
-
-  function hideContent() {
-    $('#content').addClass('hidden');
-  };
 
   if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
     console.log("A resource is close by.");
@@ -709,12 +703,6 @@ DogeApp.customInfoWindow = function(marker, data){
   });
 }
 
-
-
-$('#content #close').on('click', function() {
-  var $content = $('#content');
-  $content.addClass('hidden');
-})
 
 // events logic. Massive and needs to be refactored if at all possible. Sounds like future Shu work. Sucker.
 
@@ -1048,7 +1036,6 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = ":(";
     })
   }
-  // missing Ed, Toni
 
 
   //  ===== Closing buttons
@@ -1062,12 +1049,6 @@ DogeApp.gameLogic = function(button, data) {
   })
 
 }
-// function buttonChoices (){
-//   var btns = document.getElementsByClassName("choice-click");
-//   for (var i=0;i<btns.length;i++){
-//     addEvent(btns[i], 'click', console.log("hello");
-//   }
-// }
 
 
 
