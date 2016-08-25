@@ -10,6 +10,9 @@
     "postinstall": "bower install",
     "start": "node app"
   },
+  "engines": {
+    "node": "6.2.2"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
