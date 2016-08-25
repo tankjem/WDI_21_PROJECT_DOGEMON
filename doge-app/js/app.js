@@ -1,3 +1,4 @@
+
 // overwriting prototype stuff. Sorry not sorry
 google.maps.Circle.prototype.contains = function(latLng) {
   return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
@@ -157,8 +158,7 @@ DogeApp.getEvent = function(testMarker) {
     url: DogeApp.API_URL + "/event",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data){
-    console.log(data)
-    // console.log(data);
+    console.log(data);
     DogeApp.event = data;
     // var $content = $('#content');
     // DogeApp.getTemplate("events/show", { event: data }, $content);
@@ -208,8 +208,8 @@ DogeApp.updateUI = function() {
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
-  this.$map = $("#map"); // oop the bloody map
-  this.$content.on("submit", "form", this.handleForm);
+  this.$map = $("#map");
+  this.$main.on("submit", "form", this.handleForm);
   $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
   $(".delete-user").on('click', this.deleteUser);
@@ -219,7 +219,12 @@ DogeApp.initEventHandlers = function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
 
-  // the map
+  // if(pcDeath !== 0) {
+  //   this.deletePc;
+  // }
+
+            // === THE MAP
+
   DogeApp.map = new google.maps.Map(document.getElementById('map'), {
 
     center: {
@@ -561,14 +566,12 @@ DogeApp.setRandMarkers = function() {
 
   DogeApp.getEvent(testMarker);
 
-
-  // testMarker.addListener("click", function() {
-  //   if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
-  //     testMarker.setMap(null);
-  //     resourceCircleTest.setMap(null);
-  //   }
-  // });
-
+  testMarker.addListener("click", function() {
+    if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
+      testMarker.setMap(null);
+      resourceCircleTest.setMap(null);
+    }
+  });
   $('button').on('click', hideContent);
 
 
@@ -581,43 +584,43 @@ DogeApp.setRandMarkers = function() {
   };
 
 
-  // for (var i = 0; i < 150; i++) {
+  for (var i = 0; i < 175; i++) {
 
-  //   var randMarker = new google.maps.Marker({
-  //     position: DogeApp.getRandomMarker(),
-  //     map: DogeApp.map,
-  //     icon: {
-  //       url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
-  //       scaledSize: new google.maps.Size(30, 30), // scaled size
-  //       origin: new google.maps.Point(0,0), // origin
-  //       anchor: new google.maps.Point(15,15) // anchor
-  //     }
-  //   });
+    var randMarker = new google.maps.Marker({
+      position: DogeApp.getRandomMarker(),
+      map: DogeApp.map,
+      icon: {
+        url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
+        scaledSize: new google.maps.Size(30, 30), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(15,15) // anchor
+      }
+    });
 
-  //   // Resource radius
-  //   var resourceCircle = new google.maps.Circle({
-  //     map: DogeApp.map,
-  //     radius: 20,
-  //     strokeColor: '#ffffff',
-  //     strokeOpacity: 0.2,
-  //     fillColor: '#ffffff',
-  //     fillOpacity: 0.3,
-  //   });
+    // Resource radius
+    var resourceCircle = new google.maps.Circle({
+      map: DogeApp.map,
+      radius: 25,
+      strokeColor: '#ffffff',
+      strokeOpacity: 0.2,
+      fillColor: '#ffffff',
+      fillOpacity: 0.3,
+    });
 
-  //   resourceCircle.bindTo('center', randMarker, 'position');
+    resourceCircle.bindTo('center', randMarker, 'position');
 
-  //   var resourceCircleBounds = resourceCircle.getBounds();
+    var resourceCircleBounds = resourceCircle.getBounds();
 
-  // };
+  };
 
-  // randMarker.addListener("click", function() {
-  //   if (resourceCircleBounds.contains(DogeApp.pos)) {
-  //     randMarker.setMap(null);
-  //     resourceCircle.setMap(null);
+  randMarker.addListener("click", function() {
+    if (resourceCircleBounds.contains(DogeApp.pos)) {
+      randMarker.setMap(null);
+      resourceCircle.setMap(null);
 
-  //     DogeApp.customInfoWindow();
-  //   }
-  // });
+      DogeApp.customInfoWindow();
+    }
+  });
 }
 
 
@@ -677,11 +680,35 @@ DogeApp.customInfoWindow = function(marker, data){
   DogeApp.getUserData(button)
   marker.addListener("click", function(){
     if((data.choices).length === 2) {
-      $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1] + "</div><br></div>");
+      $("body").prepend("<div id='content'>"
+        + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br><br>'
+        + data.name
+        + "<br><img src='"
+        + data.image_url
+        + "' width='100' height='100'><div>"
+        + data.description
+        + "</div><div class='choice1'>"
+        + data.choices[0]
+        + "</div><div class='choice2'>"
+        + data.choices[1]
+        + "</div><br></div>");
       DogeApp.gameLogic();
     } else {
-      $("body").prepend("<div id='content'>" + data.name + "<br><img src='" + data.image_url + "' width='100' height='100'><div>" + data.description + "</div><div class='choice1'>" + data.choices[0] + "</div><div class='choice2'>" + data.choices[1] + "</div><div class='choice3'>" + data.choices[2] + "</div><br></div>");
-      DogeApp.gameLogic();
+      $("body").prepend("<div id='content'>"
+        + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br><br>'
+        + data.name
+        + "<br><img src='"
+        + data.image_url
+        + "' width='100' height='100'><div>"
+        + data.description
+        + "</div><div class='choice1'>"
+        + data.choices[0]
+        + "</div><div class='choice2'>"
+        + data.choices[1]
+        + "</div><div class='choice3'>"
+        + data.choices[2]
+        + "</div><br></div>");
+        DogeApp.gameLogic();
     }
   });
 
@@ -695,7 +722,12 @@ DogeApp.customInfoWindow = function(marker, data){
 // events logic. Massive and needs to be refactored if at all possible. Sounds like future Shu work. Sucker.
 
 DogeApp.gameLogic = function(button, data) {
+  $(".choice1").on("click", function() {
+
+  })
   var event = DogeApp.event
+  var hud = document.getElementById('hud');
+
   if(event.event_number === 1 ) {
     $(".choice1").on("click", function() {
       var successBase = 0.5;
@@ -705,14 +737,15 @@ DogeApp.gameLogic = function(button, data) {
         if(Math.random() > 0.7 ) {
           damageTaken = Math.ceil(10-DogeApp.user.armour + 10*Math.random());
         }
-        console.log("You have killed the zombie. You sustained " + damageTaken + " damage.");
+      document.getElementById('hud').innerHTML ="You have killed the zombie. You sustained " + damageTaken + " damage.";
       } else {
         if(Math.random() > 0.7 ) {
           damageTaken = Math.ceil(20-DogeApp.user.armour + 15*Math.random());
         } else {
           damageTaken = Math.ceil(30-DogeApp.user.armour + 20*Math.random());
         }
-        console.log("That was idiotic. You had to flee from the zombie. Like a scardy cat. You have taken " + damageTaken + " damage.")
+
+        document.getElementById('hud').innerHTML = "That was idiotic. You had to flee from the zombie. Like a scardy cat. You have taken " + damageTaken + " damage.";
       }
       DogeApp.user.health = DogeApp.user.health - damageTaken;
       DogeApp.user.inventory << DogeApp.randItemDrop;
@@ -722,7 +755,8 @@ DogeApp.gameLogic = function(button, data) {
       DogeApp.updateUserData(DogeApp.user);
     })
     $(".choice2").on("click", function() {
-      console.log("You nope'd out of the situation. You did not manage to obtain any loot.")
+      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot.";
+
     })
   }
   if(event.event_number === 2 ) {
@@ -1017,95 +1051,27 @@ DogeApp.gameLogic = function(button, data) {
     })
   }
   // missing Ed, Toni
+
+  $('#content #close').on('click', function() {
+    $('#content').addClass('hidden');
+  })
+
+  $('.choice1, .choice2, .choice3').on('click', function() {
+    $('#content').addClass('hidden');
+  })
+
 }
 
 
 DogeApp.randItemDrop = function(data) {
   console.log(data);
 }
-
-
-
-
-
-// DogeApp.customInfoWindow = function() {
-//   DogeApp.testMarker.addEventListener("click", function(){
-//     console.log("this works");
-//   })
-  // $(marker).on("click", function() {
-  //   console.log("this works")
-  // })
-
-// if(num === 1) {
-//   console.log("num is indeed 1")
-//   $('#hello').click(function(){
-//     console.log("hello");
-//   });
+// function buttonChoices (){
+//   var btns = document.getElementsByClassName("choice-click");
+//   for (var i=0;i<btns.length;i++){
+//     addEvent(btns[i], 'click', console.log("hello");
+//   }
 // }
-// }
-
-
-
-// // function buttonChoices (){
-// //   var btns = document.getElementsByClassName("choice-click");
-// //   for (var i=0;i<btns.length;i++){
-// //     addEvent(btns[i], 'click', console.log("hello");
-// //   }
-// // }
-
-//   // Try HTML5 geolocation. << Ed's code
-
-
-// //   function currentPosition() {
-// //     var infoWindow = new google.maps.InfoWindow({
-// //       map: map
-// //     });
-
-// //   if (navigator.geolocation) {
-// //     navigator.geolocation.getCurrentPosition(function(position) {
-// //       var pos = {
-// //         lat: position.coords.latitude,
-// //         lng: position.coords.longitude
-// //       };
-
-// //       infoWindow.setPosition(pos);
-// //       infoWindow.setContent('Location found.');
-// //       map.setCenter(pos);
-// //     }, function() {
-// //       handleLocationError(true, infoWindow, map.getCenter());
-// //     });
-// //   } else {
-// //     // Browser doesn't support Geolocation
-// //     handleLocationError(false, infoWindow, map.getCenter());
-// //   }
-// // }
-
-// // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-// //   infoWindow.setPosition(pos);
-// //   infoWindow.setContent(browserHasGeolocation ?
-// //     'Error: The Geolocation service failed.' :
-// //     'Error: Your browser doesn\'t support geolocation.');
-// // };
-
-
-// // currentPosition();
-
-
-// // added inventory for loop
-
-// // DogeApp.inventoryCreation = function(){
-// //   for (var i = 0; i < 30; i++) {
-
-// //     var inventory = document.createElement('div');
-// //     inventory.setAttribute("class","items");
-// //   }
-// // }
-
-
-
-// // game battle logic
-
-
 
 
 
