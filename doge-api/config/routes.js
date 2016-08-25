@@ -44,7 +44,7 @@ router.route('/pcs/:id')
   .delete(pcsController.delete);
 // items - only show
 
-router.get('/items', secureRoute, itemsController.show)
+router.get('/item', secureRoute, itemsController.show)
 
 // event - only show
 router.get('/event', secureRoute, eventsController.show)
