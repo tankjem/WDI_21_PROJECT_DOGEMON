@@ -1,5 +1,47 @@
 <h2><%= user.username %></h2>
 <h3><%= user.email %></h3>
-<h4><a href="#" data-id="<%= user.created_pc %>" class="pc-show">Your PC</a></h4>
+
+<div class="flex-container">
+  <div class="pc-info">
+    <h1>Character</h1>
+    <div class="left">
+      <img src="<%=user.image_url %>" height="150">
+    </div>
+    <p>Health:</p>
+    <progress id="health-value" value="<%= user.health %>" max="100">
+      <%= user.health %>
+    </progress>
+    <p>Armour:</p>
+    <progress id="armour-value" value="<%= user.armour %>" max="100">
+      <%= user.armour %>
+    </progress>
+    <p>Food:</p>
+    <progress id="food-value" value="<%= user.food %>" max="100">
+      <%= user.food %>
+    </progress>
+    <p>Water:</p>
+    <progress id="water-value" value="<%= user.water %>" max="100">
+      <%= user.water %>
+    </progress>
+  </div>
+  <div class="inventory">
+    <div class="inventory-title">
+      <a href="#" class="user-inventory"><h4>Inventory</h4></a>
+    </div>
+      <% user.inventory.forEach(function(item) { %>
+    <div class="list-group">
+      <img src="http://localhost:3000<%= item.image_url %>">
+      <h5><%= item.name %></h5>
+      <!-- <h5><%= item.description %></h5> -->
+      <h5><%= item.type %></h5>
+    </div>
+      <% }) %>
+   </div>
+  </div>
+</div>
+
+
+
+
 
 <a href="#" data-id="<%= user._id%>" class="delete-user btn btn-danger logged-in">Delete</a>
