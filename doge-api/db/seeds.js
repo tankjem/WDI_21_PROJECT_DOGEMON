@@ -517,7 +517,7 @@ Item.create([{
   //   choices: ["Help him", "Watch", "Ignore"],
   //   event_number:25
   //   // WARNING WARNING WARNING
-  // }]);
+  }]);
 }).then(function(events) {
   console.log(events);
 }).catch(function(err) {

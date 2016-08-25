@@ -20,16 +20,13 @@ DogeApp.setRequestHeader = function(jqXHR) {
 }
 
 DogeApp.getTemplate = function(template, data, $element) {
-
   return $.get('/templates/' + template + '.html').done(function(templateHtml) {
     var html = _.template(templateHtml)(data);
-
     if(!$element) {
       DogeApp.$main.html(html);
     } else {
       $element.html(html);
     }
-
     DogeApp.updateUI();
   });
 }
