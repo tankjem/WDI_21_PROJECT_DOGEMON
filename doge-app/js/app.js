@@ -335,12 +335,12 @@ DogeApp.setRandMarkers = function() {
   DogeApp.getEvent(testMarker);
 
 
-  // testMarker.addListener("click", function() {
-  //   if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
-  //     testMarker.setMap(null);
-  //     resourceCircleTest.setMap(null);
-  //   } 
-  // });
+  testMarker.addListener("click", function() {
+    if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
+      testMarker.setMap(null);
+      resourceCircleTest.setMap(null);
+    } 
+  });
 
   $('button').on('click', hideContent);
 
