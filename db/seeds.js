@@ -456,7 +456,7 @@ Item.create([{
     // WARNING WARNING WARNING
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Queen Kaitlyn",
+    name: "Lady Kaitlyn",
     description: "You stumble across what appears to be an empty building. However, a woman appears surrounded by several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
     image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
@@ -492,7 +492,7 @@ Item.create([{
     // WARNING WARNING WARNING
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Overwatch Ben",
+    name: "Ben's Overwatch",
     description: "You come across a tower in it is a man with a rifle. He says he's friendly and asks if you would like to join him in the tower.",
     image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
@@ -510,7 +510,7 @@ Item.create([{
     // WARNING WARNING WARNING
   },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Christian's code",
+    name: "Christian's path",
     description: "You see a man slowly but methodically chopping heads off corpses, he looks like he's doing it for the safety of others",
     image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",

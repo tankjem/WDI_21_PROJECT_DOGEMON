@@ -979,7 +979,7 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = "Nice punt. Have an item";
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey - no touching!";
+      document.getElementById('hud').innerHTML = "Hey - no touching! You are punted away.";
       DogeApp.user.health = DogeApp.user.health - 9999999;
       console.log(DogeApp.user.health);
     })
