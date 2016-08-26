@@ -543,7 +543,7 @@ DogeApp.setRandMarkers = function() {
     },
     map: DogeApp.map,
     icon: {
-      url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png",
+      url: "/images/box-icon.png",
       scaledSize: new google.maps.Size(30, 30),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(15, 15)
@@ -585,7 +585,7 @@ DogeApp.setRandMarkers = function() {
       position: DogeApp.getRandomMarker(),
       map: DogeApp.map,
       icon: {
-        url: "https://prometheus.atlas-sys.com/download/attachments/127894715/box-icon.png", // url
+        url: "/images/box-icon.png", // url
         scaledSize: new google.maps.Size(30, 30), // scaled size
         origin: new google.maps.Point(0,0), // origin
         anchor: new google.maps.Point(15,15) // anchor
