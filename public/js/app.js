@@ -485,7 +485,7 @@ DogeApp.getCurrentPosition = function(callback) {
 DogeApp.playerMarker = null;
 
 DogeApp.setPlayerMarker = function() {
-  navigator.geolocation.getCurrentPosition(function(position) {  
+  navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     if (DogeApp.playerMarker) {
       DogeApp.playerMarker.setPosition(newPoint);
@@ -546,7 +546,7 @@ DogeApp.userNeeds = function() {
 }
 
 
-DogeApp.equipItem = function() {  
+DogeApp.equipItem = function() {
   $("div.item-click").on("click", function() {
     if($(".type").html() === "Weapon") {
       $("#equippedWeapon").html($(".name").html())
@@ -780,6 +780,9 @@ DogeApp.customInfoWindow = function(marker, data){
       + "<div class='choice2'>"
       + data.choices[1]
       + "</div>"
+      + "<div class='choice3'>"
+      + data.choices[2]
+      + "</div>"
       +"</div>"
       + "</div</div>");
         DogeApp.gameLogic();
@@ -793,7 +796,7 @@ DogeApp.customInfoWindow = function(marker, data){
 DogeApp.gameLogic = function(button, data) {
   var event = DogeApp.event
   var hud = document.getElementById('hud');
-  console.log(DogeApp.user.inventory)
+  // console.log(DogeApp.user.inventory)
   if(event.event_number === 1 ) {
     $(".choice1").on("click", function() {
       var successBase = 0.5;
