@@ -146,6 +146,7 @@ DogeApp.getEditForm = function() {
 
 //events
 DogeApp.getEvent = function(testMarker) {
+// DogeApp.getEvent = function(randMarker) {
   // event.preventDefault();
   return $.ajax({
     method: "GET",
@@ -158,6 +159,7 @@ DogeApp.getEvent = function(testMarker) {
     // DogeApp.getTemplate("events/show", { event: data }, $content);
     // $content.removeClass('hidden');
     DogeApp.customInfoWindow(testMarker, data);
+    // DogeApp.customInfoWindow(randMarker, data);
     DogeApp.getItem(data);
   });
 }
@@ -461,7 +463,8 @@ DogeApp.initEventHandlers = function() {
   DogeApp.setBounds();
 
   DogeApp.getCurrentPosition(function() {
-    DogeApp.setRandMarkers();
+    DogeApp.setTestMarkers();
+    // DogeApp.setRandMarkers();
     DogeApp.setRandRedZones();
   });
   setInterval(DogeApp.userNeeds, 1000 * 60 * 45);
@@ -601,7 +604,8 @@ DogeApp.getRandomMarker = function() {
     lng_min + (Math.random() * lng_range));
 }
 
-DogeApp.setRandMarkers = function() {
+DogeApp.setTestMarkers = function() {
+// DogeApp.setRandMarkers = function() {
   var testMarker = new google.maps.Marker({
     position: {
       lat: DogeApp.pos.lat + 0.0001,
@@ -672,6 +676,7 @@ DogeApp.setRandMarkers = function() {
 
     var resourceCircleBounds = resourceCircle.getBounds();
 
+    // DogeApp.getEvent(randMarker);
   };
 
   randMarker.addListener("click", function() {
@@ -679,7 +684,7 @@ DogeApp.setRandMarkers = function() {
       randMarker.setMap(null);
       resourceCircle.setMap(null);
 
-      DogeApp.customInfoWindow();
+      // DogeApp.customInfoWindow();
     }
   });
 }
@@ -827,7 +832,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if(event.event_number === 2 ) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Rosie gives you a delighted smile, and hands you a rose.";
+      document.getElementById('hud').innerHTML = "Rosie gives you a delighted smile, and hands you a rose. It smells funny.";
       DogeApp.user.inventory.push(DogeApp.item);
       DogeApp.updateUserData(DogeApp.user);
     })
@@ -835,12 +840,12 @@ DogeApp.gameLogic = function(button, data) {
      document.getElementById('hud').innerHTML = "The young woman finishes up her routine and nimbly escapes the zombies. You wonder if you'll see her again...";
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot."
+      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot :("
     })
   }
   if( event.event_number === 3) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "You get an item!";
+      document.getElementById('hud').innerHTML = "You get an item! Huzzah!";
       DogeApp.user.inventory.push(DogeApp.item);
       DogeApp.updateUserData(DogeApp.user);
     })
@@ -866,7 +871,7 @@ DogeApp.gameLogic = function(button, data) {
         } else {
           damageTaken = Math.ceil(30-DogeApp.user.armour + 20*Math.random());
         }
-        document.getElementById('hud').innerHTML = "You had to run away. You are sad. Sadface. :(. You have taken " + damageTaken + " damage.";
+        document.getElementById('hud').innerHTML = "You had to run away. You are sad. :( You have taken " + damageTaken + " damage.";
       }
       DogeApp.user.health = DogeApp.user.health - damageTaken;
       DogeApp.updateUserData(DogeApp.user);
@@ -898,7 +903,7 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = "Wow. That was mean. I hope this doesn't happen in the presentation...";//neon easter egg?
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "YOYOYOSUP! You receive an item!";
+      document.getElementById('hud').innerHTML = "YOYOYOSUP! You receive an item! Yea Boi!";
       DogeApp.user.inventory.push(DogeApp.item);
       DogeApp.updateUserData(DogeApp.user);
     })
@@ -930,14 +935,14 @@ DogeApp.gameLogic = function(button, data) {
       DogeApp.updateUserData(DogeApp.user);
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "As I'm coding this, Shu always wins. WELCOME TO MY SHUTOPIA!";
+      document.getElementById('hud').innerHTML = "As I'm coding this, Shu always wins. WELCOME TO MY SHUTOPIA! MWAH HAHAHAHA!";
       DogeApp.user.health = DogeApp.user.health - 9999999;
       DogeApp.updateUserData(DogeApp.user);
       DogeApp.checkUserDeath();
       console.log(DogeApp.user.health);
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "Ignore eh? This feels just like my interaction with my parents growing up. Sadface.";
+      document.getElementById('hud').innerHTML = "Ignore eh? This feels just like my interaction with my parents growing up. :(";
     })
   }
   if( event.event_number === 10) {
@@ -973,7 +978,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 12) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "KWAAAAAAAAAAAAAAAAK"; // should be a wav file for surprise. Bex - looking at you...
+      document.getElementById('hud').innerHTML = "KWAAAAAAAAAAAAAAAAK! He gives you the kebab!"; // should be a wav file for surprise. Bex - looking at you...
       DogeApp.user.inventory.push(DogeApp.item);
     })
     $(".choice2").on("click", function() {
@@ -1019,7 +1024,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 15) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Something something Doge, something something meme. Giphy.";
+      document.getElementById('hud').innerHTML = "Something something Doge, something something meme. Giphy. Dank.";
     })
     $(".choice2").on("click", function() {
       document.getElementById('hud').innerHTML = "Hey - nice style. Have an item!";
@@ -1084,7 +1089,7 @@ DogeApp.gameLogic = function(button, data) {
       DogeApp.updateUserData(DogeApp.user);
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey - no touching!";
+      document.getElementById('hud').innerHTML = "Hey - no touching! You are punted Away!";
       DogeApp.user.health = DogeApp.user.health - 25;
       DogeApp.updateUserData(DogeApp.user);
       DogeApp.checkUserDeath();
@@ -1165,12 +1170,12 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 24) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Oui. Baguette. Bibliotheque. Bonjour. Other French words. Have an item.";
+      document.getElementById('hud').innerHTML = "Oui. Baguette. Bibliotheque. Bonjour. Other French words. Have an item. Its cheese";
       DogeApp.user.inventory.push(DogeApp.item);
       DogeApp.updateUserData(DogeApp.user);
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "This man is mesmerizing. You watch his sexy French dance of death.";
+      document.getElementById('hud').innerHTML = "This man is mesmerizing. You watch his sexy French dance of death. Never have you seen someone wield a baguette like that";
     })
     $(".choice3").on("click", function() {
       document.getElementById('hud').innerHTML = ":(";
@@ -1178,11 +1183,22 @@ DogeApp.gameLogic = function(button, data) {
   }
   if( event.event_number === 25) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey, you're alright. Have this item.";
+      document.getElementById('hud').innerHTML = "Hey, you're not too bad. Have this item.";
     })
     DogeApp.user.inventory.push(DogeApp.item);
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "He continues to chop off heads. You're not sure how you feel about this situation.";
+      document.getElementById('hud').innerHTML = "He continues to chop off heads. You're not sure how you feel about this situation. You shrug and head off";
+    })
+    $(".choice3").on("click", function() {
+      document.getElementById('hud').innerHTML = ":(";
+    })
+  }
+  if( event.event_number === 26) {
+    $(".choice1").on("click", function() {
+      document.getElementById('hud').innerHTML = "The leaning tower of pasta falls on you and you just about escape with your life";
+    })
+    $(".choice2").on("click", function() {
+      document.getElementById('hud').innerHTML = "A man called Antonio gives you a bag of pasta.";
     })
     $(".choice3").on("click", function() {
       document.getElementById('hud').innerHTML = ":(";
