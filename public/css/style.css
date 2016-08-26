@@ -376,3 +376,7 @@ progress#thirst-value[value]::-webkit-progress-value {
   footer span {
     font-size: 20px;
   }
+
+  footer .menu {
+    height: 100px;
+  }
