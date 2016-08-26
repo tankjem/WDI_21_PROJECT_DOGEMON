@@ -15,7 +15,7 @@ DogeApp.equippedArmourStat;
 
 var eventNumber = "";
 
-DogeApp.API_URL = "https://zoogle.herokuapp.com/api";
+DogeApp.API_URL = "/api";
 
 DogeApp.setRequestHeader = function(jqXHR) {
   var token = window.localStorage.getItem("token");
@@ -72,8 +72,6 @@ DogeApp.getUser = function() {
     url: DogeApp.API_URL + "/user",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data) {
-    // DogeApp.user = data;
-    // $("body").prepend("<div id='content'>" + DogeApp.user.username + "<br><img src='" + DogeApp.user.image_url + "' width='100' height='100'><div>" + DogeApp.user.health + "</div><br></div>");
     var $content = $('#content');
     DogeApp.getTemplate("/user/show", { user: data }, $content);
     $content.removeClass('hidden');
@@ -200,6 +198,7 @@ DogeApp.updateUI = function() {
   }
 }
 
+
 DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
@@ -213,6 +212,12 @@ DogeApp.initEventHandlers = function() {
   this.$content.on("focus", "form input", function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
+
+  this.$content.on('click', '#close', function() {
+    event.preventDefault();
+    DogeApp.$content.addClass('hidden');
+  });
+
 
   // if(pcDeath !== 0) {
   //   this.deletePc;
@@ -451,6 +456,7 @@ DogeApp.initEventHandlers = function() {
   DogeApp.map.setCenter(new google.maps.LatLng(51.515170, -0.072260));
   DogeApp.map.setZoom(18);
   DogeApp.setBounds();
+
   DogeApp.getCurrentPosition(function() {
     DogeApp.setRandMarkers();
     DogeApp.setRandRedZones();
@@ -467,6 +473,7 @@ DogeApp.getCurrentPosition = function(callback) {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
     }
+    console.log("Moving" + DogeApp.pos.lat + DogeApp.pos.lng);
 
     if(callback) callback();
   });
@@ -552,6 +559,8 @@ DogeApp.equipItem = function() {
   });
 }
 
+setInterval(DogeApp.getCurrentPosition, 1000 * 3);
+
 
 // Bounds Rectangle
 
@@ -627,19 +636,13 @@ DogeApp.setRandMarkers = function() {
       resourceCircleTest.setMap(null);
     }
   });
-  $('button').on('click', hideContent);
-
-
-  function hideContent() {
-    $('#content').addClass('hidden');
-  };
 
   if (resourceCircleBoundsTest.contains(DogeApp.pos)) {
     console.log("A resource is close by.");
   };
 
 
-  for (var i = 0; i < 175; i++) {
+  for (var i = 0; i < 150; i++) {
 
     var randMarker = new google.maps.Marker({
       position: DogeApp.getRandomMarker(),
@@ -655,7 +658,7 @@ DogeApp.setRandMarkers = function() {
     // Resource radius
     var resourceCircle = new google.maps.Circle({
       map: DogeApp.map,
-      radius: 25,
+      radius: 30,
       strokeColor: '#ffffff',
       strokeOpacity: 0.2,
       fillColor: '#ffffff',
@@ -685,7 +688,7 @@ DogeApp.setRandMarkers = function() {
 
 DogeApp.setRandRedZones = function() {
 
-  for (var i = 0; i < 8; i++) {
+  for (var i = 0; i < 5; i++) {
     var skullIcon = {
       url: "./images/skull.png", // url
       scaledSize: new google.maps.Size(60, 60), // scaled size
@@ -723,7 +726,7 @@ DogeApp.setRandRedZones = function() {
 $('#main-map').on('click', hideContent);
 
 function hideContent() {
-  $('#content').addClass('hidden');
+  $('#content-event').addClass('hidden');
 };
 
 
@@ -735,39 +738,50 @@ DogeApp.customInfoWindow = function(marker, data){
   DogeApp.getUserData(button)
   marker.addListener("click", function(){
     if((data.choices).length === 2) {
-      $("body").prepend("<div id='content'>"
+      $("body").prepend("<div id='content-event'>"
         + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br><br>'
+        + "<div class='choice-title'>"
+        + "<h3>"
         + data.name
+        + "</h3>"
+        + "</div>"
+        + "<div class='choice-info'>"
         + "<br><img src='"
         + data.image_url
-        + "' width='100' height='100'><div>"
+        + "' width='100' height='100'>"
         + data.description
         + "</div><div class='choice1'>"
         + data.choices[0]
         + "</div><div class='choice2'>"
         + data.choices[1]
-        + "</div><br></div>");
+        + "</div></div</div>");
       DogeApp.gameLogic();
     } else {
-      $("body").prepend("<div id='content'>"
-        + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br><br>'
-        + data.name
-        + "<br><img src='"
-        + data.image_url
-        + "' width='100' height='100'><div>"
-        + data.description
-        + "</div><div class='choice1'>"
-        + data.choices[0]
-        + "</div><div class='choice2'>"
-        + data.choices[1]
-        + "</div><div class='choice3'>"
-        + data.choices[2]
-        + "</div><br></div>");
+      $("body").prepend("<div id='content-event'>"
+      + '<a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a>'
+      + "<div class='choice-title'>"
+      + "<h3>"
+      + data.name
+      + "</h3>"
+      + "</div>"
+      + "<div class='choice-info'>"
+      + "<br><img src='"
+      + data.image_url
+      + "' width='100' height='100'><div>"
+      + data.description
+      +"</div>"
+      +"<div class='choice-list'>"
+      + "<div class='choice1'>"
+      + data.choices[0]
+      + "</div>"
+      + "<div class='choice2'>"
+      + data.choices[1]
+      + "</div>"
+      +"</div>"
+      + "</div</div>");
         DogeApp.gameLogic();
     }
   });
-
-  console.log(data, " is still the event");
 }
 
 
@@ -1168,19 +1182,18 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = ":(";
     })
   }
-  // missing Ed, Toni
 
-  $('#content #close').on('click', function() {
-    $('#content').addClass('hidden');
+
+  //  ===== Closing buttons
+
+  $('#content-event #close').on('click', function() {
+    $('#content-event').addClass('hidden');
   })
 
   $('.choice1, .choice2, .choice3').on('click', function() {
-    $('#content').addClass('hidden');
+    $('#content-event').addClass('hidden');
   })
 }
-
-
-
 
 $(function() {
   DogeApp.initEventHandlers();

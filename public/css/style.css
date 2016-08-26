@@ -14,7 +14,7 @@ html, body, main {
 
 .pop-up {}
 
-#content {
+#content, #content-event {
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -22,38 +22,89 @@ html, body, main {
   top: 50%;
   transform: translate(-50%, -50%);
   margin: auto;
-  background: rgba(199, 121, 102, .6);
-  padding: 1.5em;``
-  color: white;
+  background: rgba(255, 255, 255, .8);
+  padding: 1.5em;
+  color: black;
   z-index: 10;
   text-align: center;
   border-radius: 1.5em;
 }
 
-#content #close {
+#content-event {
+  font-size: 25px;
+}
+
+#content #close, #content-event #close {
+  text-decoration: none;
+  color: #000;
+  font-size: 150%;
+  align-self: flex-end;
+}
+
+#content-event div:first-of-type{
+  padding: 1.5em;
+  text-align: left;
+  line-height: 1.5em;
+  width: 75%;
+}
+
+#content-event h3{
+ font-size: 1.5em;
+}
+.choices-container{
+  display: flex;
+  width: 100%;
+}
+.choice-title{
+  width: 100%!important;
+  display: block;
+  text-align: center!important;
+}
+.choice-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items:center;
+  width: 100%;
+  height: 45vh;
+}
+#content #close:hover, #content-event #close:hover {
+  color: #FFF;
+}
+
+#close-profile {
   text-decoration: none;
   color: #000;
   font-size: 150%;
 }
 
-#content a:hover {
-  color: #FFF;
-}
-
 .choice1, .choice2, .choice3 {
   border: 1px solid black;
-  font-size: 20px;
-  margin: 5px;
+  font-size: 1em;
+  margin: .5em;
+  padding: .5em;
+  transition: .5s ease;
+  cursor: pointer;
+  text-align: center;
 }
-
+.choice1:hover, .choice2:hover, .choice3:hover {
+  background: rgb(199, 121, 102);
+}
+.choice-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
 #hud {
   position: absolute;
   top: 1em;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.6);
+
   height: auto;
   text-align: center;
-  font-size: 25px;
+  font-size: 35px;
 }
 
 /* Menu CSS */
@@ -98,11 +149,9 @@ footer {
 }
 
 ul li {
-  display: inline-block;
   border-bottom: transparent 1px solid;
   padding: 0 1em 0 1em;
   flex-basis: 25em;
-  height: auto;
   text-align: center;
 }
 
@@ -320,10 +369,6 @@ progress#thirst-value[value]::-webkit-progress-value {
   font-size: 1.2em;
   font-weight: 400;
 }
-
-// Responsive code
-
-// Menu
 
 @media only screen and (max-width: 960px) {
 
