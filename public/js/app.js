@@ -715,6 +715,9 @@ DogeApp.customInfoWindow = function(marker, data){
       + "<div class='choice2'>"
       + data.choices[1]
       + "</div>"
+      + "<div class='choice3'>"
+      + data.choices[2]
+      + "</div>"
       +"</div>"
       + "</div</div>");
         DogeApp.gameLogic();
@@ -1072,7 +1075,7 @@ DogeApp.gameLogic = function(button, data) {
       document.getElementById('hud').innerHTML = ":(";
     })
   }
-  // missing Ed, Toni
+
 
 
   //  ===== Closing buttons
