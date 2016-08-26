@@ -1197,8 +1197,6 @@ DogeApp.gameLogic = function(button, data) {
     })
   }
 
-=======
-
 
   //  ===== Closing buttons
 
