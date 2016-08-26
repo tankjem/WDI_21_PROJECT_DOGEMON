@@ -33,11 +33,13 @@
       <a href="#" class="user-inventory"><h4>Inventory</h4></a>
     </div>
       <% user.inventory.forEach(function(item) { %>
-    <div class="list-group">
+    <div class="list-group item-click">
       <img src="http://localhost:3000<%= item.image_url %>">
       <h5><%= item.name %></h5>
-      <!-- <h5><%= item.description %></h5> -->
-      <h5><%= item.type %></h5>
+      <p class="type"><%= item.item_type %></p>
+      <p class="attack">Attack: <%= item.item_attack %></p>
+      <p class="defense">Defense: <%= item.item_defense %></p>
+      <p class="heal">Heal: <%= item.item_heal %></p>
     </div>
       <% }) %>
    </div>
