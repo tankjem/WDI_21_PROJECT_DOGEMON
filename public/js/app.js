@@ -143,6 +143,7 @@ DogeApp.getEditForm = function() {
 
 //events
 DogeApp.getEvent = function(testMarker) {
+// DogeApp.getEvent = function(randMarker) {
   // event.preventDefault();
   return $.ajax({
     method: "GET",
@@ -155,6 +156,7 @@ DogeApp.getEvent = function(testMarker) {
     // DogeApp.getTemplate("events/show", { event: data }, $content);
     // $content.removeClass('hidden');
     DogeApp.customInfoWindow(testMarker, data);
+    // DogeApp.customInfoWindow(randMarker, data);
     DogeApp.getItem(data);
   });
 }
@@ -458,7 +460,8 @@ DogeApp.initEventHandlers = function() {
   DogeApp.setBounds();
 
   DogeApp.getCurrentPosition(function() {
-    DogeApp.setRandMarkers();
+    DogeApp.setTestMarkers();
+    // DogeApp.setRandMarkers();
     DogeApp.setRandRedZones();
   });
   setInterval(DogeApp.userNeeds, 1000 * 60 * 45);
@@ -598,7 +601,8 @@ DogeApp.getRandomMarker = function() {
     lng_min + (Math.random() * lng_range));
 }
 
-DogeApp.setRandMarkers = function() {
+DogeApp.setTestMarkers = function() {
+// DogeApp.setRandMarkers = function() {
   var testMarker = new google.maps.Marker({
     position: {
       lat: DogeApp.pos.lat + 0.0001,
@@ -669,6 +673,7 @@ DogeApp.setRandMarkers = function() {
 
     var resourceCircleBounds = resourceCircle.getBounds();
 
+    // DogeApp.getEvent(randMarker);
   };
 
   randMarker.addListener("click", function() {
@@ -676,7 +681,7 @@ DogeApp.setRandMarkers = function() {
       randMarker.setMap(null);
       resourceCircle.setMap(null);
 
-      DogeApp.customInfoWindow();
+      // DogeApp.customInfoWindow();
     }
   });
 }
