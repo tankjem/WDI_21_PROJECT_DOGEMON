@@ -16,6 +16,7 @@ html, body, main {
 
 #content, #content-event {
   justify-content: center;
+  max-height: 90%;
   align-items: center;
   position: absolute;
   left: 50%;
@@ -305,7 +306,7 @@ progress#thirst-value[value]::-webkit-progress-value {
 /*pc styling*/
 
 .pc-info {
-  /*width: 70%;*/
+  width: 100%;
   text-align: left;
   border-right: 1px solid black;
   align-self: flex-start;

@@ -1,3 +1,6 @@
+var bgm = new Audio('/sound/l4d.mp3');
+bgm.play();
+
 
 // overwriting prototype stuff. Sorry not sorry
 google.maps.Circle.prototype.contains = function(latLng) {
