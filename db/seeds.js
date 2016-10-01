@@ -318,24 +318,24 @@ Item.create([{
   console.log(u1);
   return Event.create([{
     name: "Zombie Attack",
-    description: "You are attacked by a zombie",
+    description: "You are attacked by a zombie.",
     image_url: "/images/events/zombie_icon.png",
     event_type: "red_zone_encounter",
-    choices: ["fight", "flee"],
+    choices: ["Fight", "Flee"],
     event_number:1
     }, {
-    name: "Yoga-Rosie",
-    description:"A bizarre sight unravels before you. A girl is doing yoga on top of a van which is surrounded by zombies. She seems perfectly at ease.",
-    image_url: "/images/events/yoga_rosie.png",
+    name: "Lost and Alone",
+    description:"You see a young girl hunched over on the ground near the side of the road. She seems to be crying.",
+    image_url: "",
     event_type: "random_encounter",
-    choices: ["Curious you jump on the van next to her and join in", "Watch", "Run away"],
+    choices: ["Ask her if she needs any help", "She's probably a Zombie - attack", "Run away"],
     event_number: 2
     }, {
-    name: "Item Found",
-    description: "You have found an item",
+    name: "Resource Cache found!",
+    description: "You have found a hidden cache.",
     image_url: "/images/events/resource_icon.png",
     event_type: "resource_encounter",
-    choices: ["collect", "leave"],
+    choices: ["Collect", "Leave"],
     event_number:3
     },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
@@ -343,17 +343,8 @@ Item.create([{
     description: "Zombies aren't the only worry",
     image_url: "/images/events/attack_icon.png",
     event_type: "random_encounter",
-    choices: ["fight", "run", "hide"],
-    event_number:6
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Baller",
-    description: "You see a zombie lurches towards you, he seems to be saying something. You distinctly make out, Baaaaallllllerrr! It shuffles past and offers a fist bump",
-    image_url: "/images/events/baller_icon.png",
-    event_type: "random_encounter",
-    choices: ["Leave it hanging", "Chop off Zombie's hand", "Bump back"],
-    event_number:7
+    choices: ["Fight", "Flee", "Hide"],
+    event_number:4
     // WARNING WARNING WARNING
     },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
@@ -362,169 +353,18 @@ Item.create([{
     image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Blue Pill", "Red Pill", "Winners don't do drugs"],
-    event_number:8
+    event_number:5
     // WARNING WARNING WARNING
     },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Lord Shu",
-    description: "You see a man standing on top of a pile of bodies laughing maniacally",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Join in with the laughing", "Fight", "Ignore"],
-    event_number:9
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Cam's Armour Emporium",
-    description: "A young lad is on the side of the road pushing a shopping trolley filled with armour, he makes an offer you can't refuse",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Take the sexy armour", "Fight", "Ignore"],
-    event_number:10
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "A Chanse Encounter",
-    description: "A very pretty and athletic man is passed out by the side of the motorway, you wake him and give him some water. He tells you he's from Leeds and that he's pretty hungover. He says you should visit him in Leeds at some point. Wait. Did he mention he was from Leeds?",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Where's Leeds?", "Sorry, where are you from again?", "Ignore"],
-    event_number:11
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "The Screaming Kiwi",
-    description: "You see a tall man with a semi-afro riding a bike and eating kebab, while blasting recorder music out of a radio strapped to the bike. He screams at a zombie and nearly drops his kebab",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Ask where he got the kebab", "Steal Kebab", "Ignore"],
-    event_number:12
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Sleepy Jason",
-    description: "A man is napping in a dumpster. Cocktails are littered around him. There is a name tag on his shirt that says Json",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Wake him up", "Take a cocktail", "Ignore"],
-    event_number:13
-    // WARNING WARNING WARNING
-  },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "Zombie Fishing",
     description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
     image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Ask for a fish", "Learn to fish", "Ignore"],
-    event_number:14
+    event_number:6
     // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Bex's Utopia",
-    description: "You encounter a woman with a steely look in her eyes, she seems completely at ease in the apocalyptic environment. She grins like a cheshire cat as she bashes in a zombies head",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Ask her why she's happy", "Bash a nearby zombie", "Run away"],
-    event_number:15
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Jem's Gem",
-    description: "A man is decked out in the finest gems you have ever seen. He looks like a king. He smiles at you and waves regally",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Wave back", "Make a danger face at him", "Ignore"],
-    event_number:16
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Smithy's business",
-    description: "A man is sat atop a grassy knoll on what can only be described as a portable deck chair. The sun is shining and all is calm. He seems busy",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Join him atop the knoll", "Ask about chair", "Ignore"],
-    event_number:17
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Adri's Apocalypse",
-    description: "A lady is walking casually down the street. She seems pretty chilled and oblivious to the danger all around her, or she just doesn't care...",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Warn her about the danger", "Make a new friend", "Ignore"],
-    event_number:18
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Lady Kaitlyn",
-    description: "You stumble across what appears to be an empty building. However, a woman appears surrounded by several minions. One of the minions tugs on the sleeve of the lady. It is swiftly punted away.",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Punt the minion back", "Help the minion", "Ignore"],
-    event_number:19
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Chetan's Erotic Coffee",
-    description: "A man approaches you and offers a cup of coffee, but before you drink it he insists on telling you about his business idea for apocalyptic coffee with an erotic twist. This is the first time you've blushed since the apocalypse.",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Listen Intently", "Sip the coffee anyway", "Ignore"],
-    event_number:20
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Julian's Russian Palava",
-    description: "A man runs up to you and declares the Russian's are coming, watch out",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Ask for more info", "Pretend to be Russian", "Ignore"],
-    event_number:21
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Andy the Urban Warrior",
-    description: "You see a man hunched over with a sword strapped to his back. Suddenly he bolts forward leaping between cars and zombies, eventually landing in front of you.",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Bow", "Fight", "Ignore"],
-    event_number:22
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Ben's Overwatch",
-    description: "You come across a tower in it is a man with a rifle. He says he's friendly and asks if you would like to join him in the tower.",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Join man on tower", "Wave", "Ignore"],
-    event_number:23
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Axel's battle of the baguette",
-    description: "A man is fighting a horde of zombies with what looks like a stale baguette.",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Help the man", "Watch", "Ignore"],
-    event_number:24
-    // WARNING WARNING WARNING
-  },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Christian's path",
-    description: "You see a man slowly but methodically chopping heads off corpses, he looks like he's doing it for the safety of others",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Help him", "Watch", "Ignore"],
-    event_number:25
-    // WARNING WARNING WARNING
-  },{
-    name: "Antonio's leaning tower of pasta",
-    description: "You see an open warehouse and venture in. Inside is the biggest of collection of dried pasta you have ever seen.",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Take some pasta", "Pause and see if their is anyone about", "Ignore"],
-    event_number:26
-  }]);
+    }]);
 }).then(function(events) {
   console.log(events);
 }).catch(function(err) {
