@@ -353,8 +353,8 @@ progress#thirst-value[value]::-webkit-progress-value {
   }
 
   #content {
-    max-height: 85%;
-    max-width: 85%;
+    max-height: 95%;
+    max-width: 95%;
   }
 
   form input, button {
