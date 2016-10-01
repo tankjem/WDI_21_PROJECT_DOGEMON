@@ -349,7 +349,11 @@ progress#thirst-value[value]::-webkit-progress-value {
 @media (max-width: 350px) {
 
   #content {
-    max-height: 90%;
-    width: 95%;
+    max-height: 85%;
+    max-width: 85%;
   }
+
+/*  .flex-container, .form-flex {
+    max-width: 
+  }*/
 }
