@@ -149,12 +149,6 @@ html, body, main {
   justify-content: space-around;
 }
 
-/*.menu ul li span {
-  font-family: 'Creepster', cursive;
-  display: inline-block;
-  font-size: 45px;
-}*/
-
 .menu ul {
   list-style-type: none;
   list-style-image: none;
@@ -228,7 +222,6 @@ form input, button {
 }
 
 form button {
-  /*background-color: inherit;*/
   color: black;
   border: 2px black solid;
   font-size: 1.5em;
@@ -288,27 +281,22 @@ progress#thirst-value[value]::-webkit-progress-value {
 
 .pc-info {
   width: 100%;
-/*  text-align: left;
-  align-self: flex-start;*/
-  /*flex: 1;*/
 }
 .pc-info p, progress {
   margin: .5em;
 }
 .pc-info .left {}
 
-/* RESPONSIVE STYLING */
-
-@media only screen and (max-width: 960px) {
-
-/*  .flex-container {
-
-  }
-
-  .pc-info progress {
-    width: 100%;
-  }*/
+.delete-user {
+  text-decoration: none;
+  text-transform: uppercase; 
+  color: #b30000;
+  border: 2px #b30000 solid;
+  padding: 0.2em;
+  margin: 0.1em;
 }
+
+/* RESPONSIVE STYLING */
 
 @media (max-width: 800px) {
 
