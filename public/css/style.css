@@ -6,7 +6,8 @@ html, body, main {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Special Elite', sans-serif;
+  font-size: 1.15em;
   overflow-y: hidden;
 }
 
@@ -24,7 +25,7 @@ html, body, main {
   font-family: 'Creepster';
   color: rgba(255, 255, 255, .8);
   letter-spacing: 0.2em;
-  font-size: 4em;
+  font-size: 2.5em;
   position: absolute;
   left: 0.2em;
   top: 0.1em;
@@ -111,9 +112,11 @@ html, body, main {
   cursor: pointer;
   text-align: center;
 }
+
 .choice1:hover, .choice2:hover, .choice3:hover {
   background: rgb(199, 121, 102);
 }
+
 .choice-list{
   display: flex;
   justify-content: space-between;
@@ -148,12 +151,6 @@ html, body, main {
   align-items: center;
   justify-content: space-around;
 }
-
-/*.menu ul li span {
-  font-family: 'Creepster', cursive;
-  display: inline-block;
-  font-size: 45px;
-}*/
 
 .menu ul {
   list-style-type: none;
@@ -200,8 +197,6 @@ html, body, main {
   flex-basis: 2.5em;
   text-align: center;
   color: white;
-  font-family: 'Bitter';
-
 }
 
 form h2 {
@@ -213,7 +208,6 @@ form h2 {
 }
 
 form {
-  font-family: 'Raleway';
   left: 0;
   right: 0;
   min-width: 100%;
@@ -221,6 +215,7 @@ form {
 }
 
 form input, button {
+  font-family: 'Special Elite', sans-serif;
   margin: .3em 0em;
   width: 100%;
   font-size: 1.2em;
@@ -247,10 +242,6 @@ form button:hover {
 /==================*/
 
 .flex-container {
-/*  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;*/
-  /*background-color: rgba(227, 205, 163, 0.8);*/
   text-align: left;
   flex-wrap: wrap;
   z-index: 1;
@@ -291,27 +282,22 @@ progress#thirst-value[value]::-webkit-progress-value {
 
 .pc-info {
   width: 100%;
-/*  text-align: left;
-  align-self: flex-start;*/
-  /*flex: 1;*/
 }
 .pc-info p, progress {
   margin: .5em;
 }
 .pc-info .left {}
 
-/* RESPONSIVE STYLING */
-
-@media only screen and (max-width: 960px) {
-
-/*  .flex-container {
-
-  }
-
-  .pc-info progress {
-    width: 100%;
-  }*/
+.delete-user {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #b30000;
+  padding: 0.2em;
+  margin: 0.2em;
+  border: 2px #b30000 solid;
 }
+
+/* RESPONSIVE STYLING */
 
 @media (max-width: 800px) {
 
@@ -344,9 +330,6 @@ progress#thirst-value[value]::-webkit-progress-value {
   .pc-info progress {
     width: 90%;
   }
-}
-
-@media (max-width: 350px) {
 
   #content {
     max-height: 90%;
