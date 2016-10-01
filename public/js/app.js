@@ -1,5 +1,5 @@
 var bgm = new Audio('/sound/l4d.mp3');
-// bgm.play();
+bgm.play();
 
 
 // overwriting prototype stuff. Sorry not sorry
@@ -830,38 +830,61 @@ DogeApp.gameLogic = function(button, data) {
         document.getElementById('hud').innerHTML = "That was idiotic. You had to flee from the zombie. Like a scardy cat. You have taken " + damageTaken + " damage.";
       }
       DogeApp.user.health = DogeApp.user.health - damageTaken;
-      DogeApp.user.inventory.push(DogeApp.item);
       DogeApp.updateUserData(DogeApp.user);
       DogeApp.checkUserDeath();
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot.";
+      document.getElementById('hud').innerHTML = "Deciding that the situation is too risky, you walk away.";
     })
   }
   if(event.event_number === 2 ) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Rosie gives you a delighted smile, and hands you a rose. It smells funny.";
-      DogeApp.user.inventory.push(DogeApp.item);
+      if(Math.random() > 0.10 ) {
+        DogeApp.user.food = DogeApp.user.food + 25;
+        DogeApp.user.water = DogeApp.user.water + 25;
+        document.getElementById('hud').innerHTML = "The girl tells you that she is lost. You help her find her way back to her family by following her tracks. They were very grateful, and provided you with food and water. Food + 25, Water + 25";
+      } else {
+        damageTaken = Math.ceil(30-DogeApp.user.armour + 20*Math.random());
+        document.getElementById('hud').innerHTML = "She looks up. Too late, you realise that she is no longer of this world. She sinks her teeth into your flesh. You have taken " + damageTaken + " damage.";
+        DogeApp.user.health = DogeApp.user.health - damageTaken;
+      }
       DogeApp.updateUserData(DogeApp.user);
+      DogeApp.checkUserDeath();
     })
     $(".choice2").on("click", function() {
-     document.getElementById('hud').innerHTML = "The young woman finishes up her routine and nimbly escapes the zombies. You wonder if you'll see her again...";
+      if(Math.random() > 0.20 ) {
+        document.getElementById('hud').innerHTML = "Good call. You catch a glimpse of the zombie's pale, rotten face as you cave her skull in.";
+      } else {
+        document.getElementById('hud').innerHTML = "You cave her skull in. She couldn't still have been human...could she?";
+      }
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot :("
+      document.getElementById('hud').innerHTML = "Deciding that the situation is too risky, you walk away."
     })
   }
-  if( event.event_number === 3) {
+  if(event.event_number === 3) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "You get an item! Huzzah!";
-      DogeApp.user.inventory.push(DogeApp.item);
+      var itemChance = Math.ceil(Math.random()*4)
+      if (item === 1) {
+        DogeApp.user.food = DogeApp.user.food + 25;
+        document.getElementById('hud').innerHTML = "Within the cache, you find some canned food. Food + 25";
+      } else if (item === 2) {
+        DogeApp.user.water = DogeApp.user.water + 25;
+        document.getElementById('hud').innerHTML = "Within the cache, you find some bottles of water. Water + 25";
+      } else if (item === 3) {
+        DogeApp.user.attack = DogeApp.user.attack + 5;
+        document.getElementById('hud').innerHTML = "Within the cache, you find a weapon. Attack + 5";
+      } else {
+        DogeApp.user.armour = DogeApp.user.armour + 5;
+        document.getElementById('hud').innerHTML = "Within the cache, you find a kevlar vest. Armour + 5";
+      }
       DogeApp.updateUserData(DogeApp.user);
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot."
+      document.getElementById('hud').innerHTML = "Deciding that the situation is too risky, you walk away."
     })
   }
-  if( event.event_number === 6) {
+  if(event.event_number === 4) {
     $(".choice1").on("click", function() {
       var successBase = 0.5;
       var totalSuccess = successBase + 0.4 * ( (1/55) * DogeApp.user.attack );
@@ -870,8 +893,7 @@ DogeApp.gameLogic = function(button, data) {
         if(Math.random() > 0.85 ) {
           damageTaken = Math.ceil(10-DogeApp.user.armour + 10*Math.random());
         }
-        document.getElementById('hud').innerHTML = "You have killed the other human. Oh the horror! The hu-manatee!. You sustained " + damageTaken + " damage.";
-        DogeApp.user.inventory.push(DogeApp.item);
+        document.getElementById('hud').innerHTML = "You have killed your human attacker. You sustained " + damageTaken + " damage.";
         DogeApp.updateUserData(DogeApp.user);
       } else {
         if(Math.random() > 0.7 ) {
@@ -879,15 +901,14 @@ DogeApp.gameLogic = function(button, data) {
         } else {
           damageTaken = Math.ceil(30-DogeApp.user.armour + 20*Math.random());
         }
-        document.getElementById('hud').innerHTML = "You had to run away. You are sad. :( You have taken " + damageTaken + " damage.";
+        document.getElementById('hud').innerHTML = "You were forced to run away. You have taken " + damageTaken + " damage.";
       }
       DogeApp.user.health = DogeApp.user.health - damageTaken;
       DogeApp.updateUserData(DogeApp.user);
       DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "You nope'd out of the situation. You did not manage to obtain any loot.";
+      document.getElementById('hud').innerHTML = "Deciding that the situation is too risky, you walk away.";
     })
     $(".choice3").on("click", function() {
       var chanceFound = 0.5
@@ -900,316 +921,37 @@ DogeApp.gameLogic = function(button, data) {
       DogeApp.user.health = DogeApp.user.health - damageTaken;
       DogeApp.updateUserData(DogeApp.user);
       DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
     })
   }
-  if( event.event_number === 7) {
+  if(event.event_number === 5) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "The zombie looks sad. A single, zombified tear falls majestically down its cheek.";
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Wow. That was mean. I hope this doesn't happen in the presentation...";//neon easter egg?
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "YOYOYOSUP! You receive an item! Yea Boi!";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-  }
-  if( event.event_number === 8) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Kids - never do drugs. They're bad and tasty.";
+      document.getElementById('hud').innerHTML = "Repeat after me. You. Never. Take. Strange. Drugs. Health - 25.";
       DogeApp.user.health = DogeApp.user.health - 25;
       DogeApp.updateUserData(DogeApp.user);
       DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Kids - never do drugs. They're bad and tasty.";
+      document.getElementById('hud').innerHTML = "Repeat after me. You. Never. Take. Strange. Drugs. Health - 25";
       DogeApp.user.health = DogeApp.user.health - 25;
       DogeApp.updateUserData(DogeApp.user);
       DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "Correct. But they sure are tasty though...";
+      document.getElementById('hud').innerHTML = "You leave the drugs. Who the hell eats mystery road drugs anyway?";
     })
   }
-  if( event.event_number === 9) {
+  if(event.event_number === 6) {
     $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Ahh, welcome. I see you're a fan of mass murder too. I like your style. Have an item.";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
+      document.getElementById('hud').innerHTML = "He refuses. He states that you must learn to help yourself.";
     })
     $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "As I'm coding this, Shu always wins. WELCOME TO MY SHUTOPIA! MWAH HAHAHAHA!";
-      DogeApp.user.health = DogeApp.user.health - 9999999;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "Ignore eh? This feels just like my interaction with my parents growing up. :(";
-    })
-  }
-  if( event.event_number === 10) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Slightly awkwardly, you take the armour from him. You quickly beat a retreat when he starts telling you about his bank robbing past.";
-      DogeApp.user.armour + 20
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "You cannot hope to beat a man with a shit ton of armour. AND a shopping trolley.";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 11) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "You try to think of something to say to distract from Leeds. Your brain betrays you and you mention Leeds again. In small talk. The worst kind of talk. Apart from the one that your significant other wants to have with you. Dear god, he is still going on about Leeds...";
-    });
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "You can see the 'North of the wall' Wildling rage as he brings the full force of his fury and indignation and Northern-ness down on you.";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 12) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "KWAAAAAAAAAAAAAAAAK! He gives you the kebab!"; // should be a wav file for surprise. Bex - looking at you...
-      DogeApp.user.inventory.push(DogeApp.item);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "You never mess with a Kiwi's kebab...";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 13) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "BEFORE YOU GO GO";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "That's a bad mistake. You should never take Json's cocktails...";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 14) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "No. You must learn to help yourself.";
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "He shows you how to fish. A little while later, you manage to fish out this item!";
-      DogeApp.user.inventory.push(DogeApp.item);
+      document.getElementById('hud').innerHTML = "He shows you how to fish. A little while later, you manage to fish yourself some trout for dinner! Food + 50, Health + 20.";
+      DogeApp.user.health = DogeApp.user.health + 20;
+      DogeApp.user.food = DogeApp.user.food + 50;
       DogeApp.updateUserData(DogeApp.user);
     })
     $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 15) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Something something Doge, something something meme. Giphy. Dank.";
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey - nice style. Have an item!";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 16) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "He nods and throws you an item!";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Oh noes. You woke the dragon. You have no defence against his onslaught";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 17) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey, how's it going? Have an item.";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "My chair? It's mine. DON'T TRY TO STEAL IT!";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 18) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Thank you for the advice - here, have this item.";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "She runs away, screaming 'Stranger danger! Stranger dangerrrrrrrrr!";
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 19) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Nice punt. Have an item";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey - no touching! You are punted Away!";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 20) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hah, just joking! You run away.";
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Well, why not? You're already here. After you drink the coffee, you bolt.";
-      if(DogeApp.user.health <= 90) {
-        DogeApp.user.health = DogeApp.user.health + 10;
-        DogeApp.updateUserData(DogeApp.user);
-      } else {
-        DogeApp.user.health = 100;
-        DogeApp.updateUserData(DogeApp.user);
-      }
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "You back away slowly, then run when you have the chance.";
-    })
-  }
-  if( event.event_number === 21) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "You need to be wary. Have this item to shield you against them";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Ahhhhh! Dieeeee!";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 22) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "He doesn't say a word. He gives you an item.";
-    })
-    DogeApp.user.inventory.push(DogeApp.item);
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "He doesn't say a word. But he beats you to death.";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = "He doesn't say a word.";
-    })
-  }
-  if( event.event_number === 23) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey, you're alright. Have this item.";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "Ignore my invitation, eh? Die!";
-      DogeApp.user.health = DogeApp.user.health - 25;
-      DogeApp.updateUserData(DogeApp.user);
-      DogeApp.checkUserDeath();
-      console.log(DogeApp.user.health);
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 24) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Oui. Baguette. Bibliotheque. Bonjour. Other French words. Have an item. Its cheese";
-      DogeApp.user.inventory.push(DogeApp.item);
-      DogeApp.updateUserData(DogeApp.user);
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "This man is mesmerizing. You watch his sexy French dance of death. Never have you seen someone wield a baguette like that";
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 25) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "Hey, you're not too bad. Have this item.";
-    })
-    DogeApp.user.inventory.push(DogeApp.item);
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "He continues to chop off heads. You're not sure how you feel about this situation. You shrug and head off";
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
-    })
-  }
-  if( event.event_number === 26) {
-    $(".choice1").on("click", function() {
-      document.getElementById('hud').innerHTML = "The leaning tower of pasta falls on you and you just about escape with your life";
-    })
-    $(".choice2").on("click", function() {
-      document.getElementById('hud').innerHTML = "A man called Antonio gives you a bag of pasta.";
-    })
-    $(".choice3").on("click", function() {
-      document.getElementById('hud').innerHTML = ":(";
+      document.getElementById('hud').innerHTML = "Deciding that the situation is too risky, you walk away.";
     })
   }
 
