@@ -1,16 +1,9 @@
 
 <a href="#" aria-label="Close Account Info Modal Box" id="close">&cross;</a><br>
 
-<h2><%= user.username %></h2>
-<h3><%= user.email %></h3>
-
 <div class="flex-container">
 
   <div class="pc-info">
-    <h1>Character</h1>
-    <div class="left">
-      <img src="<%=user.image_url %>" height="150">
-    </div>
     <p>Health:</p>
     <progress id="health-value" value="<%= user.health %>" max="100">
       <%= user.health %>
@@ -27,18 +20,6 @@
     <progress id="water-value" value="<%= user.water %>" max="100">
       <%= user.water %>
     </progress>
-  </div>
-  <div class="inventory">
-    <div class="inventory-title">
-      <a href="#" class="user-inventory"><h4>Inventory</h4></a>
-    </div>
-      <% user.inventory.forEach(function(item) { %>
-    <div class="list-group item-click">
-      <img src="http://localhost:3000<%= item.image_url %>">
-      <h5><%= item.name %></h5>
-    </div>
-      <% }) %>
-   </div>
   </div>
 </div>
 

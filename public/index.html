@@ -3,9 +3,14 @@
 
 <head>
   <title>Zoogle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
 
+  <link rel="stylesheet" type="text/css" href="./css/reset.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+  <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">
+
   <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Creepster" rel="stylesheet">
@@ -23,22 +28,43 @@
 
   <div id="hud"></div>
 
-  <footer>
 
-    <div class="menu">
+  <h1 id="title">Zoogle</h1>
 
-      <a href="/"><span> Zoogle </span></a>
+  <div class="menu">
 
-      <ul>
-        <li><a href="#" data-template="register" class="logged-out">Register</a></li>
-        <li><a href="#" data-template="login" class="logged-out">Login</a></li>
-        <li><a href="#" class="logout logged-in">Logout</a></li>
-        <li><a href="#" class="profile logged-in">Profile</a></li>
-        <li><a href="#" class="edit-user logged-in">Edit Profile</a></li>
-      </ul>
-    </div>
+<!--     <a href="/"><span> Zoogle </span></a> -->
 
-  </footer>
+    <ul>
+      <li>
+        <a href="#" data-template="register" class="logged-out">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-template="login" class="logged-out">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="profile logged-in">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="edit-user logged-in">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="logout logged-in">
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj2NaBp-eO4GkikHRvVppsyEYw-JbRCIk&libraries=geometry&library=spherical"></script>
 

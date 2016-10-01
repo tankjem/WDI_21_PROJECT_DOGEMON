@@ -1,5 +1,5 @@
 var bgm = new Audio('/sound/l4d.mp3');
-bgm.play();
+// bgm.play();
 
 
 // overwriting prototype stuff. Sorry not sorry
@@ -78,6 +78,7 @@ DogeApp.getUser = function() {
     var $content = $('#content');
     DogeApp.getTemplate("/user/show", { user: data }, $content);
     $content.removeClass('hidden');
+    $('.menu').addClass('hidden');
   });
 }
 
@@ -133,6 +134,8 @@ DogeApp.handleFormErrors = function(jqXHR) {
 DogeApp.getEditForm = function() {
   event.preventDefault();
 
+  $('.menu').addClass('hidden');
+
   return $.ajax({
     method: "GET",
     url: DogeApp.API_URL + "/user",
@@ -153,7 +156,7 @@ DogeApp.getEvent = function(testMarker) {
     url: DogeApp.API_URL + "/event",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data){
-    console.log(data);
+    // console.log(data);
     DogeApp.event = data;
     // var $content = $('#content');
     // DogeApp.getTemplate("events/show", { event: data }, $content);
@@ -172,7 +175,7 @@ DogeApp.getItem = function() {
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data){
     DogeApp.item = data;
-    console.log(data);
+    // console.log(data);
     // var $content = $('#content');
     // DogeApp.getTemplate("items/show", {item:data}, $content);
     // $content.removeClass('hidden');
@@ -208,6 +211,7 @@ DogeApp.initEventHandlers = function() {
   this.$main = $("main");
   this.$content = $("#content");
   this.$map = $("#map");
+  this.$menu = $('.menu');
   this.$content.on("submit", "form", this.handleForm);
   $(".menu a").not(".logout, .profile, .edit-user").on('click', this.loadPage);
   $(".menu a.profile").on('click', this.getUser);
@@ -218,9 +222,14 @@ DogeApp.initEventHandlers = function() {
     $(this).parents('.form-group').removeClass('has-error');
   });
 
+  $('.menu a').on('click', function() {
+    $('.menu').addClass('hidden');
+  })
+
   this.$content.on('click', '#close', function() {
     event.preventDefault();
     DogeApp.$content.addClass('hidden');
+    DogeApp.$menu.removeClass('hidden');
   });
 
 
@@ -468,7 +477,7 @@ DogeApp.initEventHandlers = function() {
     DogeApp.setRandRedZones();
   });
   setInterval(DogeApp.userNeeds, 1000 * 60 * 45);
-  setInterval(DogeApp.getCurrentPosition, 1000 * 3);
+  setInterval(DogeApp.getCurrentPosition, 1000 * 30);
 }
 
 // // =================== auto-updating player marker
@@ -507,7 +516,7 @@ DogeApp.setPlayerMarker = function() {
     DogeApp.map.setCenter(newPoint);
     console.log()
   });
-  setTimeout(DogeApp.setPlayerMarker, 500);
+  setTimeout(DogeApp.setPlayerMarker, 1000 * 20);
 }
 
 DogeApp.setPlayerMarker();
@@ -542,8 +551,6 @@ DogeApp.userNeeds = function() {
   } else {
     DogeApp.user.water = DogeApp.user.water - 5;
   }
-  console.log(DogeApp.user.food + " is now working");
-  console.log(DogeApp.user.water + " is now working");
   DogeApp.updateUserData(DogeApp.user);
   DogeApp.checkUserDeath();
 }
@@ -565,13 +572,14 @@ DogeApp.equipItem = function() {
   });
 }
 
-setInterval(DogeApp.getCurrentPosition, 1000 * 3);
+// setInterval(DogeApp.getCurrentPosition, 1000 * 30);
 
 
-// Bounds Rectangle
-
+// === >>> Bounds Rectangle <<< ===
 
 DogeApp.setBounds = function() {
+
+  // Oct 1st -- Bex; set this to a circular radius around the player 
   var bounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(51.511883, -0.084863),
     new google.maps.LatLng(51.518263, -0.061775)
@@ -1210,10 +1218,12 @@ DogeApp.gameLogic = function(button, data) {
 
   $('#content-event #close').on('click', function() {
     $('#content-event').addClass('hidden');
+    $('.menu').removeClass('hidden');
   })
 
   $('.choice1, .choice2, .choice3').on('click', function() {
     $('#content-event').addClass('hidden');
+    $('.menu').removeClass('hidden');
   })
 }
 
