@@ -516,7 +516,7 @@ DogeApp.setPlayerMarker = function() {
     DogeApp.map.setCenter(newPoint);
     console.log()
   });
-  setTimeout(DogeApp.setPlayerMarker, 1000 * 20);
+  setTimeout(DogeApp.setPlayerMarker, 1000 * 30000);
 }
 
 DogeApp.setPlayerMarker();
