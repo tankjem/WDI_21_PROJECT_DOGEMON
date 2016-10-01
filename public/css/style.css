@@ -6,6 +6,7 @@ html, body, main {
   height: 100%;
   padding: 0;
   margin: 0;
+  font-size: 1.05em;
   font-family: 'Special Elite', sans-serif;
   overflow-y: hidden;
 }
