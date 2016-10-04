@@ -25,10 +25,10 @@ html, body, main {
   font-family: 'Creepster';
   color: rgba(255, 255, 255, .8);
   letter-spacing: 0.2em;
-  font-size: 4em;
+  font-size: 3em;
   position: absolute;
   left: 0.2em;
-  top: 0.1em;
+  bottom: 1em;
   z-index: 1000;
 }
 
@@ -51,7 +51,10 @@ html, body, main {
 }
 
 #content-event {
-  font-size: 2em;
+
+  background: rgba(255, 255, 255, .8);
+  max-width: 90%;
+  font-size: 1em;
 }
 
 #close {
@@ -66,32 +69,30 @@ html, body, main {
   margin: -0.1em;
 }
 
-#content-event div:first-of-type{
-  padding: 1.5em;
-  text-align: left;
-  line-height: 1.5em;
-  width: 75%;
-}
-
 #content-event h3{
- font-size: 1.5em;
+ width: 100%;
+ font-size: 1.3em;
+ margin: 0;
 }
 
 .choices-container{
-  display: flex;
-  width: 100%;
+  background: rgba(255, 255, 255, .8);
+  max-width: 90%;
+  height: 90%;
 }
+
 .choice-title{
   width: 100%!important;
   display: block;
   text-align: center!important;
 }
+
 .choice-info{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items:center;
-  width: 100%;
+  width: 90%;
   height: auto;
 }
 #content #close:hover, #content-event #close:hover {
@@ -106,15 +107,17 @@ html, body, main {
 
 .choice1, .choice2, .choice3 {
   font-size: 1em;
-  margin: .5em;
+  margin: .2em;
   padding: .5em;
   transition: .5s ease;
   cursor: pointer;
   text-align: center;
 }
+
 .choice1:hover, .choice2:hover, .choice3:hover {
   background: rgb(199, 121, 102);
 }
+
 .choice-list{
   display: flex;
   justify-content: space-between;
@@ -130,7 +133,7 @@ html, body, main {
 
   height: auto;
   text-align: center;
-  font-size: 35px;
+  font-size: 1em;
 }
 
 /* Menu CSS */
@@ -325,9 +328,14 @@ progress#thirst-value[value]::-webkit-progress-value {
 @media (max-width: 400px) {
 
   #title {
-    font-size: 2.5em;
+    font-size: 2em;
+    bottom: 1.5em;
   }
   .pc-info progress {
+    width: 90%;
+  }
+
+  #content-event {
     width: 90%;
   }
 }
@@ -336,6 +344,7 @@ progress#thirst-value[value]::-webkit-progress-value {
 
   #title {
     font-size: 1.5em;
+    bottom: 2.2em;
   }
 
   #content {
