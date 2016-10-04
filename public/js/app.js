@@ -12,7 +12,7 @@ var DogeApp = DogeApp || {};
 DogeApp.pos;
 DogeApp.event;
 DogeApp.user;
-DogeApp.item = 1;
+DogeApp.item;
 DogeApp.equippedWeaponStat;
 DogeApp.equippedArmourStat;
 
@@ -171,13 +171,13 @@ DogeApp.getItem = function() {
   // event.preventDefault();
   return $.ajax({
     method: "GET",
-    url: DogeApp.API_URL + "/item",
+    url: DogeApp.API_URL + "/itemChance",
     beforeSend: DogeApp.setRequestHeader
   }).done(function(data){
-    DogeApp.item = data;
+    DogeApp.itemChance = data;
     // console.log(data);
     // var $content = $('#content');
-    // DogeApp.getTemplate("items/show", {item:data}, $content);
+    // DogeApp.getTemplate("itemChances/show", {itemChance:data}, $content);
     // $content.removeClass('hidden');
   });
 }
@@ -557,7 +557,7 @@ DogeApp.userNeeds = function() {
 
 
 DogeApp.equipItem = function() {
-  $("div.item-click").on("click", function() {
+  $("div.itemChance-click").on("click", function() {
     if($(".type").html() === "Weapon") {
       $("#equippedWeapon").html($(".name").html())
       DogeApp.equippedWeaponStat = $(".damage").html()
@@ -865,13 +865,13 @@ DogeApp.gameLogic = function(button, data) {
   if(event.event_number === 3) {
     $(".choice1").on("click", function() {
       var itemChance = Math.ceil(Math.random()*4)
-      if (item === 1) {
+      if (itemChance === 1) {
         DogeApp.user.food = DogeApp.user.food + 25;
         document.getElementById('hud').innerHTML = "Within the cache, you find some canned food. Food + 25";
-      } else if (item === 2) {
+      } else if (itemChance === 2) {
         DogeApp.user.water = DogeApp.user.water + 25;
         document.getElementById('hud').innerHTML = "Within the cache, you find some bottles of water. Water + 25";
-      } else if (item === 3) {
+      } else if (itemChance === 3) {
         DogeApp.user.attack = DogeApp.user.attack + 5;
         document.getElementById('hud').innerHTML = "Within the cache, you find a weapon. Attack + 5";
       } else {
