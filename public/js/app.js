@@ -864,6 +864,7 @@ DogeApp.gameLogic = function(button, data) {
   }
   if(event.event_number === 3) {
     $(".choice1").on("click", function() {
+      console.log(DogeApp.user);
       var itemChance = Math.ceil(Math.random()*4)
       if (itemChance === 1) {
         DogeApp.user.food = DogeApp.user.food + 25;

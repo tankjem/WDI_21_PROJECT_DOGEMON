@@ -317,53 +317,54 @@ Item.create([{
 }).then(function(u1) {
   console.log(u1);
   return Event.create([{
-    name: "Zombie Attack",
-    description: "You are attacked by a zombie.",
-    image_url: "/images/events/zombie_icon.png",
-    event_type: "red_zone_encounter",
-    choices: ["Fight", "Flee"],
-    event_number:1
-    }, {
-    name: "Lost and Alone",
-    description:"You see a young girl hunched over on the ground near the side of the road. She seems to be crying.",
-    image_url: "",
-    event_type: "random_encounter",
-    choices: ["Ask her if she needs any help", "She's probably a Zombie - attack", "Run away"],
-    event_number: 2
-    }, {
+    // name: "Zombie Attack",
+    // description: "You are attacked by a zombie.",
+    // image_url: "/images/events/zombie_icon.png",
+    // event_type: "red_zone_encounter",
+    // choices: ["Fight", "Flee"],
+    // event_number:1
+    // }, {
+    // name: "Lost and Alone",
+    // description:"You see a young girl hunched over on the ground near the side of the road. She seems to be crying.",
+    // image_url: "",
+    // event_type: "random_encounter",
+    // choices: ["Ask her if she needs any help", "She's probably a Zombie - attack", "Run away"],
+    // event_number: 2
+    // }, {
     name: "Resource Cache found!",
     description: "You have found a hidden cache.",
     image_url: "/images/events/resource_icon.png",
     event_type: "resource_encounter",
     choices: ["Collect", "Leave"],
     event_number:3
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Survivor Fight",
-    description: "Zombies aren't the only worry",
-    image_url: "/images/events/attack_icon.png",
-    event_type: "random_encounter",
-    choices: ["Fight", "Flee", "Hide"],
-    event_number:4
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "The Blue or the Red Pill",
-    description: "You find a sealed bag on the floor containing two pills one red or blue...",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Blue Pill", "Red Pill", "Winners don't do drugs"],
-    event_number:5
-    // WARNING WARNING WARNING
-    },{
-    // WARNING THIS USES A URL FROM THE ASSETS FOLDER
-    name: "Zombie Fishing",
-    description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
-    image_url: "/images/events/event_marker.png",
-    event_type: "random_encounter",
-    choices: ["Ask for a fish", "Learn to fish", "Ignore"],
-    event_number:6
-    // WARNING WARNING WARNING
+    }
+    // ,{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "Survivor Fight",
+    // description: "Zombies aren't the only worry",
+    // image_url: "/images/events/attack_icon.png",
+    // event_type: "random_encounter",
+    // choices: ["Fight", "Flee", "Hide"],
+    // event_number:4
+    // // WARNING WARNING WARNING
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "The Blue or the Red Pill",
+    // description: "You find a sealed bag on the floor containing two pills one red or blue...",
+    // image_url: "/images/events/event_marker.png",
+    // event_type: "random_encounter",
+    // choices: ["Blue Pill", "Red Pill", "Winners don't do drugs"],
+    // event_number:5
+    // // WARNING WARNING WARNING
+    // },{
+    // // WARNING THIS USES A URL FROM THE ASSETS FOLDER
+    // name: "Zombie Fishing",
+    // description: "You see a man in shorts with a speargun by a pond. He fires the speargun into the pond and catches a fish",
+    // image_url: "/images/events/event_marker.png",
+    // event_type: "random_encounter",
+    // choices: ["Ask for a fish", "Learn to fish", "Ignore"],
+    // event_number:6
+    // // WARNING WARNING WARNING
     }]);
 }).then(function(events) {
   console.log(events);
