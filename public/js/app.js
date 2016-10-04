@@ -12,7 +12,7 @@ var DogeApp = DogeApp || {};
 DogeApp.pos;
 DogeApp.event;
 DogeApp.user;
-DogeApp.item;
+DogeApp.item = 1;
 DogeApp.equippedWeaponStat;
 DogeApp.equippedArmourStat;
 

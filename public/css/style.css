@@ -128,11 +128,12 @@ html, body, main {
   position: absolute;
   top: 1em;
   width: 100%;
+  padding: 0.2em;
   background-color: rgba(255, 255, 255, 0.6);
 
   height: auto;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 /* Menu CSS */
