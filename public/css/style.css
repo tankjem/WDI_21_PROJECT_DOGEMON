@@ -190,6 +190,7 @@ html, body, main {
   justify-content: center;
   flex-direction: column;
   align-content: center;
+  overflow-y: scroll;
 }
 
 .register-title {
@@ -348,7 +349,7 @@ progress#thirst-value[value]::-webkit-progress-value {
   }
 
   #content {
-    max-height: 95%;
+    max-height: 85%;
     max-width: 90%;
   }
 
