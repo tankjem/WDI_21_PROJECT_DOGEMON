@@ -28,7 +28,7 @@ html, body, main {
   font-size: 3em;
   position: absolute;
   left: 0.2em;
-  bottom: 2em;
+  bottom:1.8em;
   z-index: 1000;
 }
 
@@ -51,10 +51,9 @@ html, body, main {
 }
 
 #content-event {
-
   background: rgba(255, 255, 255, .8);
   max-width: 90%;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 #close {
