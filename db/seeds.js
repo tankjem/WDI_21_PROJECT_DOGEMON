@@ -349,7 +349,7 @@ Item.create([{
     },{
     // WARNING THIS USES A URL FROM THE ASSETS FOLDER
     name: "The Blue or the Red Pill",
-    description: "You find a sealed bag on the floor containing two pills one red or blue. Curiosity get the better of you",
+    description: "You find a sealed bag on the floor containing two pills one red or blue...",
     image_url: "/images/events/event_marker.png",
     event_type: "random_encounter",
     choices: ["Blue Pill", "Red Pill", "Winners don't do drugs"],

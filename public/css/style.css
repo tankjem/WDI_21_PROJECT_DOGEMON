@@ -338,6 +338,7 @@ progress#thirst-value[value]::-webkit-progress-value {
 
   #content-event {
     width: 90%;
+    font-size: 1.2em;
   }
 }
 
